@@ -1,61 +1,59 @@
 
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import davidImg from "@/assets/david.jpg";
+import miguelImg from "@/assets/miguel.jpg";
+import moisesImg from "@/assets/moises.jpg";
+import jesusImg from "@/assets/jesus.jpg";
+import mariaImg from "@/assets/maria.jpg";
+import pedroImg from "@/assets/pedro.jpg";
 
-interface Avatar {
-  id: string;
-  name: string;
-  image: string;
-  description: string;
-  link: string;
-}
-
-const avatars: Avatar[] = [
+const avatars = [
   {
-    id: 'miguel',
-    name: 'Arcángel Miguel',
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop&crop=face',
-    description: 'Guerrero celestial y protector divino',
-    link: '/guerra-espiritual'
+    id: "miguel",
+    name: "Arcángel Miguel",
+    image: miguelImg,
+    description: "Guerra espiritual y protección",
+    link: "/guerra-espiritual",
   },
   {
-    id: 'david',
-    name: 'Rey David',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face',
-    description: 'Rey de Israel, salmista y músico',
-    link: '/musica-david'
+    id: "david",
+    name: "Rey David",
+    image: davidImg,
+    description: "Salmos y adoración",
+    link: "/musica-david",
   },
   {
-    id: 'profeta',
-    name: 'El Profeta',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face',
-    description: 'Visionario y mensajero divino',
-    link: '/profecia'
+    id: "moises",
+    name: "Moisés",
+    image: moisesImg,
+    description: "Libertad y liderazgo",
+    link: "/moises",
   },
   {
-    id: 'sabio',
-    name: 'El Sabio',
-    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=face',
-    description: 'Maestro de la sabiduría eterna',
-    link: '/sabiduria'
+    id: "jesus",
+    name: "Jesús",
+    image: jesusImg,
+    description: "Salvación y amor eterno",
+    link: "/jesus",
   },
   {
-    id: 'ester',
-    name: 'Éster',
-    image: 'https://images.unsplash.com/photo-1494790108755-2616b612b820?w=300&h=300&fit=crop&crop=face',
-    description: 'Reina valiente y intercesora',
-    link: '/valor'
+    id: "maria",
+    name: "Virgen María",
+    image: mariaImg,
+    description: "Gracia y obediencia",
+    link: "/maria",
   },
   {
-    id: 'pablo',
-    name: 'Pablo',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face',
-    description: 'Apóstol y maestro de la fe',
-    link: '/ensenanza'
-  }
+    id: "pedro",
+    name: "Apóstol Pedro",
+    image: pedroImg,
+    description: "Firmeza y testimonio",
+    link: "/pedro",
+  },
 ];
 
-const Avatar3DCarousel: React.FC = () => {
+export default function Avatar3DCarousel() {
   const [angle, setAngle] = useState(0);
   const [flashIndex, setFlashIndex] = useState<number | null>(null);
   const navigate = useNavigate();
@@ -63,25 +61,19 @@ const Avatar3DCarousel: React.FC = () => {
   const nextSlide = () => setAngle((prev) => prev - 360 / avatars.length);
   const prevSlide = () => setAngle((prev) => prev + 360 / avatars.length);
 
-  const handleAvatarClick = (avatar: Avatar, index: number) => {
-    setFlashIndex(index);
-    setTimeout(() => {
-      console.log(`Navegando a: ${avatar.link}`);
-      // navigate(avatar.link); // Descomenta cuando tengas las rutas
-      setFlashIndex(null);
-    }, 600);
-  };
-
   return (
     <section className="py-20 px-6">
       <div className="container mx-auto">
-        <div className="relative w-[400px] h-[400px] mx-auto" style={{ perspective: "1000px" }}>
+        <div
+          className="relative w-full max-w-[400px] h-[400px] mx-auto"
+          style={{ perspective: "1000px" }}
+        >
           <div
             className="absolute inset-0"
             style={{
               transformStyle: "preserve-3d",
               transform: `rotateY(${angle}deg)`,
-              transition: "transform 1s ease-out",
+              transition: "transform 700ms ease-in-out",
             }}
           >
             {avatars.map((avatar, index) => {
@@ -89,18 +81,25 @@ const Avatar3DCarousel: React.FC = () => {
               return (
                 <div
                   key={avatar.id}
-                  className={`absolute w-32 h-32 rounded-full overflow-hidden border-4 border-gradient-to-r from-violet-500 to-emerald-500 cursor-pointer transition-all duration-300 hover:scale-110 ${
+                  className={`absolute w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-white cursor-pointer transition-transform duration-300 shadow-xl hover:scale-105 ${
                     flashIndex === index ? "animate-flash" : ""
                   }`}
                   style={{
-                    transform: `rotateY(${theta}deg) translateZ(200px)`,
+                    transform: `rotateY(${theta}deg) translateZ(300px)`,
                   }}
-                  onClick={() => handleAvatarClick(avatar, index)}
+                  onClick={() => {
+                    setFlashIndex(index);
+                    setTimeout(() => {
+                      console.log(`Navegando a: ${avatar.link}`);
+                      // navigate(avatar.link); // Descomentar cuando tengas las rutas
+                      setFlashIndex(null);
+                    }, 600);
+                  }}
                 >
-                  <img 
-                    src={avatar.image} 
-                    alt={avatar.name} 
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
+                  <img
+                    src={avatar.image}
+                    alt={avatar.name}
+                    className="w-full h-full object-cover"
                   />
                   
                   {/* Overlay con información del avatar */}
@@ -113,7 +112,6 @@ const Avatar3DCarousel: React.FC = () => {
             })}
           </div>
 
-          {/* Controles de navegación */}
           <div className="absolute bottom-4 w-full flex justify-center gap-4">
             <button
               onClick={prevSlide}
@@ -150,6 +148,4 @@ const Avatar3DCarousel: React.FC = () => {
       </div>
     </section>
   );
-};
-
-export default Avatar3DCarousel;
+}
