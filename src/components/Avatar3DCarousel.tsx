@@ -1,53 +1,47 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import davidImg from "@/assets/david.jpg";
-import miguelImg from "@/assets/miguel.jpg";
-import moisesImg from "@/assets/moises.jpg";
-import jesusImg from "@/assets/jesus.jpg";
-import mariaImg from "@/assets/maria.jpg";
-import pedroImg from "@/assets/pedro.jpg";
 
 const avatars = [
   {
     id: "miguel",
     name: "Arcángel Miguel",
-    image: miguelImg,
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=400&fit=crop&crop=face",
     description: "Guerra espiritual y protección",
     link: "/guerra-espiritual",
   },
   {
     id: "david",
     name: "Rey David",
-    image: davidImg,
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop&crop=face",
     description: "Salmos y adoración",
     link: "/musica-david",
   },
   {
     id: "moises",
     name: "Moisés",
-    image: moisesImg,
+    image: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?w=400&h=400&fit=crop&crop=face",
     description: "Libertad y liderazgo",
     link: "/moises",
   },
   {
     id: "jesus",
     name: "Jesús",
-    image: jesusImg,
+    image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=400&h=400&fit=crop&crop=face",
     description: "Salvación y amor eterno",
     link: "/jesus",
   },
   {
     id: "maria",
     name: "Virgen María",
-    image: mariaImg,
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=400&fit=crop&crop=face",
     description: "Gracia y obediencia",
     link: "/maria",
   },
   {
     id: "pedro",
     name: "Apóstol Pedro",
-    image: pedroImg,
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop&crop=face",
     description: "Firmeza y testimonio",
     link: "/pedro",
   },
