@@ -12,7 +12,7 @@ const avatars = [
   },
   {
     id: "david",
-    name: "Rey David",
+    name: "Rey David", 
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop&crop=face",
     description: "Salmos y adoración",
     link: "/musica-david",
@@ -48,96 +48,228 @@ const avatars = [
 ];
 
 export default function Avatar3DCarousel() {
-  const [angle, setAngle] = useState(0);
-  const [flashIndex, setFlashIndex] = useState<number | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const navigate = useNavigate();
 
-  const nextSlide = () => setAngle((prev) => prev - 360 / avatars.length);
-  const prevSlide = () => setAngle((prev) => prev + 360 / avatars.length);
+  const nextSlide = () => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      setCurrentIndex((prev) => (prev + 1) % avatars.length);
+      setTimeout(() => setIsAnimating(false), 800);
+    }
+  };
+
+  const prevSlide = () => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      setCurrentIndex((prev) => (prev - 1 + avatars.length) % avatars.length);
+      setTimeout(() => setIsAnimating(false), 800);
+    }
+  };
+
+  const goToSlide = (index: number) => {
+    if (!isAnimating && index !== currentIndex) {
+      setIsAnimating(true);
+      setCurrentIndex(index);
+      setTimeout(() => setIsAnimating(false), 800);
+    }
+  };
+
+  const handleAvatarClick = (avatar: typeof avatars[0], index: number) => {
+    console.log(`Navegando a: ${avatar.link}`);
+    // navigate(avatar.link);
+  };
 
   return (
-    <section className="py-20 px-6">
-      <div className="container mx-auto">
-        <div
-          className="relative w-full max-w-[400px] h-[400px] mx-auto"
-          style={{ perspective: "1000px" }}
-        >
-          <div
-            className="absolute inset-0"
-            style={{
-              transformStyle: "preserve-3d",
-              transform: `rotateY(${angle}deg)`,
-              transition: "transform 700ms ease-in-out",
-            }}
-          >
+    <section className="py-20 px-6 relative overflow-hidden">
+      {/* Fondo con efecto de matriz */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900/20 to-violet-900/20">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_24%,rgba(59,130,246,0.05)_25%,rgba(59,130,246,0.05)_26%,transparent_27%,transparent_74%,rgba(59,130,246,0.05)_75%,rgba(59,130,246,0.05)_76%,transparent_77%,transparent),linear-gradient(transparent_24%,rgba(59,130,246,0.05)_25%,rgba(59,130,246,0.05)_26%,transparent_27%,transparent_74%,rgba(59,130,246,0.05)_75%,rgba(59,130,246,0.05)_76%,transparent_77%,transparent)] bg-[size:40px_40px]"></div>
+      </div>
+
+      <div className="container mx-auto relative z-10">
+        {/* Título futurista */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-600 mb-4">
+            HOLOGRAPHIC AVATARS
+          </h2>
+          <div className="w-32 h-1 bg-gradient-to-r from-cyan-400 to-violet-600 mx-auto"></div>
+        </div>
+
+        {/* Carrusel principal */}
+        <div className="relative max-w-6xl mx-auto">
+          <div className="relative h-[500px] md:h-[600px] perspective-1000">
             {avatars.map((avatar, index) => {
-              const theta = (360 / avatars.length) * index;
+              const isActive = index === currentIndex;
+              const isPrev = index === (currentIndex - 1 + avatars.length) % avatars.length;
+              const isNext = index === (currentIndex + 1) % avatars.length;
+              const isVisible = isActive || isPrev || isNext;
+
+              if (!isVisible) return null;
+
+              let translateX = 0;
+              let translateZ = 0;
+              let rotateY = 0;
+              let scale = 0.7;
+              let opacity = 0.4;
+
+              if (isActive) {
+                translateX = 0;
+                translateZ = 100;
+                rotateY = 0;
+                scale = 1;
+                opacity = 1;
+              } else if (isPrev) {
+                translateX = -400;
+                translateZ = -200;
+                rotateY = 45;
+                scale = 0.8;
+                opacity = 0.6;
+              } else if (isNext) {
+                translateX = 400;
+                translateZ = -200;
+                rotateY = -45;
+                scale = 0.8;
+                opacity = 0.6;
+              }
+
               return (
                 <div
                   key={avatar.id}
-                  className={`absolute w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-white cursor-pointer transition-transform duration-300 shadow-xl hover:scale-105 ${
-                    flashIndex === index ? "animate-flash" : ""
+                  className={`absolute top-1/2 left-1/2 w-80 h-96 md:w-96 md:h-[500px] transform -translate-x-1/2 -translate-y-1/2 transition-all duration-800 ease-out cursor-pointer group ${
+                    isActive ? 'z-30' : 'z-10'
                   }`}
                   style={{
-                    transform: `rotateY(${theta}deg) translateZ(300px)`,
+                    transform: `translate(-50%, -50%) translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
+                    opacity,
                   }}
-                  onClick={() => {
-                    setFlashIndex(index);
-                    setTimeout(() => {
-                      console.log(`Navegando a: ${avatar.link}`);
-                      // navigate(avatar.link); // Descomentar cuando tengas las rutas
-                      setFlashIndex(null);
-                    }, 600);
-                  }}
+                  onClick={() => isActive ? handleAvatarClick(avatar, index) : goToSlide(index)}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  <img
-                    src={avatar.image}
-                    alt={avatar.name}
-                    className="w-full h-full object-cover"
-                  />
-                  
-                  {/* Overlay con información del avatar */}
-                  <div className="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-2">
-                    <h3 className="text-white text-sm font-bold mb-1">{avatar.name}</h3>
-                    <p className="text-white text-xs">{avatar.description}</p>
+                  {/* Marco holográfico */}
+                  <div className={`relative w-full h-full rounded-lg overflow-hidden border-2 transition-all duration-500 ${
+                    isActive 
+                      ? 'border-cyan-400 shadow-2xl shadow-cyan-400/50' 
+                      : 'border-blue-500/50 shadow-lg shadow-blue-500/25'
+                  }`}>
+                    {/* Efecto de escaneo */}
+                    <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/20 to-transparent transition-transform duration-2000 ${
+                      isActive ? 'animate-pulse' : ''
+                    }`}></div>
+
+                    {/* Imagen del avatar */}
+                    <div className="relative w-full h-full">
+                      <img
+                        src={avatar.image}
+                        alt={avatar.name}
+                        className={`w-full h-full object-cover transition-all duration-500 ${
+                          hoveredIndex === index ? 'scale-110 brightness-110' : 'scale-100'
+                        }`}
+                      />
+                      
+                      {/* Overlay holográfico */}
+                      <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 transition-opacity duration-500 ${
+                        isActive ? 'opacity-70' : 'opacity-90'
+                      }`}></div>
+
+                      {/* Partículas flotantes */}
+                      {isActive && (
+                        <div className="absolute inset-0">
+                          {[...Array(6)].map((_, i) => (
+                            <div
+                              key={i}
+                              className="absolute w-1 h-1 bg-cyan-400 rounded-full animate-ping"
+                              style={{
+                                left: `${20 + (i * 15)}%`,
+                                top: `${30 + (i * 10)}%`,
+                                animationDelay: `${i * 0.5}s`,
+                                animationDuration: '2s'
+                              }}
+                            ></div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Información del avatar */}
+                    <div className={`absolute bottom-0 left-0 right-0 p-6 transform transition-all duration-500 ${
+                      isActive ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                    }`}>
+                      <div className="backdrop-blur-sm bg-black/50 rounded-lg p-4 border border-cyan-400/30">
+                        <h3 className="text-xl md:text-2xl font-bold text-cyan-400 mb-2 font-mono">
+                          {avatar.name}
+                        </h3>
+                        <p className="text-sm text-blue-100 mb-3">
+                          {avatar.description}
+                        </p>
+                        <div className="flex items-center text-xs text-cyan-300">
+                          <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                          SISTEMA ACTIVO
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bordes animados para el activo */}
+                    {isActive && (
+                      <>
+                        <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-cyan-400 animate-pulse"></div>
+                        <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-cyan-400 animate-pulse"></div>
+                        <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-cyan-400 animate-pulse"></div>
+                        <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-cyan-400 animate-pulse"></div>
+                      </>
+                    )}
                   </div>
                 </div>
               );
             })}
           </div>
 
-          <div className="absolute bottom-4 w-full flex justify-center gap-4">
-            <button
-              onClick={prevSlide}
-              className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-xl hover:bg-white/40 transition-all duration-300 border border-white/20"
-              aria-label="Avatar anterior"
-            >
-              ◀️
-            </button>
-            <button
-              onClick={nextSlide}
-              className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-xl hover:bg-white/40 transition-all duration-300 border border-white/20"
-              aria-label="Siguiente avatar"
-            >
-              ▶️
-            </button>
-          </div>
+          {/* Controles de navegación */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center text-white hover:shadow-lg hover:shadow-cyan-400/50 transition-all duration-300 border border-cyan-400/30 z-40"
+            disabled={isAnimating}
+          >
+            ◀
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center text-white hover:shadow-lg hover:shadow-cyan-400/50 transition-all duration-300 border border-cyan-400/30 z-40"
+            disabled={isAnimating}
+          >
+            ▶
+          </button>
         </div>
 
-        {/* Indicadores de avatares */}
-        <div className="flex justify-center mt-8 space-x-2">
+        {/* Indicadores */}
+        <div className="flex justify-center mt-12 space-x-3">
           {avatars.map((avatar, index) => (
-            <div
+            <button
               key={avatar.id}
-              className="text-center cursor-pointer group"
-              onClick={() => setAngle(-360 / avatars.length * index)}
-            >
-              <div className="w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 group-hover:bg-violet-500 transition-colors duration-300 mb-2"></div>
-              <span className="text-xs text-gray-600 dark:text-gray-400 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors duration-300">
-                {avatar.name}
-              </span>
-            </div>
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentIndex
+                  ? 'bg-cyan-400 shadow-lg shadow-cyan-400/50'
+                  : 'bg-gray-600 hover:bg-gray-400'
+              }`}
+            />
           ))}
+        </div>
+
+        {/* Panel de información futurista */}
+        <div className="mt-12 max-w-2xl mx-auto">
+          <div className="bg-gradient-to-r from-slate-900/80 to-blue-900/80 backdrop-blur-sm rounded-xl p-6 border border-cyan-400/30">
+            <div className="flex items-center mb-4">
+              <div className="w-4 h-4 bg-green-400 rounded-full animate-pulse mr-3"></div>
+              <span className="text-cyan-400 font-mono text-sm">INTERFACE STATUS: ONLINE</span>
+            </div>
+            <p className="text-blue-100 text-center">
+              Interfaz holográfica interactiva. Selecciona un avatar para acceder a sus funciones especializadas.
+            </p>
+          </div>
         </div>
       </div>
     </section>

@@ -69,6 +69,10 @@ export default {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
+			perspective: {
+				'1000': '1000px',
+				'2000': '2000px',
+			},
 			keyframes: {
 				'accordion-down': {
 					from: {
@@ -145,6 +149,14 @@ export default {
 						opacity: '1',
 						transform: 'scale(1)'
 					}
+				},
+				'hologram-scan': {
+					'0%': {
+						transform: 'translateY(-100%)'
+					},
+					'100%': {
+						transform: 'translateY(100%)'
+					}
 				}
 			},
 			animation: {
@@ -154,7 +166,8 @@ export default {
 				'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
 				'divine-flash': 'divine-flash 0.8s ease-out',
 				'flash-sweep': 'flash-sweep 0.8s ease-out',
-				'flash': 'flash 0.6s ease-in-out'
+				'flash': 'flash 0.6s ease-in-out',
+				'hologram-scan': 'hologram-scan 2s linear infinite'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
