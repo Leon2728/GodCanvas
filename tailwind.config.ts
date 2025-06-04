@@ -103,13 +103,42 @@ export default {
 					'50%': {
 						opacity: '0.5'
 					}
+				},
+				'divine-flash': {
+					'0%': {
+						boxShadow: '0 0 0 rgba(139, 92, 246, 0)',
+						transform: 'scale(1)'
+					},
+					'50%': {
+						boxShadow: '0 0 30px rgba(139, 92, 246, 0.8), 0 0 60px rgba(16, 185, 129, 0.6)',
+						transform: 'scale(1.05)'
+					},
+					'100%': {
+						boxShadow: '0 0 0 rgba(139, 92, 246, 0)',
+						transform: 'scale(1)'
+					}
+				},
+				'flash-sweep': {
+					'0%': {
+						transform: 'translateX(-100%) rotate(-45deg)',
+						opacity: '0'
+					},
+					'50%': {
+						opacity: '1'
+					},
+					'100%': {
+						transform: 'translateX(100%) rotate(-45deg)',
+						opacity: '0'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.5s ease-out',
-				'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+				'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+				'divine-flash': 'divine-flash 0.8s ease-out',
+				'flash-sweep': 'flash-sweep 0.8s ease-out'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Avatar {
   id: string;
@@ -56,6 +57,8 @@ const avatars: Avatar[] = [
 
 const Avatar3DCarousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [flashingAvatar, setFlashingAvatar] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % avatars.length);
@@ -63,6 +66,19 @@ const Avatar3DCarousel: React.FC = () => {
 
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev - 1 + avatars.length) % avatars.length);
+  };
+
+  const handleAvatarClick = (avatar: Avatar) => {
+    // Activar el efecto de destello
+    setFlashingAvatar(avatar.id);
+    
+    // Esperar el tiempo del destello y luego redirigir
+    setTimeout(() => {
+      setFlashingAvatar(null);
+      // Por ahora, console.log en lugar de navigate ya que no tenemos las rutas creadas
+      console.log(`Navegando a: ${avatar.link}`);
+      // navigate(avatar.link); // Descomenta cuando tengas las rutas
+    }, 800); // 800ms para que se vea bien el efecto
   };
 
   const getVisibleAvatars = () => {
@@ -93,6 +109,7 @@ const Avatar3DCarousel: React.FC = () => {
               const isCenter = idx === 1;
               const isLeft = idx === 0;
               const isRight = idx === 2;
+              const isFlashing = flashingAvatar === avatar.id;
               
               let transform = '';
               let zIndex = 1;
@@ -122,10 +139,22 @@ const Avatar3DCarousel: React.FC = () => {
                     opacity
                   }}
                 >
-                  <div className="w-64 h-80 bg-white/10 dark:bg-black/20 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 p-6 hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300 cursor-pointer group">
+                  <div 
+                    className={`w-64 h-80 bg-white/10 dark:bg-black/20 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 p-6 hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300 cursor-pointer group relative overflow-hidden ${
+                      isFlashing ? 'animate-divine-flash' : ''
+                    }`}
+                    onClick={() => handleAvatarClick(avatar)}
+                  >
+                    {/* Efecto de Destello Celestial */}
+                    {isFlashing && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-violet-400/30 via-white/50 to-emerald-400/30 animate-flash-sweep pointer-events-none z-10"></div>
+                    )}
+                    
                     {/* Avatar Image */}
                     <div className="relative mb-4">
-                      <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-gradient-to-r from-violet-500 to-emerald-500 p-1">
+                      <div className={`w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-gradient-to-r from-violet-500 to-emerald-500 p-1 transition-all duration-300 ${
+                        isFlashing ? 'shadow-2xl shadow-violet-500/50' : ''
+                      }`}>
                         <img
                           src={avatar.image}
                           alt={avatar.name}
@@ -133,7 +162,9 @@ const Avatar3DCarousel: React.FC = () => {
                         />
                       </div>
                       {/* Divine Glow */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-emerald-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className={`absolute inset-0 bg-gradient-to-r from-violet-500/20 to-emerald-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                        isFlashing ? 'opacity-100 animate-pulse' : ''
+                      }`}></div>
                     </div>
                     
                     {/* Avatar Name */}
