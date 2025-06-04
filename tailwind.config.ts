@@ -130,6 +130,21 @@ export default {
 						transform: 'translateX(100%) rotate(-45deg)',
 						opacity: '0'
 					}
+				},
+				'flash': {
+					'0%': { 
+						opacity: '1',
+						transform: 'scale(1)'
+					},
+					'50%': { 
+						opacity: '0.3',
+						transform: 'scale(1.1)',
+						boxShadow: '0 0 20px rgba(139, 92, 246, 0.8)'
+					},
+					'100%': { 
+						opacity: '1',
+						transform: 'scale(1)'
+					}
 				}
 			},
 			animation: {
@@ -138,7 +153,8 @@ export default {
 				'fade-in': 'fade-in 0.5s ease-out',
 				'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
 				'divine-flash': 'divine-flash 0.8s ease-out',
-				'flash-sweep': 'flash-sweep 0.8s ease-out'
+				'flash-sweep': 'flash-sweep 0.8s ease-out',
+				'flash': 'flash 0.6s ease-in-out'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
