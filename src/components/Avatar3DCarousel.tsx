@@ -25,11 +25,11 @@ const avatars = [
     link: "/moises",
   },
   {
-    id: "jesus",
-    name: "Jesús",
-    image: "/lovable-uploads/1aecfba8-4b19-4a5b-9ea8-0c8738b93a61.png",
-    description: "Salvación y amor eterno",
-    link: "/jesus",
+    id: "jonas",
+    name: "Jonás",
+    image: "/lovable-uploads/d90ef4c7-a90f-403c-9f0c-d531bef221d4.png",
+    description: "Obediencia y segunda oportunidad",
+    link: "/jonas",
   },
   {
     id: "maria",
