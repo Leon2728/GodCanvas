@@ -6,42 +6,42 @@ const avatars = [
   {
     id: "miguel",
     name: "Arcángel Miguel",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=400&fit=crop&crop=face",
+    image: "/lovable-uploads/ce4229a1-91fb-4604-a11b-fbd6372c23a6.png",
     description: "Guerra espiritual y protección",
     link: "/guerra-espiritual",
   },
   {
     id: "david",
     name: "Rey David", 
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop&crop=face",
+    image: "/lovable-uploads/1ec2033e-25b5-4535-95df-6e56e6760675.png",
     description: "Salmos y adoración",
     link: "/musica-david",
   },
   {
     id: "moises",
     name: "Moisés",
-    image: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?w=400&h=400&fit=crop&crop=face",
+    image: "/lovable-uploads/fa10329a-22af-4ccb-99f4-43482105e610.png",
     description: "Libertad y liderazgo",
     link: "/moises",
   },
   {
     id: "jesus",
     name: "Jesús",
-    image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=400&h=400&fit=crop&crop=face",
+    image: "/lovable-uploads/1aecfba8-4b19-4a5b-9ea8-0c8738b93a61.png",
     description: "Salvación y amor eterno",
     link: "/jesus",
   },
   {
     id: "maria",
     name: "Virgen María",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=400&fit=crop&crop=face",
+    image: "/lovable-uploads/a73e1da6-0660-44a3-a7af-1344731ef64d.png",
     description: "Gracia y obediencia",
     link: "/maria",
   },
   {
     id: "pedro",
     name: "Apóstol Pedro",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop&crop=face",
+    image: "/lovable-uploads/5fb09257-b0cc-42f2-bd92-34ec89e20320.png",
     description: "Firmeza y testimonio",
     link: "/pedro",
   },
@@ -79,7 +79,7 @@ export default function Avatar3DCarousel() {
 
   const handleAvatarClick = (avatar: typeof avatars[0], index: number) => {
     console.log(`Navegando a: ${avatar.link}`);
-    // navigate(avatar.link);
+    navigate(avatar.link);
   };
 
   return (
