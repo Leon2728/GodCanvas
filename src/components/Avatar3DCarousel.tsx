@@ -45,6 +45,34 @@ const avatars = [
     description: "Firmeza y testimonio",
     link: "/pedro",
   },
+  {
+    id: "salomon",
+    name: "Rey Salomón",
+    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop&crop=face",
+    description: "Sabiduría y justicia",
+    link: "/salomon",
+  },
+  {
+    id: "sanson",
+    name: "Sansón",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    description: "Fuerza sobrenatural",
+    link: "/sanson",
+  },
+  {
+    id: "esther",
+    name: "Reina Esther",
+    image: "https://images.unsplash.com/photo-1494790108755-2616b612b829?w=400&h=400&fit=crop&crop=face",
+    description: "Valentía y propósito",
+    link: "/esther",
+  },
+  {
+    id: "saul",
+    name: "Rey Saúl",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    description: "Primer rey de Israel",
+    link: "/saul",
+  },
 ];
 
 export default function Avatar3DCarousel() {
