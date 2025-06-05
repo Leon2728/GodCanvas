@@ -48,14 +48,14 @@ const avatars = [
   {
     id: "salomon",
     name: "Rey Salomón",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop&crop=face",
+    image: "/lovable-uploads/bbe99dfb-6aa8-4351-9816-0a64057ce82e.png",
     description: "Sabiduría y justicia",
     link: "/salomon",
   },
   {
     id: "sanson",
     name: "Sansón",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    image: "/lovable-uploads/4734fc5f-6350-456e-8b7d-7f06e1a3f3dc.png",
     description: "Fuerza sobrenatural",
     link: "/sanson",
   },
