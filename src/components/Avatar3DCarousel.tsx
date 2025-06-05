@@ -62,14 +62,14 @@ const avatars = [
   {
     id: "esther",
     name: "Reina Esther",
-    image: "https://images.unsplash.com/photo-1494790108755-2616b612b829?w=400&h=400&fit=crop&crop=face",
+    image: "/lovable-uploads/72d1afe4-95db-4f33-965e-62e1e6185147.png",
     description: "Valentía y propósito",
     link: "/esther",
   },
   {
     id: "saul",
     name: "Rey Saúl",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    image: "/lovable-uploads/9827c3ee-1b7a-4d08-bf56-0f6335e5f706.png",
     description: "Primer rey de Israel",
     link: "/saul",
   },
