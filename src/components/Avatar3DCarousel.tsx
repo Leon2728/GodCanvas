@@ -121,7 +121,7 @@ export default function Avatar3DCarousel() {
         {/* Título futurista */}
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-600 mb-4">
-            HOLOGRAPHIC AVATARS
+            ¿Con quién quieres aprender hoy?
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-cyan-400 to-violet-600 mx-auto"></div>
         </div>
