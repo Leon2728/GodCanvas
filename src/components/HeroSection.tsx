@@ -31,8 +31,11 @@ const HeroSection: React.FC = () => {
         <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-violet-600 via-purple-500 to-emerald-500 bg-clip-text text-transparent leading-tight">
           El Lienzo de Dios
         </h1>
-        <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-light tracking-wide">
-          Selecciona tu guía espiritual
+        <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-light tracking-wide mb-4">
+          Explora la sabiduría eterna a través de hombres y mujeres que caminaron con Dios y dejaron huella en la historia.
+        </p>
+        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 font-light tracking-wide italic">
+          Cada vida es un lienzo en manos del Creador, donde la fe traza el camino hacia la eternidad.
         </p>
         
         {/* Subtle divine glow effect */}
