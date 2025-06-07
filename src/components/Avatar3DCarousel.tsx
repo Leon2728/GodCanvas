@@ -295,7 +295,7 @@ export default function Avatar3DCarousel() {
               <span className="text-cyan-400 font-mono text-sm">INTERFACE STATUS: ONLINE</span>
             </div>
             <p className="text-blue-100 text-center">
-              Interfaz holográfica interactiva. Selecciona un avatar para acceder a sus funciones especializadas.
+              Interfaz holográfica interactiva. Selecciona un personaje bíblico para acceder a sus funciones especializadas.
             </p>
           </div>
         </div>
