@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGesture } from 'react-use-gesture';
@@ -90,24 +89,26 @@ const AvatarSkeleton = () => (
   <div className="w-80 h-96 md:w-96 md:h-[500px] bg-gradient-to-br from-slate-800/50 to-blue-900/50 rounded-lg border border-cyan-400/30 animate-pulse">
     <div className="h-full flex flex-col justify-end p-6">
       <div className="backdrop-blur-sm bg-black/50 rounded-lg p-4 border border-cyan-400/30">
-        <div className="h-6 bg-cyan-400/30 rounded mb-2 animate-pulse"></div>
-        <div className="h-4 bg-blue-100/30 rounded mb-3 animate-pulse"></div>
+        <div className="h-6 bg-cyan-400/30 rounded mb-2"></div>
+        <div className="h-4 bg-blue-100/30 rounded mb-3"></div>
         <div className="flex items-center">
-          <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-          <div className="h-3 w-24 bg-cyan-300/30 rounded animate-pulse"></div>
+          <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+          <div className="h-3 w-24 bg-cyan-300/30 rounded"></div>
         </div>
       </div>
     </div>
   </div>
 );
 
-const LazyImage = ({ src, alt, className, onLoad }: { 
+const LazyImage = ({ src, alt, className, onLoad, onError }: { 
   src: string; 
   alt: string; 
   className: string; 
   onLoad?: () => void;
+  onError?: () => void;
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -129,20 +130,42 @@ const LazyImage = ({ src, alt, className, onLoad }: {
     return () => observer.disconnect();
   }, []);
 
+  const handleLoad = () => {
+    console.log(`Imagen cargada: ${src}`);
+    setIsLoaded(true);
+    setHasError(false);
+    onLoad?.();
+  };
+
+  const handleError = () => {
+    console.error(`Error cargando imagen: ${src}`);
+    setHasError(true);
+    setIsLoaded(false);
+    onError?.();
+  };
+
   return (
     <div ref={imgRef} className="relative w-full h-full">
-      {!isLoaded && (
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-800/50 to-blue-900/50 animate-pulse rounded-lg" />
+      {(!isLoaded || hasError) && (
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-800/50 to-blue-900/50 animate-pulse rounded-lg flex items-center justify-center">
+          {hasError ? (
+            <div className="text-center text-white/70">
+              <div className="text-2xl mb-2">⚠️</div>
+              <div className="text-sm">Imagen no disponible</div>
+            </div>
+          ) : (
+            <div className="w-8 h-8 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+          )}
+        </div>
       )}
-      {isInView && (
+      {isInView && !hasError && (
         <img
           src={src}
           alt={alt}
           className={`${className} transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-          onLoad={() => {
-            setIsLoaded(true);
-            onLoad?.();
-          }}
+          onLoad={handleLoad}
+          onError={handleError}
+          loading="lazy"
         />
       )}
     </div>
@@ -156,6 +179,7 @@ export default function Avatar3DCarousel() {
   const [isAutoplay, setIsAutoplay] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState<Set<number>>(new Set());
+  const [imagesWithError, setImagesWithError] = useState<Set<number>>(new Set());
   const navigate = useNavigate();
   const carouselRef = useRef<HTMLDivElement>(null);
   const autoplayRef = useRef<NodeJS.Timeout>();
@@ -249,8 +273,19 @@ export default function Avatar3DCarousel() {
   };
 
   const handleImageLoad = (index: number) => {
+    console.log(`Imagen ${index} cargada exitosamente`);
     setImagesLoaded(prev => new Set([...prev, index]));
   };
+
+  const handleImageError = (index: number) => {
+    console.error(`Error cargando imagen ${index}`);
+    setImagesWithError(prev => new Set([...prev, index]));
+  };
+
+  useEffect(() => {
+    console.log('Avatar3DCarousel montado');
+    console.log('Avatars configurados:', avatars.length);
+  }, []);
 
   return (
     <section 
@@ -333,6 +368,7 @@ export default function Avatar3DCarousel() {
               }
 
               const isImageLoaded = imagesLoaded.has(index);
+              const hasImageError = imagesWithError.has(index);
 
               return (
                 <div
@@ -368,9 +404,8 @@ export default function Avatar3DCarousel() {
                       isActive ? 'animate-pulse' : ''
                     }`}></div>
 
-                    {/* Imagen del avatar con lazy loading */}
+                    {/* Imagen del avatar con lazy loading mejorado */}
                     <div className="relative w-full h-full">
-                      {!isImageLoaded && <AvatarSkeleton />}
                       <LazyImage
                         src={avatar.image}
                         alt={avatar.name}
@@ -378,6 +413,7 @@ export default function Avatar3DCarousel() {
                           hoveredIndex === index ? 'scale-110 brightness-110' : 'scale-100'
                         }`}
                         onLoad={() => handleImageLoad(index)}
+                        onError={() => handleImageError(index)}
                       />
                       
                       {/* Overlay holográfico */}
