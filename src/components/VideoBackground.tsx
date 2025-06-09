@@ -25,6 +25,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
   const handleVideoLoad = () => {
     setIsLoaded(true);
     setHasError(false);
+    console.log('Video loaded successfully');
   };
 
   const handleVideoError = () => {
@@ -40,8 +41,8 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
       
       {/* Animated nebula layers */}
       <div className="absolute inset-0 opacity-60">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-violet-500/20 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDuration: '4s' }}></div>
-        <div className="absolute top-3/4 right-1/4 w-80 h-80 bg-gradient-radial from-cyan-500/15 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s', animationDelay: '2s' }}></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-violet-500/20 to-transparent rounded-full blur-3xl animate-pulse cosmic-drift" style={{ animationDuration: '4s' }}></div>
+        <div className="absolute top-3/4 right-1/4 w-80 h-80 bg-gradient-radial from-cyan-500/15 to-transparent rounded-full blur-3xl animate-pulse nebula-pulse" style={{ animationDuration: '6s', animationDelay: '2s' }}></div>
         <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-gradient-radial from-blue-500/20 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }}></div>
       </div>
       
@@ -50,7 +51,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
         {[...Array(30)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-white/40 rounded-full animate-pulse"
+            className="absolute w-1 h-1 bg-white/40 rounded-full animate-pulse particle-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -63,7 +64,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
       
       {/* Subtle scanning effect */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent animate-hologram-scan"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent animate-pulse"></div>
       </div>
     </div>
   );
@@ -73,8 +74,8 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
       {videoSrc && !hasError && (
         <video
           ref={videoRef}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
+          className={`absolute inset-0 w-full h-full object-cover z-0 opacity-80 transition-opacity duration-1000 ${
+            isLoaded ? 'opacity-80' : 'opacity-0'
           }`}
           autoPlay
           muted
@@ -85,6 +86,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
           onError={handleVideoError}
         >
           <source src={videoSrc} type="video/mp4" />
+          Tu navegador no soporta videos HTML5.
         </video>
       )}
       
@@ -94,7 +96,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
       )}
       
       {/* Overlay for content readability */}
-      <div className="absolute inset-0 bg-black/10 dark:bg-black/20"></div>
+      <div className="absolute inset-0 bg-black/10 dark:bg-black/20 z-10"></div>
     </div>
   );
 };

@@ -5,9 +5,9 @@ import VideoBackground from './VideoBackground';
 const HeroSection: React.FC = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background with Cosmic Fallback */}
+      {/* Video Background con ruta exacta especificada */}
       <VideoBackground 
-        videoSrc="/videos/cosmic-background.mp4" // Cambia esta ruta cuando tengas el video
+        videoSrc="/videos/cosmic-background.mp4"
         fallbackGradient={true}
         className="z-0"
       />
