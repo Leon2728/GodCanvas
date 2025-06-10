@@ -34,7 +34,7 @@ const App = () => {
                 <div>
                   <Index />
                   {/* Blog Section */}
-                  <BlogSection />
+                  <BlogSection isDark={true} />
                 </div>
               } />
               

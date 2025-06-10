@@ -14,10 +14,10 @@ const Index: React.FC = () => {
       <Header />
       <HeroSection />
       <Avatar3DCarousel />
-      <CommunitySection />
-      <SocialSection />
-      <AboutSection />
-      <RegisterSection />
+      <CommunitySection isDark={true} />
+      <SocialSection isDark={true} />
+      <AboutSection isDark={true} />
+      <RegisterSection isDark={true} />
     </div>
   );
 };
