@@ -29,7 +29,7 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
           {/* Back navigation */}
           <Link 
             to="/"
-            className="inline-flex items-center space-x-3 mb-12 text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-all duration-300 group"
+            className="inline-flex items-center space-x-3 mb-12 text-sm text-slate-700 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-all duration-300 group"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
             <span className="font-medium">Volver al Blog</span>
@@ -68,14 +68,14 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
 
           {/* Article content */}
           <div className="prose prose-xl max-w-none">
-            <div className="text-slate-700 dark:text-slate-300 leading-relaxed space-y-16">
+            <div className="text-slate-800 dark:text-slate-300 leading-relaxed space-y-16">
               
               <section>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 bg-gradient-to-r from-slate-900 to-blue-800 dark:from-white dark:to-blue-200 bg-clip-text text-transparent leading-[1.1]">
                   La Visión se Confirma: La Realidad Valida el Discernimiento Profético
                 </h2>
                 
-                <p className="text-lg sm:text-xl leading-relaxed text-slate-700 dark:text-slate-300 mb-10 font-light">
+                <p className="text-lg sm:text-xl leading-relaxed text-slate-800 dark:text-slate-300 mb-10 font-light">
                   Este blog nació de una profunda convicción que resonó en el espíritu del autor: el mundo estaba al borde de un cambio geopolítico dramático. Lo que para muchos era solo una intuición, hoy se valida con los titulares globales. Las acciones de Occidente, la respuesta de Rusia y el creciente uso de la inteligencia artificial en el conflicto nos acercan cada día más al cumplimiento de lo que aquí se advirtió. A medida que los acontecimientos se desarrollan, lo que lees aquí no es solo un análisis, sino un testimonio vivo de lo que quizás tu propio corazón ya percibía.
                 </p>
 
@@ -356,7 +356,7 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
                 to="/"
                 className="group flex items-center space-x-3 px-8 py-4 rounded-xl bg-slate-100 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-600/30 hover:border-blue-400 dark:hover:border-blue-600/50 hover:bg-slate-200 dark:hover:bg-slate-900/60 transition-all duration-300 backdrop-blur-sm"
               >
-                <span className="text-slate-700 dark:text-slate-300 group-hover:text-blue-700 dark:group-hover:text-blue-300 font-medium">← Volver al Blog</span>
+                <span className="text-slate-800 dark:text-slate-300 group-hover:text-blue-700 dark:group-hover:text-blue-300 font-medium">← Volver al Blog</span>
               </Link>
             </div>
           </footer>
@@ -368,4 +368,4 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
 
 export default BlogPost1;
 
-</initial_code>
+</edits_to_apply>
