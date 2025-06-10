@@ -1,8 +1,8 @@
-# God Canvas - Avatar Carousel & Prophetic Blog 🌌🔮
+# GODCANVAS.INFO: God Canvas - Tu Espacio de Discernimiento Profético 🌌🔮
 
 ## **Descripción del Proyecto**
 
-**God Canvas** es una plataforma digital evolutiva que fusiona la **visión artística con el discernimiento profético y el análisis estratégico de eventos globales.** Comenzó como una exploración de animaciones inmersivas y ahora se expande para ser un lienzo dinital donde se despliegan **revelaciones y reflexiones sobre el futuro.**
+**God Canvas** es una plataforma digital evolutiva que fusiona la **visión artística con el discernimiento profético y el análisis estratégico de eventos globales.** Comenzó como una exploración de animaciones inmersivas y ahora se expande para ser un lienzo digital donde se despliegan **revelaciones y reflexiones sobre el futuro.**
 
 Este proyecto busca ofrecer una perspectiva única sobre el mundo, invitando a la audiencia a la preparación más que a la predicción, y a comprender cómo los eventos actuales se alinean con un patrón más grande.
 
@@ -27,7 +27,7 @@ Este proyecto está construido con herramientas modernas y eficientes:
 
 Puedes explorar la versión desplegada de **God Canvas** en GitHub Pages:
 
-➡️ **[Visitar God Canvas (GitHub Pages)](https://leon2728.github.io/godcanvas-avatar-carousel/)**
+➡️ **[Visitar God Canvas (GitHub Pages)](https://leon2728.github.io/GodCanvas/)**
 
 ## **Cómo Contribuir o Ejecutar Localmente**
 
@@ -35,11 +35,11 @@ Si deseas explorar el código, proponer mejoras o ejecutar el proyecto en tu má
 
 1.  **Clona el Repositorio:**
     ```bash
-    git clone [https://github.com/Leon2728/godcanvas-avatar-carousel.git](https://github.com/Leon2728/godcanvas-avatar-carousel.git)
+    git clone [https://github.com/Leon2728/GodCanvas.git](https://github.com/Leon2728/GodCanvas.git)
     ```
 2.  **Navega al Directorio del Proyecto:**
     ```bash
-    cd godcanvas-avatar-carousel
+    cd GodCanvas
     ```
 3.  **Instala las Dependencias:**
     ```bash
@@ -56,4 +56,3 @@ Si deseas explorar el código, proponer mejoras o ejecutar el proyecto en tu má
 “No se trata de predicción. Se trata de preparación. Lo profético se está cumpliendo.”
 
 ---
-
