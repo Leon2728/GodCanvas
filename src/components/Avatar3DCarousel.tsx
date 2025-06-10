@@ -1,8 +1,8 @@
-
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGesture } from 'react-use-gesture';
 import { Zap, Code, Database, Cpu, Shield, Sparkles } from 'lucide-react';
+import { useIsMobile } from '../hooks/use-mobile';
 
 const avatars = [
   {
@@ -216,6 +216,7 @@ export default function Avatar3DCarousel() {
   const navigate = useNavigate();
   const carouselRef = useRef<HTMLDivElement>(null);
   const autoplayRef = useRef<NodeJS.Timeout>();
+  const isMobile = useIsMobile();
 
   // Scanline animation
   useEffect(() => {
@@ -621,24 +622,28 @@ export default function Avatar3DCarousel() {
             })}
           </div>
 
-          {/* Enhanced Navigation Controls */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white hover:shadow-2xl hover:shadow-cyan-400/50 transition-all duration-300 border-2 border-cyan-400/50 z-40 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed group"
-            disabled={isAnimating}
-          >
-            <div className="text-xl font-bold group-hover:scale-125 transition-transform">◀</div>
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/0 to-cyan-400/20 group-hover:from-cyan-400/20 group-hover:to-cyan-400/40 transition-all duration-300"></div>
-          </button>
-          
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 rounded-full flex items-center justify-center text-white hover:shadow-2xl hover:shadow-cyan-400/50 transition-all duration-300 border-2 border-cyan-400/50 z-40 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed group"
-            disabled={isAnimating}
-          >
-            <div className="text-xl font-bold group-hover:scale-125 transition-transform">▶</div>
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/0 to-cyan-400/20 group-hover:from-cyan-400/20 group-hover:to-cyan-400/40 transition-all duration-300"></div>
-          </button>
+          {/* Enhanced Navigation Controls - Hidden on Mobile */}
+          {!isMobile && (
+            <>
+              <button
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white hover:shadow-2xl hover:shadow-cyan-400/50 transition-all duration-300 border-2 border-cyan-400/50 z-40 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed group"
+                disabled={isAnimating}
+              >
+                <div className="text-xl font-bold group-hover:scale-125 transition-transform">◀</div>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/0 to-cyan-400/20 group-hover:from-cyan-400/20 group-hover:to-cyan-400/40 transition-all duration-300"></div>
+              </button>
+              
+              <button
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 rounded-full flex items-center justify-center text-white hover:shadow-2xl hover:shadow-cyan-400/50 transition-all duration-300 border-2 border-cyan-400/50 z-40 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed group"
+                disabled={isAnimating}
+              >
+                <div className="text-xl font-bold group-hover:scale-125 transition-transform">▶</div>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/0 to-cyan-400/20 group-hover:from-cyan-400/20 group-hover:to-cyan-400/40 transition-all duration-300"></div>
+              </button>
+            </>
+          )}
         </div>
 
         {/* Enhanced Progress Indicators */}
