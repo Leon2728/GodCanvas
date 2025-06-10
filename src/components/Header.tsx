@@ -18,6 +18,9 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
         
         {/* Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
+          <a href="#blog-profetico" className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300 font-bold">
+            📰 Blog
+          </a>
           <a href="#comunidad" className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300">
             Comunidad
           </a>
