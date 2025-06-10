@@ -1,59 +1,73 @@
-# God Canvas - El Lienzo Profético 🌌🔮
+# Welcome to your Lovable project
 
-## **Descripción del Proyecto**
+## Project info
 
-**God Canvas** (`godcanvas.info`) es una plataforma digital evolutiva que fusiona la **visión artística con el discernimiento profético y el análisis estratégico de eventos globales.** Comenzó como una exploración de animaciones inmersivas y ahora se expande para ser un lienzo digital donde se despliegan **revelaciones y reflexiones sobre el futuro.**
+**URL**: https://lovable.dev/projects/6db9cc1e-b450-40e4-bb48-f28e1fa3cd8a
 
-Este proyecto busca ofrecer una perspectiva única sobre el mundo, invitando a la audiencia a la preparación más que a la predicción, y a comprender cómo los eventos actuales se alinean con un patrón más grande.
+## How can I edit this code?
 
-## **Características Destacadas**
+There are several ways of editing your application.
 
-✨ **Video de Fondo Cósmico Inmersivo:** Una experiencia visual cautivadora que te sumerge en el "Lienzo de Dios" desde el primer momento.
-🚀 **Carrusel de Avatares Dinámico:** Componente interactivo para presentar elementos clave del proyecto.
-📰 **Blog Profético Detallado:** Un espacio dedicado a análisis profundos y visiones sobre eventos globales (como la guerra entre Occidente y Rusia, el rol de la IA en el conflicto), escritos antes de que los titulares lo confirmen.
-🧭 **Navegación Intuitiva (Navbar):** Permite explorar fácilmente las secciones del blog, clips de documentales y podcasts.
-📚 **Estructura Modular:** Desarrollado con componentes reutilizables en React para facilitar la expansión y mantenimiento.
+**Use Lovable**
 
-## **Tecnologías Utilizadas**
+Simply visit the [Lovable Project](https://lovable.dev/projects/6db9cc1e-b450-40e4-bb48-f28e1fa3cd8a) and start prompting.
 
-Este proyecto está construido con herramientas modernas y eficientes:
+Changes made via Lovable will be committed automatically to this repo.
 
-* **React:** Una biblioteca de JavaScript para construir interfaces de usuario interactivas.
-* **TypeScript:** Añade tipado estático a JavaScript para código más robusto y escalable.
-* **Vite:** Un entorno de desarrollo frontend de próxima generación que ofrece una experiencia de desarrollo rapidísima.
-* **Tailwind CSS:** Un framework de CSS de primera utilidad para estilos rápidos y personalizables.
+**Use your preferred IDE**
 
-## **Cómo Ver el Proyecto**
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-Puedes explorar la versión desplegada de **God Canvas** en tu dominio personalizado y en GitHub Pages:
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-➡️ **[Visitar God Canvas (Dominio Principal)](https://godcanvas.info)** (Una vez que el dominio esté conectado)
-➡️ **[Visitar God Canvas (GitHub Pages)](https://leon2728.github.io/GodCanvas/)**
+Follow these steps:
 
-## **Cómo Contribuir o Ejecutar Localmente**
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
 
-Si deseas explorar el código, proponer mejoras o ejecutar el proyecto en tu máquina local, sigue estos pasos:
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
 
-1.  **Clona el Repositorio:**
-    ```bash
-    git clone [https://github.com/Leon2728/GodCanvas.git](https://github.com/Leon2728/GodCanvas.git)
-    ```
-2.  **Navega al Directorio del Proyecto:**
-    ```bash
-    cd GodCanvas
-    ```
-3.  **Instala las Dependencias:**
-    ```bash
-    npm install
-    ```
-4.  **Inicia el Servidor de Desarrollo:**
-    ```bash
-    npm run dev
-    ```
-    Esto abrirá el proyecto en tu navegador (normalmente en `http://localhost:5173/` o similar).
+# Step 3: Install the necessary dependencies.
+npm i
 
-## **Mantente Conectado**
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
+```
 
-“No se trata de predicción. Se trata de preparación. Lo profético se está cumpliendo.”
+**Edit a file directly in GitHub**
 
----
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
+
+**Use GitHub Codespaces**
+
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
+
+## What technologies are used for this project?
+
+This project is built with:
+
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
+
+## How can I deploy this project?
+
+Simply open [Lovable](https://lovable.dev/projects/6db9cc1e-b450-40e4-bb48-f28e1fa3cd8a) and click on Share -> Publish.
+
+## Can I connect a custom domain to my Lovable project?
+
+Yes, you can!
+
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
