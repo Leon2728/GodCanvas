@@ -1,22 +1,21 @@
-// src/App.tsx
 
 import React, { useRef } from 'react';
 import HeroSection from './components/HeroSection';
-import Navbar from './components/Navbar'; // Importa la nueva Navbar
-import BlogSection from './components/BlogSection'; // Importa la nueva sección del blog
-import DocumentarySection from './components/DocumentarySection'; // Importa la sección del documental
-import PodcastsSection from './components/PodcastsSection'; // Importa la sección de podcasts
-import AvatarCarousel from './components/AvatarCarousel'; // Asegúrate de que este componente esté disponible
+import Navbar from './components/Navbar';
+import BlogSection from './components/BlogSection';
+import DocumentarySection from './components/DocumentarySection';
+import PodcastsSection from './components/PodcastsSection';
+import AvatarCarousel from './components/AvatarCarousel';
 
 const App: React.FC = () => {
-  // Referencias para cada sección a la que la Navbar navegará
-  const blogRef = useRef<HTMLElement>(null);
-  const documentaryRef = useRef<HTMLElement>(null);
-  const podcastsRef = useRef<HTMLElement>(null);
+  // Referencias corregidas para usar HTMLDivElement
+  const blogRef = useRef<HTMLDivElement>(null);
+  const documentaryRef = useRef<HTMLDivElement>(null);
+  const podcastsRef = useRef<HTMLDivElement>(null);
 
   // Función para manejar la navegación desde la Navbar
   const handleNavigate = (sectionId: string) => {
-    let targetRef: React.RefObject<HTMLElement> | null = null;
+    let targetRef: React.RefObject<HTMLDivElement> | null = null;
     switch (sectionId) {
       case 'blog-profetico':
         targetRef = blogRef;
@@ -47,20 +46,15 @@ const App: React.FC = () => {
       {/* Hero Section (con el video de fondo) */}
       <HeroSection />
 
-      {/* Carrusel de Avatares - Posiciona este componente donde Lovable lo haya generado originalmente */}
-      {/* Podrías colocarlo entre HeroSection y BlogSection, o al final, dependiendo de tu diseño. */}
-      {/* Por ahora, lo colocamos aquí para mantener la estructura base. */}
+      {/* Carrusel de Avatares */}
       <section className="relative z-10 py-16 bg-gradient-to-t from-gray-950 to-gray-900">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-yellow-400 mb-10 animate-fade-in">
             Explora el Futuro Profético
           </h2>
-          {/* Aquí va tu Avatar Carousel. Asegúrate de que el componente AvatarCarousel esté definido */}
-          {/* Si Lovable lo generó en otro lugar, deberías moverlo o adaptar el import */}
           <AvatarCarousel />
         </div>
       </section>
-
 
       {/* Sección del Blog Profético */}
       <div ref={blogRef}>
@@ -80,7 +74,7 @@ const App: React.FC = () => {
       {/* Frase de Cierre Permanente */}
       <footer className="bg-gray-950 text-white text-center py-10 px-4">
         <p className="text-xl md:text-2xl font-semibold text-yellow-300">
-          “No se trata de predicción. Se trata de preparación. Lo profético se está cumpliendo.”
+          "No se trata de predicción. Se trata de preparación. Lo profético se está cumpliendo."
         </p>
         <p className="text-md text-gray-500 mt-4">
           &copy; {new Date().getFullYear()} God Canvas. Todos los derechos reservados.
