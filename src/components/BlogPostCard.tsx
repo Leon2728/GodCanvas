@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { BlogPost } from '../data/blogPosts';
 
 interface BlogPostCardProps {
@@ -8,6 +9,16 @@ interface BlogPostCardProps {
 }
 
 const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, isDark }) => {
+  // Map post IDs to their respective routes
+  const getPostRoute = (postId: string) => {
+    const routes: { [key: string]: string } = {
+      '1': '/blog/despertar-conciencia-global',
+      '2': '/blog/ia-gran-diseno',
+      '3': '/blog/geopolitica-celestial'
+    };
+    return routes[postId] || '/';
+  };
+
   return (
     <article className="group relative bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-violet-400/20 transform transition-all duration-300 hover:scale-[1.02] overflow-hidden h-full flex flex-col">
       
@@ -46,15 +57,18 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, isDark }) => {
           </p>
         </div>
         
-        {/* Clean CTA */}
-        <button className="group/btn w-full py-3 text-sm font-medium text-violet-300 border border-violet-400/30 rounded-lg hover:bg-violet-600/10 hover:border-violet-400/50 transition-all duration-200">
+        {/* Clean CTA with proper navigation */}
+        <Link 
+          to={getPostRoute(post.id)}
+          className="group/btn w-full py-3 text-sm font-medium text-violet-300 border border-violet-400/30 rounded-lg hover:bg-violet-600/10 hover:border-violet-400/50 transition-all duration-200 block"
+        >
           <span className="flex items-center justify-center space-x-2">
             <span>Leer más</span>
             <svg className="w-3 h-3 transform group-hover/btn:translate-x-0.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </span>
-        </button>
+        </Link>
       </div>
     </article>
   );
