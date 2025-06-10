@@ -26,6 +26,12 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
             onClick={() => onNavigate('blog-profetico')}
             className="text-white hover:text-yellow-400 text-lg font-semibold transition duration-300 flex items-center"
           >
+            <span className="text-xl mr-2">📝</span> Blog
+          </button>
+          <button
+            onClick={() => onNavigate('blog-profetico')}
+            className="text-white hover:text-yellow-400 text-lg font-semibold transition duration-300 flex items-center"
+          >
             <span className="text-xl mr-2">🧭</span> Blog Profético
           </button>
           <button
