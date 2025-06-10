@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
@@ -18,7 +19,7 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
           
           {/* Back button */}
           <Link 
-            to="/#blog-profetico" 
+            to="/"
             className="inline-flex items-center space-x-2 mb-8 px-4 py-2 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-violet-300 hover:text-white hover:border-violet-400/50 transition-all duration-300"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -170,5 +171,3 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
 };
 
 export default BlogPost1;
-
-</edits_to_apply>
