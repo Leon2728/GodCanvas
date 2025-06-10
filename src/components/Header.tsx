@@ -1,14 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import ThemeToggle from './ThemeToggle';
 
-interface HeaderProps {
-  isDark: boolean;
-  onThemeToggle: () => void;
-}
-
-const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
+const Header: React.FC = () => {
   const [activeSection, setActiveSection] = useState('');
   const [scrolled, setScrolled] = useState(false);
 
@@ -72,8 +66,8 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
 
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
         scrolled 
-          ? 'backdrop-blur-xl bg-white/10 dark:bg-black/10 shadow-xl shadow-violet-500/10' 
-          : 'backdrop-blur-md bg-white/5 dark:bg-black/5'
+          ? 'backdrop-blur-xl bg-black/10 shadow-xl shadow-violet-500/10' 
+          : 'backdrop-blur-md bg-black/5'
       }`}>
         
         {/* Neural Network Grid */}
@@ -84,7 +78,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
         <div className="container mx-auto px-6 py-4 relative">
           <div className="flex items-center justify-between">
             
-            {/* Logo Holográfico - Solo este mantiene el marco especial */}
+            {/* Logo Holográfico */}
             <button onClick={scrollToTop} className="relative group cursor-pointer">
               <div className="absolute -inset-3 bg-gradient-to-r from-violet-600/30 via-purple-600/30 to-emerald-500/30 rounded-2xl blur-xl opacity-50 group-hover:opacity-80 transition-all duration-700"></div>
               <div className="relative px-4 py-2 bg-gradient-to-r from-violet-900/20 to-emerald-900/20 rounded-xl border border-violet-400/30 backdrop-blur-sm group-hover:border-violet-400/50 transition-all duration-300">
@@ -97,7 +91,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
               </div>
             </button>
             
-            {/* Navigation - Estilo limpio como redes sociales */}
+            {/* Navigation */}
             <nav className="hidden lg:flex items-center space-x-1">
               {navItems.map((item) => (
                 <button
@@ -114,7 +108,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
                 </button>
               ))}
               
-              {/* CTA Button - Estilo limpio */}
+              {/* CTA Button */}
               <button
                 onClick={() => scrollToSection('register')}
                 className="ml-6 flex items-center px-8 py-3 bg-gradient-to-r from-violet-600 via-purple-600 to-emerald-500 text-white font-bold rounded-full transform transition-all duration-300 hover:scale-105 shadow-xl"
@@ -132,11 +126,6 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
                   <div className="w-full h-0.5 bg-gradient-to-r from-violet-400 to-emerald-400 transform transition-transform duration-300 group-hover:-rotate-45 group-hover:-translate-y-2"></div>
                 </div>
               </button>
-            </div>
-            
-            {/* Theme Toggle */}
-            <div className="ml-4">
-              <ThemeToggle isDark={isDark} onToggle={onThemeToggle} />
             </div>
           </div>
         </div>

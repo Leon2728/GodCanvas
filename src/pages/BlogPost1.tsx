@@ -3,25 +3,20 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { ArrowLeft } from 'lucide-react';
 
-interface BlogPost1Props {
-  isDark?: boolean;
-  onThemeToggle?: () => void;
-}
-
-const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = () => {} }) => {
+const BlogPost1: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-100 to-blue-50 dark:from-slate-950 dark:via-gray-950 dark:to-black relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-gray-950 to-black relative overflow-hidden">
       {/* Professional grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(148,163,184,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.1)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(148,163,184,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.03)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(148,163,184,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.03)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
       
-      {/* Subtle ambient lighting with professional blue/slate theme */}
+      {/* Subtle ambient lighting */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-gradient-radial from-blue-500/8 dark:from-blue-500/6 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-gradient-radial from-slate-400/6 dark:from-slate-400/4 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-radial from-indigo-500/8 dark:from-indigo-500/5 to-transparent rounded-full blur-2xl"></div>
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-gradient-radial from-blue-500/6 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-gradient-radial from-slate-400/4 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-radial from-indigo-500/5 to-transparent rounded-full blur-2xl"></div>
       </div>
 
-      <Header isDark={isDark} onThemeToggle={onThemeToggle} />
+      <Header />
       
       <article className="relative pt-32 pb-24 px-6 sm:px-8 lg:px-12 z-10">
         <div className="container mx-auto max-w-5xl">
@@ -29,7 +24,7 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
           {/* Back navigation */}
           <Link 
             to="/"
-            className="inline-flex items-center space-x-3 mb-12 text-sm text-slate-700 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-all duration-300 group"
+            className="inline-flex items-center space-x-3 mb-12 text-sm text-slate-400 hover:text-blue-300 transition-all duration-300 group"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
             <span className="font-medium">Volver al Blog</span>
@@ -38,25 +33,25 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
           {/* Article header */}
           <header className="mb-20">
             <div className="flex flex-wrap items-center gap-6 mb-12">
-              <time className="text-xs font-semibold text-blue-700 dark:text-blue-300 uppercase tracking-[0.2em] bg-blue-100 dark:bg-blue-500/10 px-4 py-2 rounded-full border border-blue-200 dark:border-blue-400/20 backdrop-blur-sm">
+              <time className="text-xs font-semibold text-blue-300 uppercase tracking-[0.2em] bg-blue-500/10 px-4 py-2 rounded-full border border-blue-400/20 backdrop-blur-sm">
                 9 de Junio, 2025
               </time>
-              <span className="text-xs font-semibold text-indigo-700 dark:text-indigo-300 uppercase tracking-[0.2em] bg-indigo-100 dark:bg-indigo-500/10 px-4 py-2 rounded-full border border-indigo-200 dark:border-indigo-400/20 backdrop-blur-sm">
+              <span className="text-xs font-semibold text-indigo-300 uppercase tracking-[0.2em] bg-indigo-500/10 px-4 py-2 rounded-full border border-indigo-400/20 backdrop-blur-sm">
                 Profecía
               </span>
             </div>
             
             <h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold mb-12 leading-[0.95] tracking-tight">
-              <span className="bg-gradient-to-r from-slate-900 via-gray-800 to-slate-700 dark:from-white dark:via-slate-100 dark:to-gray-200 bg-clip-text text-transparent block mb-4">
+              <span className="bg-gradient-to-r from-white via-slate-100 to-gray-200 bg-clip-text text-transparent block mb-4">
                 La Guerra Global se Intensifica:
               </span>
-              <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-slate-600 dark:from-blue-400 dark:via-indigo-400 dark:to-slate-300 bg-clip-text text-transparent block">
+              <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-slate-300 bg-clip-text text-transparent block">
                 ¿Estás Listo para lo que Viene?
               </span>
               <span className="text-3xl sm:text-4xl lg:text-5xl ml-2 sm:ml-6 block mt-6">📰⚔️🧠</span>
             </h1>
 
-            <div className="relative rounded-3xl overflow-hidden border border-slate-300 dark:border-slate-700/30 shadow-2xl shadow-black/20 dark:shadow-black/60 backdrop-blur-sm">
+            <div className="relative rounded-3xl overflow-hidden border border-slate-700/30 shadow-2xl shadow-black/60 backdrop-blur-sm">
               <img 
                 src="/lovable-uploads/28208dd9-0d18-4231-97e0-21190702e10a.png" 
                 alt="La Guerra Global se Intensifica" 
@@ -68,30 +63,30 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
 
           {/* Article content */}
           <div className="prose prose-xl max-w-none">
-            <div className="text-slate-800 dark:text-slate-300 leading-relaxed space-y-16">
+            <div className="text-slate-300 leading-relaxed space-y-16">
               
               <section>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 bg-gradient-to-r from-slate-900 to-blue-800 dark:from-white dark:to-blue-200 bg-clip-text text-transparent leading-[1.1]">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent leading-[1.1]">
                   La Visión se Confirma: La Realidad Valida el Discernimiento Profético
                 </h2>
                 
-                <p className="text-lg sm:text-xl leading-relaxed text-slate-800 dark:text-slate-300 mb-10 font-light">
+                <p className="text-lg sm:text-xl leading-relaxed text-slate-300 mb-10 font-light">
                   Este blog nació de una profunda convicción que resonó en el espíritu del autor: el mundo estaba al borde de un cambio geopolítico dramático. Lo que para muchos era solo una intuición, hoy se valida con los titulares globales. Las acciones de Occidente, la respuesta de Rusia y el creciente uso de la inteligencia artificial en el conflicto nos acercan cada día más al cumplimiento de lo que aquí se advirtió. A medida que los acontecimientos se desarrollan, lo que lees aquí no es solo un análisis, sino un testimonio vivo de lo que quizás tu propio corazón ya percibía.
                 </p>
 
-                <div className="bg-gradient-to-r from-slate-100 to-blue-50 dark:from-slate-900/60 dark:to-blue-950/40 border border-blue-200 dark:border-blue-400/20 rounded-2xl p-8 sm:p-10 my-12 backdrop-blur-sm">
-                  <h3 className="text-2xl font-bold text-blue-800 dark:text-blue-300 mb-6 flex items-center space-x-4">
+                <div className="bg-gradient-to-r from-slate-900/60 to-blue-950/40 border border-blue-400/20 rounded-2xl p-8 sm:p-10 my-12 backdrop-blur-sm">
+                  <h3 className="text-2xl font-bold text-blue-300 mb-6 flex items-center space-x-4">
                     <span className="text-3xl">📌</span>
                     <span className="tracking-wide">REFERENCIA</span>
                   </h3>
-                  <p className="text-blue-700 dark:text-blue-100 mb-8 text-lg leading-relaxed font-light">
+                  <p className="text-blue-100 mb-8 text-lg leading-relaxed font-light">
                     Si aún no lo has hecho, te invitamos a leer la primera parte de este análisis, publicada el 13 de febrero de 2025: La Guerra Entre Occidente y Rusia: Lo Que Está Por Venir
                   </p>
                   <a 
                     href="https://www.facebook.com/share/p/1BYssk4UMq/" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-3 px-6 py-4 bg-blue-200 dark:bg-blue-600/20 border border-blue-300 dark:border-blue-400/30 rounded-xl text-blue-800 dark:text-blue-200 hover:bg-blue-300 dark:hover:bg-blue-600/30 hover:border-blue-400 dark:hover:border-blue-400/50 transition-all duration-300 font-medium"
+                    className="inline-flex items-center space-x-3 px-6 py-4 bg-blue-600/20 border border-blue-400/30 rounded-xl text-blue-200 hover:bg-blue-600/30 hover:border-blue-400/50 transition-all duration-300 font-medium"
                   >
                     <span>📖 Leer en Facebook</span>
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,11 +97,11 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
               </section>
 
               <section>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 bg-gradient-to-r from-slate-900 to-indigo-800 dark:from-white dark:to-indigo-200 bg-clip-text text-transparent leading-[1.1]">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent leading-[1.1]">
                   Tu Mundo se Transforma: El Conflicto de Ucrania Ahora es Global
                 </h2>
                 
-                <p className="text-lg sm:text-xl leading-relaxed text-slate-700 dark:text-slate-300 font-light">
+                <p className="text-lg sm:text-xl leading-relaxed text-slate-300 font-light">
                   La guerra entre Rusia y Ucrania ya no es un conflicto lejano; ha trascendido sus fronteras originales, transformándose en una crisis global con implicaciones de gran alcance para tu futuro y el orden mundial. A medida que la intervención de Occidente se intensifica, las preguntas sobre el desenlace de esta crisis y su impacto en el equilibrio de poder mundial se vuelven más urgentes para ti.
                 </p>
               </section>
@@ -342,7 +337,7 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
               </section>
 
               <section className="text-center py-16">
-                <p className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-slate-900 via-blue-800 to-indigo-800 dark:from-white dark:via-blue-200 dark:to-indigo-200 bg-clip-text text-transparent">
+                <p className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-blue-200 to-indigo-200 bg-clip-text text-transparent">
                   💬 ¡Si este análisis resonó contigo en lo profundo, no lo guardes solo para ti. Tal vez alguien necesite verlo hoy!
                 </p>
               </section>
@@ -350,13 +345,13 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
           </div>
 
           {/* Navigation */}
-          <footer className="mt-20 pt-10 border-t border-slate-300 dark:border-slate-700/30">
+          <footer className="mt-20 pt-10 border-t border-slate-700/30">
             <div className="flex justify-between items-center">
               <Link 
                 to="/"
-                className="group flex items-center space-x-3 px-8 py-4 rounded-xl bg-slate-100 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-600/30 hover:border-blue-400 dark:hover:border-blue-600/50 hover:bg-slate-200 dark:hover:bg-slate-900/60 transition-all duration-300 backdrop-blur-sm"
+                className="group flex items-center space-x-3 px-8 py-4 rounded-xl bg-slate-900/40 border border-slate-600/30 hover:border-blue-600/50 hover:bg-slate-900/60 transition-all duration-300 backdrop-blur-sm"
               >
-                <span className="text-slate-800 dark:text-slate-300 group-hover:text-blue-700 dark:group-hover:text-blue-300 font-medium">← Volver al Blog</span>
+                <span className="text-slate-300 group-hover:text-blue-300 font-medium">← Volver al Blog</span>
               </Link>
             </div>
           </footer>
@@ -367,5 +362,3 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
 };
 
 export default BlogPost1;
-
-</edits_to_apply>

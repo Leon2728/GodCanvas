@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import BlogPost1 from "./pages/BlogPost1";
@@ -14,33 +14,10 @@ import VideoBackground from "./components/VideoBackground";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [isDark, setIsDark] = useState(false);
-
-  // Initialize theme based on system preference
+  // Force dark mode always
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDark(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setIsDark(e.matches);
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    document.documentElement.classList.add('dark');
   }, []);
-
-  // Apply theme to document
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDark]);
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-  };
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -48,22 +25,22 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <div className={`relative min-h-screen overflow-hidden ${isDark ? 'dark' : ''}`}>
+          <div className="relative min-h-screen overflow-hidden dark">
             {/* Video Background */}
             <VideoBackground />
             
             <Routes>
               <Route path="/" element={
                 <div>
-                  <Index isDark={isDark} onThemeToggle={toggleTheme} />
+                  <Index />
                   {/* Blog Section */}
-                  <BlogSection isDark={isDark} />
+                  <BlogSection />
                 </div>
               } />
               
               {/* Single blog post route */}
               <Route path="/blog/despertar-conciencia-global" element={
-                <BlogPost1 isDark={isDark} onThemeToggle={toggleTheme} />
+                <BlogPost1 />
               } />
               
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
