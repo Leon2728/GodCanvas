@@ -1,6 +1,6 @@
-// src/components/Navbar.tsx
 
 import React from 'react';
+import { useScrollDirection } from '../hooks/useScrollDirection';
 
 // Definimos las propiedades que recibirá el componente Navbar
 interface NavbarProps {
@@ -8,8 +8,12 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
+  const scrollDirection = useScrollDirection();
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-70 backdrop-blur-sm p-4 shadow-lg">
+    <nav className={`fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-70 backdrop-blur-sm p-4 shadow-lg transition-transform duration-300 ease-in-out ${
+      scrollDirection === 'down' ? '-translate-y-full' : 'translate-y-0'
+    }`}>
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo o Título del Sitio - Puedes cambiar "God Canvas" */}
         <a href="#" className="text-white text-2xl font-bold tracking-wider hover:text-gray-300 transition duration-300">
