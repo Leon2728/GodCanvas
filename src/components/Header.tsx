@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
   };
 
   const navItems = [
-    { href: 'blog-profetico', label: 'Blog Profético', icon: '📰', isSpecial: true },
+    { href: 'blog-profetico', label: 'Blog Profético', icon: '📰' },
     { href: 'comunidad', label: 'Comunidad', icon: '👥' },
     { href: 'redes', label: 'Redes Sociales', icon: '🌐' },
     { href: 'about', label: 'Acerca de', icon: '🎯' },
@@ -84,7 +84,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
         <div className="container mx-auto px-6 py-4 relative">
           <div className="flex items-center justify-between">
             
-            {/* Logo Futurista como Home Button */}
+            {/* Logo Holográfico - Solo este mantiene el marco especial */}
             <button onClick={scrollToTop} className="relative group cursor-pointer">
               <div className="absolute -inset-3 bg-gradient-to-r from-violet-600/30 via-purple-600/30 to-emerald-500/30 rounded-2xl blur-xl opacity-50 group-hover:opacity-80 transition-all duration-700"></div>
               <div className="relative px-4 py-2 bg-gradient-to-r from-violet-900/20 to-emerald-900/20 rounded-xl border border-violet-400/30 backdrop-blur-sm group-hover:border-violet-400/50 transition-all duration-300">
@@ -97,68 +97,30 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
               </div>
             </button>
             
-            {/* Navigation Futurística 2030 */}
+            {/* Navigation - Estilo limpio como redes sociales */}
             <nav className="hidden lg:flex items-center space-x-1">
               {navItems.map((item) => (
-                <div key={item.href} className="relative group">
-                  {/* Holo Background */}
-                  <div className={`absolute -inset-1 rounded-xl transition-all duration-300 ${
+                <button
+                  key={item.href}
+                  onClick={() => scrollToSection(item.href)}
+                  className={`flex items-center space-x-3 px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 ${
                     activeSection === item.href
-                      ? 'bg-gradient-to-r from-violet-500/30 to-emerald-500/30 blur-sm'
-                      : 'bg-gradient-to-r from-violet-600/10 to-emerald-600/10 opacity-0 group-hover:opacity-100 blur-sm'
-                  }`}></div>
-                  
-                  <button
-                    onClick={() => scrollToSection(item.href)}
-                    className={`relative flex items-center space-x-3 px-6 py-3 rounded-xl transition-all duration-300 transform group-hover:scale-105 ${
-                      activeSection === item.href
-                        ? 'bg-gradient-to-r from-violet-600/40 to-emerald-600/40 border border-violet-400/50 text-white font-semibold shadow-lg'
-                        : item.isSpecial
-                        ? 'bg-gradient-to-r from-violet-600/20 to-purple-600/20 border border-violet-400/30 text-violet-200 font-medium hover:text-white'
-                        : 'text-gray-300 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/20'
-                    }`}
-                  >
-                    {/* Icon con efecto quantum */}
-                    <span className={`text-lg transition-all duration-300 ${
-                      activeSection === item.href ? 'scale-110 drop-shadow-lg' : 'group-hover:scale-110'
-                    }`}>
-                      {item.icon}
-                    </span>
-                    
-                    {/* Text con underline effect */}
-                    <span className="font-medium tracking-wide relative">
-                      {item.label}
-                      
-                      {/* Quantum underline */}
-                      <div className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-violet-400 to-emerald-400 transition-all duration-500 ${
-                        activeSection === item.href ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-60'
-                      }`}></div>
-                    </span>
-                    
-                    {/* Scanning effect */}
-                    <div className="absolute inset-0 rounded-xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/50 to-transparent animate-pulse"></div>
-                    </div>
-                  </button>
-                </div>
+                      ? 'text-white font-semibold'
+                      : 'text-gray-300 hover:text-white'
+                  }`}
+                >
+                  <span className="text-lg">{item.icon}</span>
+                  <span className="font-medium tracking-wide">{item.label}</span>
+                </button>
               ))}
               
-              {/* CTA Button Futurístico 2030 */}
-              <div className="relative group ml-6">
-                <div className="absolute -inset-1 bg-gradient-to-r from-violet-500 to-emerald-500 rounded-full blur opacity-75 group-hover:opacity-100 transition-all duration-500"></div>
-                <button
-                  onClick={() => scrollToSection('register')}
-                  className="relative flex items-center px-8 py-3 bg-gradient-to-r from-violet-600 via-purple-600 to-emerald-500 text-white font-bold rounded-full overflow-hidden transform transition-all duration-300 hover:scale-105 shadow-xl"
-                >
-                  <span className="relative z-10 tracking-wide">Únete Ahora</span>
-                  
-                  {/* Animated background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-violet-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
-                  {/* Border glow */}
-                  <div className="absolute inset-0 rounded-full border border-white/30 group-hover:border-white/50 transition-colors duration-300"></div>
-                </button>
-              </div>
+              {/* CTA Button - Estilo limpio */}
+              <button
+                onClick={() => scrollToSection('register')}
+                className="ml-6 flex items-center px-8 py-3 bg-gradient-to-r from-violet-600 via-purple-600 to-emerald-500 text-white font-bold rounded-full transform transition-all duration-300 hover:scale-105 shadow-xl"
+              >
+                <span className="tracking-wide">Únete Ahora</span>
+              </button>
             </nav>
             
             {/* Mobile Menu Button */}
