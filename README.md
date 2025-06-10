@@ -1,8 +1,8 @@
-# GODCANVAS.INFO: God Canvas - Tu Espacio de Discernimiento Profético 🌌🔮
+# God Canvas - El Lienzo Profético 🌌🔮
 
 ## **Descripción del Proyecto**
 
-**God Canvas** es una plataforma digital evolutiva que fusiona la **visión artística con el discernimiento profético y el análisis estratégico de eventos globales.** Comenzó como una exploración de animaciones inmersivas y ahora se expande para ser un lienzo digital donde se despliegan **revelaciones y reflexiones sobre el futuro.**
+**God Canvas** (`godcanvas.info`) es una plataforma digital evolutiva que fusiona la **visión artística con el discernimiento profético y el análisis estratégico de eventos globales.** Comenzó como una exploración de animaciones inmersivas y ahora se expande para ser un lienzo digital donde se despliegan **revelaciones y reflexiones sobre el futuro.**
 
 Este proyecto busca ofrecer una perspectiva única sobre el mundo, invitando a la audiencia a la preparación más que a la predicción, y a comprender cómo los eventos actuales se alinean con un patrón más grande.
 
@@ -25,8 +25,9 @@ Este proyecto está construido con herramientas modernas y eficientes:
 
 ## **Cómo Ver el Proyecto**
 
-Puedes explorar la versión desplegada de **God Canvas** en GitHub Pages:
+Puedes explorar la versión desplegada de **God Canvas** en tu dominio personalizado y en GitHub Pages:
 
+➡️ **[Visitar God Canvas (Dominio Principal)](https://godcanvas.info)** (Una vez que el dominio esté conectado)
 ➡️ **[Visitar God Canvas (GitHub Pages)](https://leon2728.github.io/GodCanvas/)**
 
 ## **Cómo Contribuir o Ejecutar Localmente**
