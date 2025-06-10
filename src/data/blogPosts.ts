@@ -36,7 +36,7 @@ export const blogPosts: BlogPost[] = [
       💬 ¡Comparte este análisis si crees que tu comunidad debe estar alerta!
     `,
     category: 'Profecía',
-    imageUrl: 'https://via.placeholder.com/600x400/8A2BE2/FFFFFF?text=Conciencia_Global'
+    imageUrl: '/lovable-uploads/6337b1e2-b973-410a-b7af-98b6edde6e3e.png'
   },
   {
     id: '2',
@@ -68,7 +68,7 @@ export const blogPosts: BlogPost[] = [
       💬 ¡Es momento de reflexionar sobre el papel de la tecnología en tu vida espiritual!
     `,
     category: 'Tecnología',
-    imageUrl: 'https://via.placeholder.com/600x400/3CB371/FFFFFF?text=IA_y_Diseño'
+    imageUrl: '/lovable-uploads/6337b1e2-b973-410a-b7af-98b6edde6e3e.png'
   },
   {
     id: '3',
@@ -107,6 +107,6 @@ export const blogPosts: BlogPost[] = [
       💬 ¡Comparte esta perspectiva si crees que tu comunidad necesita discernimiento espiritual!
     `,
     category: 'Geopolítica',
-    imageUrl: 'https://via.placeholder.com/600x400/FFD700/FFFFFF?text=Geopolitica_Celestial'
+    imageUrl: '/lovable-uploads/6337b1e2-b973-410a-b7af-98b6edde6e3e.png'
   },
 ];
