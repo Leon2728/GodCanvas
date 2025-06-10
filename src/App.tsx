@@ -8,8 +8,6 @@ import { useState, useEffect } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import BlogPost1 from "./pages/BlogPost1";
-import BlogPost2 from "./pages/BlogPost2";
-import BlogPost3 from "./pages/BlogPost3";
 import BlogSection from "./components/BlogSection";
 import VideoBackground from "./components/VideoBackground";
 
@@ -63,15 +61,9 @@ const App = () => {
                 </div>
               } />
               
-              {/* Blog post routes */}
+              {/* Single blog post route */}
               <Route path="/blog/despertar-conciencia-global" element={
                 <BlogPost1 isDark={isDark} onThemeToggle={toggleTheme} />
-              } />
-              <Route path="/blog/ia-gran-diseno" element={
-                <BlogPost2 isDark={isDark} onThemeToggle={toggleTheme} />
-              } />
-              <Route path="/blog/geopolitica-celestial" element={
-                <BlogPost3 isDark={isDark} onThemeToggle={toggleTheme} />
               } />
               
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

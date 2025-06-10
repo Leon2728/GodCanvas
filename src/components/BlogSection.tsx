@@ -2,6 +2,7 @@
 import React from 'react';
 import BlogPostCard from './BlogPostCard';
 import { blogPosts } from '../data/blogPosts';
+import { Video, Mic } from 'lucide-react';
 
 interface BlogSectionProps {
   isDark: boolean;
@@ -39,8 +40,8 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isDark }) => {
           </p>
         </header>
 
-        {/* Professional blog grid with better spacing */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 mb-16">
+        {/* Blog grid with single article */}
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 lg:gap-8 mb-16 max-w-2xl mx-auto">
           {blogPosts.map((post, index) => (
             <div
               key={post.id}
@@ -54,11 +55,65 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isDark }) => {
           ))}
         </div>
 
+        {/* New Visual Content Sections */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          
+          {/* Documentary Section */}
+          <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-violet-400/20 transition-all duration-300 p-8">
+            <div className="flex items-center space-x-3 mb-6">
+              <Video className="w-8 h-8 text-violet-400" />
+              <h2 className="text-2xl font-bold text-white">🎥 Sección del Documental</h2>
+            </div>
+            
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              Explora contenido visual profundo sobre las profecías y análisis geopolíticos. 
+              Documentales que revelan las conexiones espirituales detrás de los eventos mundiales.
+            </p>
+            
+            <div className="aspect-video bg-gradient-to-br from-violet-900/20 to-emerald-900/20 rounded-lg mb-6 flex items-center justify-center border border-violet-400/20">
+              <div className="text-center">
+                <Video className="w-16 h-16 text-violet-300 mx-auto mb-4" />
+                <p className="text-violet-200 font-medium">Próximamente</p>
+                <p className="text-gray-400 text-sm">Contenido documental en desarrollo</p>
+              </div>
+            </div>
+            
+            <button className="w-full py-3 text-sm font-medium text-violet-300 border border-violet-400/30 rounded-lg hover:bg-violet-600/10 hover:border-violet-400/50 transition-all duration-200">
+              Ver Documentales
+            </button>
+          </div>
+
+          {/* Podcast Section */}
+          <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-emerald-400/20 transition-all duration-300 p-8">
+            <div className="flex items-center space-x-3 mb-6">
+              <Mic className="w-8 h-8 text-emerald-400" />
+              <h2 className="text-2xl font-bold text-white">🎙️ Podcast / Reflexiones</h2>
+            </div>
+            
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              Reflexiones profundas y conversaciones sobre el discernimiento profético. 
+              Episodios que conectan la espiritualidad con los acontecimientos actuales.
+            </p>
+            
+            <div className="aspect-video bg-gradient-to-br from-emerald-900/20 to-violet-900/20 rounded-lg mb-6 flex items-center justify-center border border-emerald-400/20">
+              <div className="text-center">
+                <Mic className="w-16 h-16 text-emerald-300 mx-auto mb-4" />
+                <p className="text-emerald-200 font-medium">Próximamente</p>
+                <p className="text-gray-400 text-sm">Episodios de podcast en preparación</p>
+              </div>
+            </div>
+            
+            <button className="w-full py-3 text-sm font-medium text-emerald-300 border border-emerald-400/30 rounded-lg hover:bg-emerald-600/10 hover:border-emerald-400/50 transition-all duration-200">
+              Escuchar Podcast
+            </button>
+          </div>
+        </div>
+
         {/* Clean call-to-action */}
         <footer className="text-center">
           <button className="group relative px-8 py-4 bg-white/5 backdrop-blur-xl text-white font-medium rounded-xl border border-white/10 hover:border-violet-400/30 transition-all duration-300 transform hover:scale-[1.02] overflow-hidden">
             <span className="relative z-10 flex items-center space-x-2">
-              <span>Ver todos los artículos</span>
+              <span>Explorar todo el contenido</span>
               <svg className="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -67,7 +122,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isDark }) => {
           </button>
           
           <p className="mt-6 text-gray-500 text-sm max-w-lg mx-auto">
-            Mantente informado con análisis proféticos y perspectivas espirituales
+            Mantente informado con análisis proféticos, documentales y reflexiones espirituales
           </p>
         </footer>
       </div>
