@@ -8,21 +8,16 @@ import SocialSection from '../components/SocialSection';
 import AboutSection from '../components/AboutSection';
 import RegisterSection from '../components/RegisterSection';
 
-interface IndexProps {
-  isDark?: boolean;
-  onThemeToggle?: () => void;
-}
-
-const Index: React.FC<IndexProps> = ({ isDark = false, onThemeToggle = () => {} }) => {
+const Index: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-violet-50 to-emerald-50 dark:from-gray-900 dark:via-violet-950 dark:to-emerald-950 transition-colors duration-500">
-      <Header isDark={isDark} onThemeToggle={onThemeToggle} />
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-violet-950 to-emerald-950 transition-colors duration-500">
+      <Header />
       <HeroSection />
       <Avatar3DCarousel />
-      <CommunitySection isDark={isDark} />
-      <SocialSection isDark={isDark} />
-      <AboutSection isDark={isDark} />
-      <RegisterSection isDark={isDark} />
+      <CommunitySection />
+      <SocialSection />
+      <AboutSection />
+      <RegisterSection />
     </div>
   );
 };
