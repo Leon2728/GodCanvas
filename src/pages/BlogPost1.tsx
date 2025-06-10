@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
@@ -15,10 +14,11 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
       {/* Professional grid pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]"></div>
       
-      {/* Subtle ambient lighting */}
+      {/* Subtle ambient lighting with cyan/blue theme */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-radial from-blue-500/5 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-radial from-violet-500/5 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-radial from-cyan-500/8 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-radial from-blue-500/8 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-radial from-teal-500/6 to-transparent rounded-full blur-2xl"></div>
       </div>
 
       <Header isDark={isDark} onThemeToggle={onThemeToggle} />
@@ -29,7 +29,7 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
           {/* Back navigation */}
           <Link 
             to="/"
-            className="inline-flex items-center space-x-2 mb-8 text-sm text-gray-400 hover:text-white transition-colors duration-200 group"
+            className="inline-flex items-center space-x-2 mb-8 text-sm text-gray-400 hover:text-cyan-300 transition-colors duration-200 group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-200" />
             <span>Volver al Blog</span>
@@ -38,10 +38,10 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
           {/* Article header */}
           <header className="mb-16">
             <div className="flex flex-wrap items-center gap-4 mb-8">
-              <time className="text-xs font-medium text-blue-400 uppercase tracking-wider bg-blue-500/10 px-3 py-1.5 rounded-full border border-blue-500/20">
+              <time className="text-xs font-medium text-cyan-400 uppercase tracking-wider bg-cyan-500/10 px-3 py-1.5 rounded-full border border-cyan-500/20">
                 9 de Junio, 2025
               </time>
-              <span className="text-xs font-medium text-violet-400 uppercase tracking-wider bg-violet-500/10 px-3 py-1.5 rounded-full border border-violet-500/20">
+              <span className="text-xs font-medium text-blue-400 uppercase tracking-wider bg-blue-500/10 px-3 py-1.5 rounded-full border border-blue-500/20">
                 Profecía
               </span>
             </div>
@@ -51,7 +51,7 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
                 La Guerra Global se Intensifica:
               </span>
               <br />
-              <span className="bg-gradient-to-r from-blue-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 bg-clip-text text-transparent">
                 ¿Estás Listo para lo que Viene?
               </span>
               <span className="text-2xl sm:text-3xl lg:text-4xl ml-2 sm:ml-4">📰⚔️🧠</span>
@@ -72,7 +72,7 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
             <div className="text-gray-300 leading-relaxed space-y-12">
               
               <section>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent leading-tight">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent leading-tight">
                   La Visión se Confirma: La Realidad Valida el Discernimiento Profético
                 </h2>
                 
@@ -80,19 +80,19 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
                   Este blog nació de una profunda convicción que resonó en el espíritu del autor: el mundo estaba al borde de un cambio geopolítico dramático. Lo que para muchos era solo una intuición, hoy se valida con los titulares globales. Las acciones de Occidente, la respuesta de Rusia y el creciente uso de la inteligencia artificial en el conflicto nos acercan cada día más al cumplimiento de lo que aquí se advirtió. A medida que los acontecimientos se desarrollan, lo que lees aquí no es solo un análisis, sino un testimonio vivo de lo que quizás tu propio corazón ya percibía.
                 </p>
 
-                <div className="bg-gradient-to-r from-emerald-950/50 to-emerald-900/30 border border-emerald-500/20 rounded-xl p-6 sm:p-8 my-10 backdrop-blur-sm">
-                  <h3 className="text-xl font-bold text-emerald-300 mb-4 flex items-center space-x-3">
+                <div className="bg-gradient-to-r from-teal-950/50 to-cyan-900/30 border border-teal-500/20 rounded-xl p-6 sm:p-8 my-10 backdrop-blur-sm">
+                  <h3 className="text-xl font-bold text-teal-300 mb-4 flex items-center space-x-3">
                     <span className="text-2xl">📌</span>
                     <span>REFERENCIA</span>
                   </h3>
-                  <p className="text-emerald-100 mb-6 text-base leading-relaxed">
+                  <p className="text-teal-100 mb-6 text-base leading-relaxed">
                     Si aún no lo has hecho, te invitamos a leer la primera parte de este análisis, publicada el 13 de febrero de 2025: La Guerra Entre Occidente y Rusia: Lo Que Está Por Venir
                   </p>
                   <a 
                     href="https://www.facebook.com/share/p/1BYssk4UMq/" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-2 px-5 py-3 bg-emerald-600/20 border border-emerald-400/30 rounded-lg text-emerald-200 hover:bg-emerald-600/30 hover:border-emerald-400/50 transition-all duration-200 font-medium text-sm"
+                    className="inline-flex items-center space-x-2 px-5 py-3 bg-teal-600/20 border border-teal-400/30 rounded-lg text-teal-200 hover:bg-teal-600/30 hover:border-teal-400/50 transition-all duration-200 font-medium text-sm"
                   >
                     <span>📖 Leer en Facebook</span>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -113,16 +113,16 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
               </section>
 
               <section>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-violet-200 bg-clip-text text-transparent leading-tight">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent leading-tight">
                   El 1 de Junio: El Golpe Estratégico en Rusia que Vimos Venir
                 </h2>
 
-                <div className="bg-gradient-to-r from-emerald-950/50 to-emerald-900/30 border border-emerald-400/20 rounded-xl p-6 sm:p-8 my-10 backdrop-blur-sm">
-                  <h3 className="text-xl font-bold text-emerald-300 mb-4 flex items-center space-x-3">
+                <div className="bg-gradient-to-r from-teal-950/50 to-cyan-900/30 border border-teal-400/20 rounded-xl p-6 sm:p-8 my-10 backdrop-blur-sm">
+                  <h3 className="text-xl font-bold text-teal-300 mb-4 flex items-center space-x-3">
                     <span className="text-2xl">✅</span>
                     <span>HECHO CUMPLIDO</span>
                   </h3>
-                  <p className="text-emerald-100 text-base leading-relaxed">
+                  <p className="text-teal-100 text-base leading-relaxed">
                     El ataque del 1 de junio de 2025 a bases rusas fue anticipado en este mismo blog como parte de una ofensiva aérea sin precedentes por parte de Occidente. Ahora, la realidad confirma esa visión profética que aquí se compartió, marcando un punto de inflexión que todos estamos viviendo.
                   </p>
                 </div>
@@ -343,7 +343,7 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
               </section>
 
               <section className="text-center py-12">
-                <p className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-white via-blue-200 to-violet-200 bg-clip-text text-transparent">
+                <p className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-white via-cyan-200 to-blue-200 bg-clip-text text-transparent">
                   💬 ¡Si este análisis resonó contigo en lo profundo, no lo guardes solo para ti. Tal vez alguien necesite verlo hoy!
                 </p>
               </section>
@@ -355,9 +355,9 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
             <div className="flex justify-between items-center">
               <Link 
                 to="/"
-                className="group flex items-center space-x-2 px-6 py-3 rounded-lg bg-gray-900/30 border border-gray-700/30 hover:border-gray-600/50 hover:bg-gray-900/50 transition-all duration-200"
+                className="group flex items-center space-x-2 px-6 py-3 rounded-lg bg-gray-900/30 border border-gray-700/30 hover:border-cyan-600/50 hover:bg-gray-900/50 transition-all duration-200"
               >
-                <span className="text-gray-300 group-hover:text-white font-medium text-sm">← Volver al Blog</span>
+                <span className="text-gray-300 group-hover:text-cyan-300 font-medium text-sm">← Volver al Blog</span>
               </Link>
             </div>
           </footer>
