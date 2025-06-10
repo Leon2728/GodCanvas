@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 
 interface HeaderProps {
@@ -20,11 +21,21 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   const navItems = [
-    { href: '#blog-profetico', label: 'Blog', icon: '📰', isSpecial: true },
-    { href: '#comunidad', label: 'Comunidad', icon: '👥' },
-    { href: '#redes', label: 'Redes Sociales', icon: '🌐' },
-    { href: '#about', label: 'Acerca de nosotros', icon: '🎯' },
+    { href: 'blog-profetico', label: 'Blog', icon: '📰', isSpecial: true },
+    { href: 'comunidad', label: 'Comunidad', icon: '👥' },
+    { href: 'redes', label: 'Redes Sociales', icon: '🌐' },
+    { href: 'about', label: 'Acerca de nosotros', icon: '🎯' },
   ];
 
   return (
@@ -38,7 +49,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 80}px`,
-              animationDelay: `${Math.random() * 3}s`,
+              animationDelay: `${i * 2}s`,
               animationDuration: `${2 + Math.random() * 3}s`
             }}
           />
@@ -65,7 +76,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
           <div className="flex items-center justify-between">
             
             {/* Logo con efectos holográficos */}
-            <div className="relative group">
+            <Link to="/" className="relative group">
               <div className="absolute -inset-2 bg-gradient-to-r from-violet-600 via-purple-600 to-emerald-500 rounded-xl blur-xl opacity-30 group-hover:opacity-60 transition-all duration-700 animate-pulse"></div>
               <div className="relative">
                 <div className="text-3xl font-black bg-gradient-to-r from-violet-400 via-purple-400 to-emerald-400 bg-clip-text text-transparent filter drop-shadow-lg">
@@ -89,7 +100,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
                   />
                 ))}
               </div>
-            </div>
+            </Link>
             
             {/* Navigation Futurística */}
             <nav className="hidden lg:flex items-center space-x-2">
@@ -98,8 +109,8 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
                   {/* Holographic background */}
                   <div className="absolute -inset-1 bg-gradient-to-r from-violet-600/20 to-emerald-600/20 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm"></div>
                   
-                  <a
-                    href={item.href}
+                  <button
+                    onClick={() => scrollToSection(item.href)}
                     className={`relative flex items-center space-x-2 px-6 py-3 rounded-xl transition-all duration-500 transform group-hover:scale-105 ${
                       item.isSpecial
                         ? 'bg-gradient-to-r from-violet-600/20 to-purple-600/20 border border-violet-400/30 font-bold text-violet-300 dark:text-violet-200'
@@ -123,7 +134,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
                     <div className="absolute inset-0 rounded-xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-violet-400 to-transparent animate-flash-sweep"></div>
                     </div>
-                  </a>
+                  </button>
                   
                   {/* Floating particles on hover */}
                   <div className="absolute -inset-4 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -145,8 +156,8 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
               {/* CTA Button Futurístico */}
               <div className="relative group ml-4">
                 <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 to-emerald-600 rounded-full blur-lg opacity-75 group-hover:opacity-100 transition-all duration-700 animate-pulse"></div>
-                <a
-                  href="#register"
+                <button
+                  onClick={() => scrollToSection('register')}
                   className="relative flex items-center px-8 py-3 bg-gradient-to-r from-violet-600 to-emerald-500 text-white font-bold rounded-full overflow-hidden transform transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-violet-500/50"
                 >
                   <span className="relative z-10 tracking-wide">Regístrese</span>
@@ -159,7 +170,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
                   
                   {/* Energy pulse effect */}
                   <div className="absolute inset-0 rounded-full bg-white/10 scale-0 group-hover:scale-110 transition-transform duration-700 opacity-0 group-hover:opacity-100"></div>
-                </a>
+                </button>
               </div>
             </nav>
             
