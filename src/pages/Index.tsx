@@ -3,6 +3,10 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import Avatar3DCarousel from '../components/Avatar3DCarousel';
+import CommunitySection from '../components/CommunitySection';
+import SocialSection from '../components/SocialSection';
+import AboutSection from '../components/AboutSection';
+import RegisterSection from '../components/RegisterSection';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(false);
@@ -38,6 +42,10 @@ const Index = () => {
       <Header isDark={isDark} onThemeToggle={toggleTheme} />
       <HeroSection />
       <Avatar3DCarousel />
+      <CommunitySection isDark={isDark} />
+      <SocialSection isDark={isDark} />
+      <AboutSection isDark={isDark} />
+      <RegisterSection isDark={isDark} />
     </div>
   );
 };
