@@ -237,7 +237,7 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
                 </div>
 
                 <p className="text-lg sm:text-xl leading-relaxed text-slate-700 dark:text-slate-300 mb-12 font-light">
-                  Gracias a esta IA visual, los drones no dependían de señales remotas humanas, lo que los hacía resistentes a las interferencias electrónicas rusas. Además, se desplegaron en enjambres coordinados, optimizando rutas y tiempos de impacto para maximizar el daño simultáneo. Esto es el futuro de la guerra, y lo estamos viendo ahora mismo.
+                  Gracias a esta IA visual, los drones no dependían de señales remotas humanas, lo que los hacían resistentes a las interferencias electrónicas rusas. Además, se desplegaron en enjambres coordinados, optimizando rutas y tiempos de impacto para maximizar el daño simultáneo. Esto es el futuro de la guerra, y lo estamos viendo ahora mismo.
                 </p>
 
                 <h3 className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white mb-6">
