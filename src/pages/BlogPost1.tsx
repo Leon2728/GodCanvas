@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
@@ -42,7 +41,7 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
             </h1>
 
             <img 
-              src="/lovable-uploads/6337b1e2-b973-410a-b7af-98b6edde6e3e.png" 
+              src="/lovable-uploads/28208dd9-0d18-4231-97e0-21190702e10a.png" 
               alt="La Guerra Global se Intensifica" 
               className="w-full h-64 md:h-96 object-cover rounded-2xl border border-white/10"
             />
@@ -157,10 +156,10 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
           <footer className="mt-16 pt-8 border-t border-white/10">
             <div className="flex justify-between items-center">
               <Link 
-                to="/blog/ia-gran-diseno"
+                to="/"
                 className="group flex items-center space-x-2 px-6 py-3 rounded-lg bg-white/5 border border-white/10 hover:border-violet-400/30 transition-all duration-300"
               >
-                <span className="text-gray-400 group-hover:text-white">Siguiente →</span>
+                <span className="text-gray-400 group-hover:text-white">← Volver al Blog</span>
               </Link>
             </div>
           </footer>

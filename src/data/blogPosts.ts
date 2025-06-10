@@ -33,6 +33,6 @@ export const blogPosts: BlogPost[] = [
       💬 ¡Comparte este análisis si crees que tus amigos y tu comunidad deben estar alertas!
     `,
     category: 'Profecía',
-    imageUrl: '/lovable-uploads/6337b1e2-b973-410a-b7af-98b6edde6e3e.png'
+    imageUrl: '/lovable-uploads/28208dd9-0d18-4231-97e0-21190702e10a.png'
   },
 ];
