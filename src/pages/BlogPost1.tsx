@@ -170,3 +170,5 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
 };
 
 export default BlogPost1;
+
+</edits_to_apply>
