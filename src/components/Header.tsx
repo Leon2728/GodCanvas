@@ -47,6 +47,14 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ 
+      top: 0, 
+      behavior: 'smooth' 
+    });
+    setActiveSection('hero');
+  };
+
   const navItems = [
     { href: 'blog-profetico', label: 'Blog Profético', icon: '📰', isSpecial: true },
     { href: 'comunidad', label: 'Comunidad', icon: '👥' },
@@ -76,15 +84,18 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
         <div className="container mx-auto px-6 py-4 relative">
           <div className="flex items-center justify-between">
             
-            {/* Logo Futurista */}
-            <Link to="/" className="relative group">
+            {/* Logo Futurista como Home Button */}
+            <button onClick={scrollToTop} className="relative group cursor-pointer">
               <div className="absolute -inset-3 bg-gradient-to-r from-violet-600/30 via-purple-600/30 to-emerald-500/30 rounded-2xl blur-xl opacity-50 group-hover:opacity-80 transition-all duration-700"></div>
-              <div className="relative px-4 py-2 bg-gradient-to-r from-violet-900/20 to-emerald-900/20 rounded-xl border border-violet-400/30 backdrop-blur-sm">
-                <div className="text-2xl font-black bg-gradient-to-r from-violet-300 via-purple-300 to-emerald-300 bg-clip-text text-transparent">
+              <div className="relative px-4 py-2 bg-gradient-to-r from-violet-900/20 to-emerald-900/20 rounded-xl border border-violet-400/30 backdrop-blur-sm group-hover:border-violet-400/50 transition-all duration-300">
+                <div className="text-2xl font-black bg-gradient-to-r from-violet-300 via-purple-300 to-emerald-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
                   GodCanvas
                 </div>
+                
+                {/* Home indicator */}
+                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-violet-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-            </Link>
+            </button>
             
             {/* Navigation Futurística 2030 */}
             <nav className="hidden lg:flex items-center space-x-1">
