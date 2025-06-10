@@ -99,7 +99,7 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
                 Fue ejecutado por Ucrania, pero la tecnología y la inteligencia occidental son innegables. La clave residió en el uso de drones de largo alcance de desarrollo reciente, capaces de alcanzar objetivos a más de 3.000 km. Es crucial que comprendas que no se utilizaron aviones tripulados en esta fase, lo que sugiere que estos ataques con drones están abriendo camino para una futura ofensiva aérea occidental directa, algo que te afecta directamente al cambiar las reglas del juego global.
               </p>
 
-              <h3 className="text-xl font-bold text-white mb-4 mt-6">El Impacto Inicial que Sientes (o sentirás):</h3>
+              <h3 className="text-xl font-bold text-white mb-4 mt-6">El Impacto Inicial:</h3>
               
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-start space-x-3">
@@ -147,7 +147,7 @@ const BlogPost1: React.FC<BlogPost1Props> = ({ isDark = false, onThemeToggle = (
               </p>
 
               <p className="text-center text-lg font-medium text-white mt-12">
-                💬 ¡Comparte este análisis si crees que tus amigos y tu comunidad deben estar alertas!
+                💬 ¡Si este análisis resonó contigo en lo profundo, no lo guardes solo para ti. Tal vez alguien necesite verlo hoy!
               </p>
             </div>
           </div>
