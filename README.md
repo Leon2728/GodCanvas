@@ -1,4 +1,3 @@
-
 # GodCanvas ✨
 
 ![GodCanvas Banner](https://via.placeholder.com/1200x400/2A0064/E0BBE4?text=GodCanvas+-+El+Lienzo+Divino)
@@ -19,6 +18,7 @@ GodCanvas es una plataforma digital con una visión profunda y profética, dise�
 * **Temas (Claro/Oscuro):** Un interruptor de tema para personalizar la experiencia visual según las preferencias del usuario.
 * **Preparado para Contenido Multimedia:** Estructura lista para integrar clips de documentales y podcasts/reflexiones.
 * **Potencial de Contenido 3D:** Preparado para futuras integraciones de modelos 3D interactivos que enriquecerán la experiencia visual del usuario.
+* **Vista Previa: Carrousel de Avatares:** Explora un carrousel de avatares interactivo en acción [aquí](https://preview--godcanvas-avatar-carousel.lovable.app/).
 
 ---
 
