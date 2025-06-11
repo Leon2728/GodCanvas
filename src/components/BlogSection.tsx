@@ -2,7 +2,7 @@
 import React from 'react';
 import BlogPostCard from './BlogPostCard';
 import { blogPosts } from '../data/blogPosts';
-import { Video, Mic } from 'lucide-react';
+import { Video, Mic, BookOpen } from 'lucide-react';
 
 interface BlogSectionProps {
   isDark: boolean;
@@ -39,6 +39,71 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isDark }) => {
             Perspectivas divinas sobre los eventos actuales y análisis profético del mundo moderno
           </p>
         </header>
+
+        {/* Spiritual Introduction Section */}
+        <div className="mb-20 max-w-4xl mx-auto">
+          <div className="bg-gradient-to-r from-amber-50/5 via-yellow-50/5 to-amber-50/5 backdrop-blur-xl rounded-3xl border border-amber-400/20 p-8 md:p-12 shadow-2xl shadow-amber-500/5">
+            
+            {/* Header with cross icon */}
+            <div className="flex items-center justify-center mb-8">
+              <div className="flex items-center space-x-3 px-6 py-3 bg-amber-600/10 rounded-full border border-amber-400/20">
+                <span className="text-2xl">✝️</span>
+                <span className="text-amber-300 font-semibold text-sm uppercase tracking-wide">Introducción Espiritual</span>
+              </div>
+            </div>
+
+            {/* Main introduction text */}
+            <div className="text-center mb-10">
+              <p className="text-lg md:text-xl text-amber-100 mb-8 font-light leading-relaxed">
+                "Antes de seguir leyendo este blog, recordemos lo que dice la Escritura…"
+              </p>
+            </div>
+
+            {/* Biblical quote - highlighted */}
+            <div className="relative mb-10">
+              <div className="absolute -inset-4 bg-gradient-to-r from-amber-500/10 via-yellow-500/10 to-amber-500/10 rounded-2xl blur-xl"></div>
+              <div className="relative bg-gradient-to-r from-amber-900/30 to-yellow-900/30 rounded-2xl p-8 border border-amber-400/30 backdrop-blur-sm">
+                <div className="flex items-start space-x-4 mb-6">
+                  <BookOpen className="w-8 h-8 text-amber-300 mt-1 flex-shrink-0" />
+                  <div className="flex-1">
+                    <blockquote className="text-xl md:text-2xl font-medium text-amber-100 leading-relaxed italic mb-4">
+                      "Porque no fue traída jamás la profecía por voluntad humana, sino que los santos hombres de Dios hablaron siendo inspirados por el Espíritu Santo."
+                    </blockquote>
+                    <cite className="text-amber-300 font-semibold text-lg">
+                      — 2 Pedro 1:21 (RVR60)
+                    </cite>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Explanatory text */}
+            <div className="space-y-6 text-amber-100/90 leading-relaxed">
+              <p className="text-lg font-light">
+                Este blog no pretende anticipar el futuro por voluntad personal, ni crear alarma sin fundamento. 
+                Toda visión o interpretación aquí compartida ha sido meditada con temor reverente, a la luz de la Palabra de Dios.
+              </p>
+              
+              <p className="text-lg font-light">
+                Las cosas secretas pertenecen al Señor, pero las reveladas son para nosotros. Y este espacio busca ser fiel 
+                a lo revelado, sin añadir, sin quitar, sin forzar.
+              </p>
+              
+              <div className="pt-6 border-t border-amber-400/20">
+                <p className="text-lg font-medium text-amber-200 text-center">
+                  Si decides seguir leyendo, hazlo con discernimiento espiritual, oración y humildad ante Aquel que conoce el principio y el fin.
+                </p>
+              </div>
+            </div>
+
+            {/* Decorative elements */}
+            <div className="flex justify-center mt-8 space-x-2">
+              <div className="w-2 h-2 bg-amber-400 rounded-full opacity-50"></div>
+              <div className="w-2 h-2 bg-amber-400 rounded-full"></div>
+              <div className="w-2 h-2 bg-amber-400 rounded-full opacity-50"></div>
+            </div>
+          </div>
+        </div>
 
         {/* Blog grid with single article */}
         <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 lg:gap-8 mb-16 max-w-2xl mx-auto">
