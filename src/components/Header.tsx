@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Music } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [activeSection, setActiveSection] = useState('');
@@ -11,7 +12,7 @@ const Header: React.FC = () => {
       setScrolled(window.scrollY > 20);
       
       // Detect active section based on scroll position
-      const sections = ['hero', 'blog-profetico', 'comunidad', 'redes', 'about'];
+      const sections = ['hero', 'blog-profetico', 'musica', 'comunidad', 'redes', 'about'];
       const currentSection = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -51,6 +52,7 @@ const Header: React.FC = () => {
 
   const navItems = [
     { href: 'blog-profetico', label: 'Blog Profético', icon: '📰' },
+    { href: 'musica', label: 'Música', icon: <Music className="w-5 h-5" /> },
     { href: 'comunidad', label: 'Comunidad', icon: '👥' },
     { href: 'redes', label: 'Redes Sociales', icon: '🌐' },
     { href: 'about', label: 'Acerca de', icon: '🎯' },
@@ -103,7 +105,9 @@ const Header: React.FC = () => {
                       : 'text-gray-300 hover:text-white'
                   }`}
                 >
-                  <span className="text-lg">{item.icon}</span>
+                  <span className="text-lg">
+                    {typeof item.icon === 'string' ? item.icon : item.icon}
+                  </span>
                   <span className="font-medium tracking-wide">{item.label}</span>
                 </button>
               ))}
