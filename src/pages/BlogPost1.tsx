@@ -1,9 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import TextToSpeech from '../components/TextToSpeech';
 import { ArrowLeft } from 'lucide-react';
 
 const BlogPost1: React.FC = () => {
+  // Extract the main content for text-to-speech
+  const articleContent = `
+    La Guerra Global se Intensifica: ¿Estás Listo para lo que Viene?
+    
+    La Visión se Confirma: La Realidad Valida el Discernimiento Profético
+    
+    Este blog nació de una profunda convicción que resonó en el espíritu del autor: el mundo estaba al borde de un cambio geopolítico dramático. Lo que para muchos era solo una intuición, hoy se valida con los titulares globales. Las acciones de Occidente, la respuesta de Rusia y el creciente uso de la inteligencia artificial en el conflicto nos acercan cada día más al cumplimiento de lo que aquí se advirtió.
+
+    Tu Mundo se Transforma: El Conflicto de Ucrania Ahora es Global
+    
+    La guerra entre Rusia y Ucrania ya no es un conflicto lejano; ha trascendido sus fronteras originales, transformándose en una crisis global con implicaciones de gran alcance para tu futuro y el orden mundial.
+
+    El 1 de Junio: El Golpe Estratégico en Rusia que Vimos Venir
+    
+    El ataque del 1 de junio de 2025 a bases rusas fue anticipado en este mismo blog como parte de una ofensiva aérea sin precedentes por parte de Occidente. Este ataque se centró en bases militares estratégicas en la retaguardia profunda de Rusia, específicamente en bases aéreas clave donde operaban bombarderos pesados de largo alcance.
+
+    La Inteligencia Artificial: El Nuevo Factor que Define Tu Futuro en la Guerra
+    
+    El ataque del 1 de junio lleva la firma de una sofisticada inteligencia artificial aplicada a la navegación autónoma de drones. Drones kamikaze guiados por IA entrenada para reconocer visualmente aeronaves rusas específicas, utilizando bases de datos que incluían imágenes de satélite y archivos históricos.
+
+    La Fractura Interna Rusa: Cómo Afecta la Presión sobre Putin tu Realidad
+    
+    La respuesta rusa ante esta ofensiva desencadenará una profunda crisis interna en Moscú. El ambiente sugiere una pérdida de cohesión en la cúpula rusa, algo que afecta la estabilidad de una potencia nuclear.
+
+    El futuro de la guerra entre Occidente y Rusia sigue siendo incierto, pero los indicios son claros y los eventos se alinean con las anticipaciones. Este blog continuará como un mapa profético, estratégico y espiritual, brindándote discernimiento sobre el desenlace de esta guerra histórica.
+  `;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-gray-950 to-black relative overflow-hidden">
       {/* Professional grid pattern */}
@@ -60,6 +88,12 @@ const BlogPost1: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
             </div>
           </header>
+
+          {/* Text-to-Speech Component */}
+          <TextToSpeech 
+            text={articleContent} 
+            title="La Guerra Global se Intensifica: ¿Estás Listo para lo que Viene?"
+          />
 
           {/* Article content */}
           <div className="prose prose-xl max-w-none">
