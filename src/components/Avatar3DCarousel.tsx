@@ -8,7 +8,7 @@ const avatars = [
   {
     id: "jesus",
     name: "Jesucristo",
-    image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=600&fit=crop",
+    image: "/lovable-uploads/3cfe7e09-6f3f-4148-90a6-8cb8fa79a634.png",
     description: "Salvador del mundo y luz eterna",
     link: "/jesus",
     category: "salvador",
