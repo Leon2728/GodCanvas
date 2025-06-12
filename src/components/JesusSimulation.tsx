@@ -274,7 +274,7 @@ const JesusSimulation: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-2xl text-white font-bold mb-6">La Llegada de Fe</h3>
+              <h3 className="text-2xl text-white font-bold mb-6">Fe</h3>
               {/* Efectos de llegada divina */}
               <div className="absolute inset-0 bg-gradient-to-r from-pink-400/10 via-purple-400/10 to-blue-400/10 animate-pulse rounded-full" />
             </div>
