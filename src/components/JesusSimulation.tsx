@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import VideoBackground from './VideoBackground';
 
 type SimulationStep = 
   | 'intro'
@@ -92,20 +93,33 @@ const JesusSimulation: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         return (
           <StepContainer>
             <div className="text-center mb-8">
-              {/* Tree Image with Living Effects */}
-              <div className="mb-8 relative">
-                <div className="absolute inset-0 bg-gradient-to-t from-green-900/30 to-transparent rounded-2xl animate-pulse" />
-                <img 
-                  src="/lovable-uploads/3b88d9c4-192f-4729-85c1-21c699881555.png"
-                  alt="El Árbol que Suelta - Bosque de Sanidad"
-                  className="w-full max-w-2xl mx-auto rounded-2xl shadow-2xl border-4 border-white/20 relative z-10 transition-transform duration-300 hover:scale-105"
-                />
-                {/* Efecto de viento en las hojas */}
-                <div className="absolute top-4 left-4 w-2 h-2 bg-green-400 rounded-full animate-bounce opacity-60" />
-                <div className="absolute top-8 right-8 w-1 h-1 bg-yellow-400 rounded-full animate-ping" />
-                <div className="absolute bottom-12 left-12 w-1 h-1 bg-emerald-300 rounded-full animate-pulse" />
+              {/* Video Background with Living Effects */}
+              <div className="mb-8 relative w-full max-w-4xl mx-auto">
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
+                  <VideoBackground 
+                    videoSrc="/lovable-uploads/tree-loop-5s.mp4"
+                    fallbackGradient={true}
+                    className="rounded-2xl"
+                  />
+                  
+                  {/* Overlay effects for divine presence */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-green-900/30 to-transparent rounded-2xl animate-pulse pointer-events-none" />
+                  
+                  {/* Floating divine particles */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-4 left-4 w-2 h-2 bg-green-400 rounded-full animate-bounce opacity-60" />
+                    <div className="absolute top-8 right-8 w-1 h-1 bg-yellow-400 rounded-full animate-ping" />
+                    <div className="absolute bottom-12 left-12 w-1 h-1 bg-emerald-300 rounded-full animate-pulse" />
+                    <div className="absolute top-1/2 left-1/4 w-1 h-1 bg-white rounded-full animate-pulse opacity-70" />
+                    <div className="absolute bottom-1/4 right-1/3 w-1 h-1 bg-blue-300 rounded-full animate-ping opacity-60" />
+                  </div>
+
+                  {/* Divine light rays effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-transparent to-transparent animate-pulse pointer-events-none" />
+                </div>
+                
+                <h3 className="text-2xl text-white font-bold mb-6 animate-fade-in mt-6">El Encuentro en el Bosque</h3>
               </div>
-              <h3 className="text-2xl text-white font-bold mb-6 animate-fade-in">El Encuentro en el Bosque</h3>
             </div>
             
             <JesusMessage breathingActive={breathingActive}>
