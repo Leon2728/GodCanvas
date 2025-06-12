@@ -1,6 +1,5 @@
-
 import React, { useState, useRef, useEffect } from 'react';
-import { volume, volumeOff, Play, Pause, RotateCcw } from 'lucide-react';
+import { Play, Pause, Square, Settings, Volume2, VolumeX, Download, Loader2 } from 'lucide-react';
 import { Button } from './ui/button';
 
 interface TextToSpeechProps {
@@ -8,312 +7,310 @@ interface TextToSpeechProps {
   title?: string;
 }
 
+interface VoiceSettings {
+  rate: number;
+  pitch: number;
+  volume: number;
+  voice: SpeechSynthesisVoice | null;
+}
+
 const TextToSpeech: React.FC<TextToSpeechProps> = ({ text, title = "Artículo" }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [showSettings, setShowSettings] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [isMuted, setIsMuted] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [playbackRate, setPlaybackRate] = useState(1);
-  const [apiKey, setApiKey] = useState('');
-  const [showApiKeyInput, setShowApiKeyInput] = useState(false);
+  const [currentPosition, setCurrentPosition] = useState(0);
   
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const speechUtteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const [voiceSettings, setVoiceSettings] = useState<VoiceSettings>({
+    rate: 1,
+    pitch: 1,
+    volume: 0.8,
+    voice: null
+  });
 
-  // Cleanup text for better speech synthesis
-  const cleanText = (rawText: string) => {
-    return rawText
-      .replace(/[📰⚔️🧠📌📖✅📅🤖🎥🎙️⚡📊🎯❌✝️💬]/g, '') // Remove emojis
-      .replace(/https?:\/\/[^\s]+/g, '') // Remove URLs
-      .replace(/\n+/g, '. ') // Replace line breaks with periods
-      .replace(/\s+/g, ' ') // Normalize spaces
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const textChunks = useRef<string[]>([]);
+  const currentChunkIndex = useRef(0);
+
+  useEffect(() => {
+    const loadVoices = () => {
+      const availableVoices = speechSynthesis.getVoices();
+      setVoices(availableVoices);
+      
+      if (availableVoices.length > 0 && !voiceSettings.voice) {
+        const spanishVoice = availableVoices.find(voice => 
+          voice.lang.includes('es') || voice.name.toLowerCase().includes('spanish')
+        );
+        setVoiceSettings(prev => ({
+          ...prev,
+          voice: spanishVoice || availableVoices[0]
+        }));
+      }
+    };
+
+    loadVoices();
+    speechSynthesis.addEventListener('voiceschanged', loadVoices);
+    
+    return () => {
+      speechSynthesis.removeEventListener('voiceschanged', loadVoices);
+      if (utteranceRef.current) {
+        speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
+  const cleanText = (text: string): string => {
+    return text
+      .replace(/[#*_`]/g, '')
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      .replace(/\s+/g, ' ')
       .trim();
   };
 
-  const handlePlay = async () => {
-    const cleanedText = cleanText(text);
+  const splitTextIntoChunks = (text: string, maxLength: number = 200): string[] => {
+    const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+    const chunks: string[] = [];
+    let currentChunk = '';
+
+    sentences.forEach(sentence => {
+      const trimmedSentence = sentence.trim();
+      if (currentChunk.length + trimmedSentence.length <= maxLength) {
+        currentChunk += (currentChunk ? '. ' : '') + trimmedSentence;
+      } else {
+        if (currentChunk) chunks.push(currentChunk + '.');
+        currentChunk = trimmedSentence;
+      }
+    });
+
+    if (currentChunk) chunks.push(currentChunk + '.');
+    return chunks;
+  };
+
+  const speakChunk = (chunkIndex: number) => {
+    if (chunkIndex >= textChunks.current.length) {
+      setIsPlaying(false);
+      setIsPaused(false);
+      setProgress(100);
+      return;
+    }
+
+    const chunk = textChunks.current[chunkIndex];
+    const utterance = new SpeechSynthesisUtterance(chunk);
     
-    if (apiKey) {
-      // Use ElevenLabs if API key is provided
-      try {
-        await playWithElevenLabs(cleanedText);
-      } catch (error) {
-        console.log('ElevenLabs failed, falling back to browser TTS:', error);
-        playWithBrowserTTS(cleanedText);
-      }
-    } else {
-      // Use browser's built-in TTS
-      playWithBrowserTTS(cleanedText);
+    utterance.rate = voiceSettings.rate;
+    utterance.pitch = voiceSettings.pitch;
+    utterance.volume = isMuted ? 0 : voiceSettings.volume;
+    if (voiceSettings.voice) {
+      utterance.voice = voiceSettings.voice;
     }
-  };
 
-  const playWithElevenLabs = async (cleanedText: string) => {
-    try {
-      const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/pNInz6obpgDQGcFmaJgB', {
-        method: 'POST',
-        headers: {
-          'Accept': 'audio/mpeg',
-          'Content-Type': 'application/json',
-          'xi-api-key': apiKey
-        },
-        body: JSON.stringify({
-          text: cleanedText,
-          model_id: 'eleven_multilingual_v2',
-          voice_settings: {
-            stability: 0.5,
-            similarity_boost: 0.5
-          }
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error('ElevenLabs API error');
-      }
-
-      const audioBlob = await response.blob();
-      const audioUrl = URL.createObjectURL(audioBlob);
+    utterance.onend = () => {
+      currentChunkIndex.current++;
+      setCurrentPosition(currentChunkIndex.current);
+      setProgress((currentChunkIndex.current / textChunks.current.length) * 100);
       
-      if (audioRef.current) {
-        audioRef.current.src = audioUrl;
-        audioRef.current.playbackRate = playbackRate;
-        await audioRef.current.play();
-        setIsPlaying(true);
-        setIsPaused(false);
-      }
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const playWithBrowserTTS = (cleanedText: string) => {
-    if ('speechSynthesis' in window) {
-      // Stop any current speech
-      window.speechSynthesis.cancel();
-      
-      const utterance = new SpeechSynthesisUtterance(cleanedText);
-      utterance.rate = playbackRate;
-      utterance.pitch = 1;
-      utterance.volume = isMuted ? 0 : 1;
-      
-      // Try to use Spanish voice if available
-      const voices = window.speechSynthesis.getVoices();
-      const spanishVoice = voices.find(voice => 
-        voice.lang.includes('es') || voice.name.includes('Spanish')
-      );
-      if (spanishVoice) {
-        utterance.voice = spanishVoice;
-      }
-
-      utterance.onstart = () => {
-        setIsPlaying(true);
-        setIsPaused(false);
-      };
-
-      utterance.onend = () => {
+      if (currentChunkIndex.current < textChunks.current.length) {
+        speakChunk(currentChunkIndex.current);
+      } else {
         setIsPlaying(false);
         setIsPaused(false);
-        setCurrentTime(0);
-      };
+        setProgress(100);
+      }
+    };
 
-      speechUtteranceRef.current = utterance;
-      window.speechSynthesis.speak(utterance);
+    utterance.onerror = () => {
+      console.error('Error en la síntesis de voz');
+      setIsPlaying(false);
+      setIsLoading(false);
+    };
+
+    utteranceRef.current = utterance;
+    speechSynthesis.speak(utterance);
+  };
+
+  const handlePlay = async () => {
+    if (isPaused) {
+      speechSynthesis.resume();
+      setIsPaused(false);
+      setIsPlaying(true);
+      return;
     }
+
+    setIsLoading(true);
+    const cleanedText = cleanText(text);
+    textChunks.current = splitTextIntoChunks(cleanedText);
+    currentChunkIndex.current = 0;
+    setCurrentPosition(0);
+    setProgress(0);
+
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsPlaying(true);
+      speakChunk(0);
+    }, 500);
   };
 
   const handlePause = () => {
-    if (audioRef.current && !audioRef.current.paused) {
-      audioRef.current.pause();
-      setIsPaused(true);
-    } else if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.pause();
-      setIsPaused(true);
-    }
-  };
-
-  const handleResume = () => {
-    if (audioRef.current && audioRef.current.paused) {
-      audioRef.current.play();
-      setIsPaused(false);
-    } else if (window.speechSynthesis.paused) {
-      window.speechSynthesis.resume();
-      setIsPaused(false);
-    }
+    speechSynthesis.pause();
+    setIsPaused(true);
+    setIsPlaying(false);
   };
 
   const handleStop = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-    if (window.speechSynthesis.speaking || window.speechSynthesis.paused) {
-      window.speechSynthesis.cancel();
-    }
+    speechSynthesis.cancel();
     setIsPlaying(false);
     setIsPaused(false);
-    setCurrentTime(0);
+    setProgress(0);
+    setCurrentPosition(0);
+    currentChunkIndex.current = 0;
   };
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
-    if (audioRef.current) {
-      audioRef.current.muted = !isMuted;
+    if (utteranceRef.current && isPlaying) {
+      utteranceRef.current.volume = isMuted ? voiceSettings.volume : 0;
     }
-  };
-
-  const handleSpeedChange = (speed: number) => {
-    setPlaybackRate(speed);
-    if (audioRef.current) {
-      audioRef.current.playbackRate = speed;
-    }
-  };
-
-  // Update time for audio element
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const updateTime = () => setCurrentTime(audio.currentTime);
-    const updateDuration = () => setDuration(audio.duration);
-    const handleEnded = () => {
-      setIsPlaying(false);
-      setIsPaused(false);
-      setCurrentTime(0);
-    };
-
-    audio.addEventListener('timeupdate', updateTime);
-    audio.addEventListener('loadedmetadata', updateDuration);
-    audio.addEventListener('ended', handleEnded);
-
-    return () => {
-      audio.removeEventListener('timeupdate', updateTime);
-      audio.removeEventListener('loadedmetadata', updateDuration);
-      audio.removeEventListener('ended', handleEnded);
-    };
-  }, []);
-
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-900/20 to-indigo-900/20 backdrop-blur-xl rounded-2xl border border-blue-400/20 p-6 mb-8">
-      <audio ref={audioRef} />
-      
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
-            <volume className="w-5 h-5 text-blue-300" />
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-white">Escuchar Artículo</h3>
-            <p className="text-sm text-blue-200">{title}</p>
-          </div>
+    <div className="w-full max-w-4xl mx-auto bg-gradient-to-br from-slate-900/95 to-blue-900/95 backdrop-blur-xl rounded-2xl p-6 border border-cyan-400/30 shadow-2xl">
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
+          <h3 className="text-xl font-bold text-white font-mono">🎧 NARRADOR AI</h3>
         </div>
-        
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => setShowApiKeyInput(!showApiKeyInput)}
-          className="text-blue-300 hover:text-blue-200"
-        >
-          ⚙️ Configurar
-        </Button>
+        <div className="text-cyan-400 text-sm font-mono">
+          {isPlaying ? 'REPRODUCIENDO' : isPaused ? 'PAUSADO' : 'LISTO'}
+        </div>
       </div>
 
-      {showApiKeyInput && (
-        <div className="mb-4 p-4 bg-blue-950/30 rounded-lg border border-blue-400/20">
-          <label className="block text-sm font-medium text-blue-200 mb-2">
-            ElevenLabs API Key (opcional para voz profesional):
-          </label>
-          <input
-            type="password"
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
-            placeholder="Ingresa tu API key de ElevenLabs"
-            className="w-full px-3 py-2 bg-blue-900/20 border border-blue-400/30 rounded-lg text-white placeholder-blue-300/50 focus:border-blue-400/50 focus:outline-none"
-          />
-          <p className="text-xs text-blue-300/70 mt-1">
-            Sin API key se usará la voz del navegador (gratuita)
-          </p>
+      <div className="mb-6">
+        <div className="flex items-center justify-between text-sm text-cyan-300 mb-2">
+          <span>Progreso de lectura</span>
+          <span>{Math.round(progress)}%</span>
         </div>
-      )}
+        <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+          <div 
+            className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          ></div>
+        </div>
+      </div>
 
-      <div className="flex items-center space-x-4">
-        {!isPlaying ? (
-          <Button
-            onClick={handlePlay}
-            className="flex items-center space-x-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-200 border border-blue-400/30"
-          >
-            <Play className="w-4 h-4" />
-            <span>Reproducir</span>
-          </Button>
-        ) : (
-          <Button
-            onClick={isPaused ? handleResume : handlePause}
-            className="flex items-center space-x-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-200 border border-blue-400/30"
-          >
-            {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
-            <span>{isPaused ? 'Continuar' : 'Pausar'}</span>
-          </Button>
-        )}
+      <div className="flex items-center justify-center gap-4 mb-6">
+        <Button
+          onClick={isPlaying ? handlePause : handlePlay}
+          disabled={isLoading}
+          className="w-14 h-14 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 border-2 border-emerald-400/50"
+        >
+          {isLoading ? (
+            <Loader2 className="h-6 w-6 animate-spin" />
+          ) : isPlaying ? (
+            <Pause className="h-6 w-6" />
+          ) : (
+            <Play className="h-6 w-6" />
+          )}
+        </Button>
 
         <Button
           onClick={handleStop}
-          variant="ghost"
-          size="sm"
-          className="text-blue-300 hover:text-blue-200"
+          disabled={!isPlaying && !isPaused}
+          className="w-12 h-12 rounded-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 border-2 border-red-400/50"
         >
-          <RotateCcw className="w-4 h-4" />
+          <Square className="h-5 w-5" />
         </Button>
 
         <Button
           onClick={toggleMute}
-          variant="ghost"
-          size="sm"
-          className="text-blue-300 hover:text-blue-200"
+          className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 border-2 border-purple-400/50"
         >
-          {isMuted ? <volumeOff className="w-4 h-4" /> : <volume className="w-4 h-4" />}
+          {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
         </Button>
 
-        <div className="flex items-center space-x-2">
-          <span className="text-sm text-blue-300">Velocidad:</span>
-          {[0.75, 1, 1.25, 1.5].map((speed) => (
-            <Button
-              key={speed}
-              onClick={() => handleSpeedChange(speed)}
-              variant="ghost"
-              size="sm"
-              className={`text-xs ${
-                playbackRate === speed 
-                  ? 'text-blue-200 bg-blue-600/20' 
-                  : 'text-blue-300 hover:text-blue-200'
-              }`}
-            >
-              {speed}x
-            </Button>
-          ))}
-        </div>
+        <Button
+          onClick={() => setShowSettings(!showSettings)}
+          className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 border-2 border-blue-400/50"
+        >
+          <Settings className="h-5 w-5" />
+        </Button>
       </div>
 
-      {duration > 0 && (
-        <div className="mt-4 flex items-center space-x-2">
-          <span className="text-xs text-blue-300">{formatTime(currentTime)}</span>
-          <div className="flex-1 h-1 bg-blue-900/30 rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-blue-400 transition-all duration-300"
-              style={{ width: `${(currentTime / duration) * 100}%` }}
-            />
+      {showSettings && (
+        <div className="bg-black/50 rounded-xl p-4 border border-cyan-400/20 mb-4">
+          <h4 className="text-cyan-400 font-mono mb-4">Configuración de Voz</h4>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-cyan-300 text-sm mb-2">Velocidad: {voiceSettings.rate.toFixed(1)}x</label>
+              <input
+                type="range"
+                min="0.5"
+                max="2"
+                step="0.1"
+                value={voiceSettings.rate}
+                onChange={(e) => setVoiceSettings(prev => ({ ...prev, rate: parseFloat(e.target.value) }))}
+                className="w-full accent-cyan-400"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-cyan-300 text-sm mb-2">Tono: {voiceSettings.pitch.toFixed(1)}</label>
+              <input
+                type="range"
+                min="0.5"
+                max="2"
+                step="0.1"
+                value={voiceSettings.pitch}
+                onChange={(e) => setVoiceSettings(prev => ({ ...prev, pitch: parseFloat(e.target.value) }))}
+                className="w-full accent-cyan-400"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-cyan-300 text-sm mb-2">Volumen: {Math.round(voiceSettings.volume * 100)}%</label>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.1"
+                value={voiceSettings.volume}
+                onChange={(e) => setVoiceSettings(prev => ({ ...prev, volume: parseFloat(e.target.value) }))}
+                className="w-full accent-cyan-400"
+              />
+            </div>
           </div>
-          <span className="text-xs text-blue-300">{formatTime(duration)}</span>
+
+          {voices.length > 0 && (
+            <div className="mt-4">
+              <label className="block text-cyan-300 text-sm mb-2">Voz:</label>
+              <select
+                value={voiceSettings.voice?.name || ''}
+                onChange={(e) => {
+                  const selectedVoice = voices.find(v => v.name === e.target.value);
+                  setVoiceSettings(prev => ({ ...prev, voice: selectedVoice || null }));
+                }}
+                className="w-full bg-gray-800 text-white border border-cyan-400/30 rounded px-3 py-2"
+              >
+                {voices.map((voice) => (
+                  <option key={voice.name} value={voice.name}>
+                    {voice.name} ({voice.lang})
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
         </div>
       )}
 
-      <p className="text-xs text-blue-300/70 mt-3">
-        💡 Tip: Para mejor calidad de voz, configura tu API key de ElevenLabs
-      </p>
+      <div className="text-center">
+        <p className="text-cyan-200 text-sm leading-relaxed">
+          Disfruta de la experiencia auditiva de nuestro contenido. Utiliza los controles para personalizar la velocidad, 
+          tono y voz según tus preferencias.
+        </p>
+      </div>
     </div>
   );
 };

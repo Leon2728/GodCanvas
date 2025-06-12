@@ -1,10 +1,21 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGesture } from 'react-use-gesture';
-import { Zap, Code, Database, Cpu, Shield, Sparkles } from 'lucide-react';
+import { Zap, Code, Database, Cpu, Shield, Sparkles, Heart } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
 
 const avatars = [
+  {
+    id: "jesus",
+    name: "Jesucristo",
+    image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=600&fit=crop",
+    description: "Salvador del mundo y luz eterna",
+    link: "/jesus",
+    category: "salvador",
+    level: "DIVINO",
+    power: "∞%",
+    aura: "from-white via-yellow-200 to-gold-400"
+  },
   {
     id: "miguel",
     name: "Arcángel Miguel",
@@ -121,6 +132,7 @@ const CategoryIcon = ({ category }: { category: string }) => {
   const iconProps = { size: 16, className: "text-white" };
   
   switch (category) {
+    case "salvador": return <Heart {...iconProps} />;
     case "arcangel": return <Shield {...iconProps} />;
     case "rey": return <Sparkles {...iconProps} />;
     case "profeta": return <Zap {...iconProps} />;
@@ -520,7 +532,7 @@ export default function Avatar3DCarousel() {
                               <div className="w-16 h-2 bg-gray-800 rounded-full overflow-hidden">
                                 <div 
                                   className={`h-full bg-gradient-to-r ${avatar.aura} transition-all duration-1000`}
-                                  style={{ width: avatar.power }}
+                                  style={{ width: avatar.power === "∞%" ? "100%" : avatar.power }}
                                 ></div>
                               </div>
                               <div className="text-xs text-white font-mono mt-1">{avatar.power}</div>
