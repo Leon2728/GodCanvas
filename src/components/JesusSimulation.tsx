@@ -266,7 +266,14 @@ const JesusSimulation: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         return (
           <StepContainer>
             <div className="text-center mb-8 relative">
-              <div className="text-6xl mb-4 animate-bounce">👸</div>
+              {/* Avatar de Fe */}
+              <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-pink-400/50 shadow-2xl mb-6">
+                <img 
+                  src="/lovable-uploads/15b859c1-6e2b-4821-9ee0-88a1e7241c68.png"
+                  alt="Fe"
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <h3 className="text-2xl text-white font-bold mb-6">La Llegada de Fe</h3>
               {/* Efectos de llegada divina */}
               <div className="absolute inset-0 bg-gradient-to-r from-pink-400/10 via-purple-400/10 to-blue-400/10 animate-pulse rounded-full" />
