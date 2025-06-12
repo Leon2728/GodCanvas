@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import VideoBackground from './VideoBackground';
 
@@ -549,10 +550,10 @@ const JesusSimulation: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 animate-fade-in">
-            🌳 El Árbol que Suelta
+            🌳 Jesús y el Árbol del Perdón
           </h2>
           <p className="text-blue-200 text-lg animate-fade-in">
-            Una simulación de sanidad interior guiada por <span className="text-yellow-200 animate-pulse">Jesús</span>
+            Una experiencia de sanidad interior guiada por <span className="text-yellow-200 animate-pulse">Jesús</span>
           </p>
         </div>
 
