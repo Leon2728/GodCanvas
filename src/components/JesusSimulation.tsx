@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import VideoBackground from './VideoBackground';
 
@@ -7,6 +8,9 @@ type SimulationStep =
   | 'doubt-response'
   | 'wound-identification'
   | 'wound-personalization'
+  | 'decisive-moment'
+  | 'faith-arrival'
+  | 'faith-prayer'
   | 'liberation-climax'
   | 'transformation'
   | 'fruit-steps'
@@ -19,6 +23,7 @@ interface SimulationState {
   selectedWound?: WoundType;
   personName?: string;
   isReady?: boolean;
+  faithActivated?: boolean;
 }
 
 const JesusSimulation: React.FC<{ onBack: () => void }> = ({ onBack }) => {
@@ -209,45 +214,188 @@ const JesusSimulation: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           <WoundPersonalizationStep 
             selectedWound={state.selectedWound!}
             onSubmit={handlePersonSubmit}
-            onNext={() => setState(prev => ({ ...prev, step: 'liberation-climax' }))}
+            onNext={() => setState(prev => ({ ...prev, step: 'decisive-moment' }))}
             breathingActive={breathingActive}
           />
+        );
+
+      case 'decisive-moment':
+        return (
+          <StepContainer>
+            <div className="text-center mb-8 relative">
+              <div className="text-6xl mb-4 animate-pulse">⚡</div>
+              <h3 className="text-2xl text-white font-bold mb-6">El Momento Decisivo</h3>
+              {/* Efectos de presencia divina */}
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-transparent to-yellow-400/10 animate-pulse rounded-full" />
+            </div>
+            
+            <JesusMessage breathingActive={breathingActive}>
+              Has llegado al momento decisivo… <span className="text-blue-200">Sé que no es fácil.</span>
+              <br /><br />
+              Soltar esta hoja no borra lo que pasó, pero sí rompe el poder que tiene sobre ti.
+              <br /><br />
+              <em className="text-yellow-200">(Hace una pausa, luego sonríe.)</em>
+              <br /><br />
+              Y sé que no necesitas entenderlo todo… <span className="text-green-300 animate-pulse">Solo confiar.</span>
+            </JesusMessage>
+            
+            {/* Botón SOLTAR atenuado, no activo aún */}
+            <div className="flex justify-center mt-8 space-y-4">
+              <div className="text-center">
+                <button
+                  disabled
+                  className="px-12 py-6 bg-gradient-to-r from-gray-600 to-gray-700 text-gray-300 font-bold text-xl rounded-2xl opacity-50 cursor-not-allowed relative"
+                >
+                  <span className="flex items-center gap-2">
+                    ✋ SOLTAR
+                  </span>
+                </button>
+                <p className="text-sm text-gray-400 mt-2">Esperando ayuda...</p>
+              </div>
+            </div>
+            
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={() => setState(prev => ({ ...prev, step: 'faith-arrival' }))}
+                className="px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold rounded-2xl transition-all duration-300 transform hover:scale-105"
+              >
+                Continuar →
+              </button>
+            </div>
+          </StepContainer>
+        );
+
+      case 'faith-arrival':
+        return (
+          <StepContainer>
+            <div className="text-center mb-8 relative">
+              <div className="text-6xl mb-4 animate-bounce">👸</div>
+              <h3 className="text-2xl text-white font-bold mb-6">La Llegada de Fe</h3>
+              {/* Efectos de llegada divina */}
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-400/10 via-purple-400/10 to-blue-400/10 animate-pulse rounded-full" />
+            </div>
+            
+            <JesusMessage breathingActive={breathingActive}>
+              <span className="text-blue-200">(Presentándola:)</span>
+              <br /><br />
+              Ella es la Fe. No vino a darte una explicación… <span className="text-yellow-200 animate-pulse">vino a caminar contigo.</span>
+              <br /><br />
+              Cuando no puedas ver… ella verá por ti. Cuando dudes, ella te recordará lo que Yo ya dije.
+            </JesusMessage>
+
+            <div className="bg-black/60 backdrop-blur-xl rounded-xl p-6 mt-8 border-2 border-pink-400/50 relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-400/5 to-transparent animate-pulse rounded-xl" />
+              <div className="text-pink-300 font-bold mb-4 relative z-10 text-center">💝 Fe (dando un paso al frente):</div>
+              <div className="text-white leading-relaxed relative z-10 text-center">
+                "Hola. No necesitas sentirte fuerte ahora. Solo necesitas confiar en lo que Él te ha prometido.
+                <br /><br />
+                Yo estaré contigo en este paso. No para empujarte… sino para sostenerte.
+                <br /><br />
+                <span className="text-pink-200">Perdonar no siempre se siente lógico… pero es justo ahí donde empieza la verdadera libertad.</span>
+                <br /><br />
+                <em className="text-yellow-200">(Extiende su mano con una sonrisa cálida.)</em>
+                <br /><br />
+                <strong className="text-pink-300 animate-pulse">¿Vamos juntos?</strong>"
+              </div>
+            </div>
+            
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={() => setState(prev => ({ ...prev, step: 'faith-prayer' }))}
+                className="px-12 py-6 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-bold text-xl rounded-2xl transition-all duration-300 transform hover:scale-110 shadow-2xl relative overflow-hidden group"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  ✋ Tocar la mano de Fe
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/30 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </button>
+            </div>
+          </StepContainer>
+        );
+
+      case 'faith-prayer':
+        return (
+          <StepContainer>
+            <div className="text-center mb-8 relative">
+              <div className="text-6xl mb-4 animate-pulse">🙏</div>
+              <h3 className="text-2xl text-white font-bold mb-6">La Oración de Fe</h3>
+              {/* Efectos de oración */}
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-white/5 to-blue-400/10 animate-pulse rounded-full" />
+            </div>
+            
+            <div className="bg-black/60 backdrop-blur-xl rounded-xl p-8 mt-8 border-2 border-yellow-400/50 relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-transparent animate-pulse rounded-xl" />
+              <div className="text-yellow-300 font-bold mb-6 relative z-10 text-center text-xl">Oración Guiada:</div>
+              <div className="text-white text-lg leading-relaxed relative z-10 text-center italic">
+                <span className="text-yellow-200">"Señor Jesús, no entiendo todo… pero creo en Ti.</span>
+                <br /><br />
+                <span className="text-blue-200">Ayúdame a perdonar por fe, no por vista.</span>
+                <br /><br />
+                <span className="text-green-200">Confío en que Tú me sostendrás."</span>
+              </div>
+            </div>
+            
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={() => setState(prev => ({ ...prev, step: 'liberation-climax', faithActivated: true }))}
+                className="px-12 py-6 bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 text-white font-bold text-xl rounded-2xl transition-all duration-300 transform hover:scale-110 shadow-2xl relative overflow-hidden group"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  🙏 Amén
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-yellow-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </button>
+            </div>
+          </StepContainer>
         );
 
       case 'liberation-climax':
         return (
           <StepContainer>
             <div className="text-center mb-8 relative">
-              <div className="text-6xl mb-4 animate-bounce">✋</div>
+              <div className="text-6xl mb-4 animate-bounce">⚡</div>
               <h3 className="text-2xl text-white font-bold mb-6">El Clímax de la Liberación</h3>
-              {/* Efectos de poder divino */}
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-transparent to-yellow-400/10 animate-pulse rounded-full" />
+              {/* Efectos de poder divino empoderado por fe */}
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-transparent to-yellow-400/20 animate-pulse rounded-full" />
             </div>
             
             <JesusMessage breathingActive={breathingActive}>
-              Has entregado la herida. <span className="text-yellow-200 font-semibold animate-pulse">Ahora, vamos a soltar el peso.</span>
+              <span className="text-yellow-200 font-bold text-xl animate-pulse">¡Decláralo al mundo espiritual!</span>
               <br /><br />
-              Este es el momento de la fe. No lo harás con tus fuerzas, sino con las Mías. <span className="text-blue-200">El perdón es una decisión que desata el poder del cielo.</span> Tu decisión abre puertas que el enemigo quiso cerrar.
-              <br /><br />
-              Di esto conmigo. No solo con tus labios, sino con todo tu ser. <span className="text-red-300 font-bold animate-pulse">¡Decláralo al mundo espiritual!</span>
-              <br /><br />
-              <div className="bg-black/60 p-4 rounded-xl border-2 border-yellow-400/50 animate-pulse">
-                <strong className="text-yellow-200 text-lg">"En el nombre de Jesús, suelto este peso. Perdono. Libero. Y camino en paz."</strong>
+              <div className="bg-black/60 p-6 rounded-xl border-2 border-yellow-400/50 animate-pulse">
+                <strong className="text-yellow-200 text-xl">"En el nombre de Jesús, suelto este peso. Perdono. Libero. Y camino en paz."</strong>
               </div>
             </JesusMessage>
             
             <div className="flex justify-center mt-8">
               <button
                 onClick={() => setState(prev => ({ ...prev, step: 'transformation' }))}
-                className="px-12 py-6 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold text-xl rounded-2xl transition-all duration-300 transform hover:scale-110 shadow-2xl relative overflow-hidden group"
+                className={`px-12 py-6 text-white font-bold text-xl rounded-2xl transition-all duration-300 transform hover:scale-110 shadow-2xl relative overflow-hidden group ${
+                  state.faithActivated 
+                    ? 'bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 animate-pulse' 
+                    : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700'
+                }`}
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  🕊️ SOLTAR
+                  ✋ SOLTAR
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/30 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {state.faithActivated && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/40 to-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                )}
                 <div className="absolute inset-0 animate-ping bg-white/10 rounded-2xl" />
               </button>
             </div>
+
+            {state.faithActivated && (
+              <div className="bg-black/60 backdrop-blur-xl rounded-xl p-6 mt-8 border border-pink-400/50 animate-fade-in">
+                <div className="text-pink-300 font-bold mb-4 text-center">💖 Fe:</div>
+                <div className="text-white italic leading-relaxed text-center">
+                  "Lo hiciste. Aunque temblabas… diste el paso.
+                  <br />
+                  <span className="text-yellow-200 animate-pulse">Lo invisible empieza a florecer donde decidiste confiar.</span>"
+                </div>
+              </div>
+            )}
           </StepContainer>
         );
 
