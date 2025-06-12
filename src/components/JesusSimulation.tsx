@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import VideoBackground from './VideoBackground';
 
@@ -620,7 +619,7 @@ const WoundPersonalizationStep: React.FC<{
               type="text"
               value={personName}
               onChange={(e) => setPersonName(e.target.value)}
-              placeholder="Escribe el nombre aquí..."
+              placeholder=""
               className="w-full px-6 py-4 bg-black/60 border-2 border-white/20 rounded-xl text-white text-center text-lg placeholder-gray-400 focus:border-blue-400 focus:outline-none transition-all duration-300 focus:scale-105"
             />
           </div>
