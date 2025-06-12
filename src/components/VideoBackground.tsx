@@ -18,6 +18,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
 
   useEffect(() => {
     if (videoRef.current && videoSrc) {
+      console.log('Loading video:', videoSrc);
       videoRef.current.load();
     }
   }, [videoSrc]);
@@ -25,12 +26,28 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
   const handleVideoLoad = () => {
     setIsLoaded(true);
     setHasError(false);
-    console.log('Video loaded successfully');
+    console.log('Video loaded successfully:', videoSrc);
+    
+    // Ensure the video plays
+    if (videoRef.current) {
+      videoRef.current.play().catch(err => {
+        console.log('Video autoplay failed, but will work on user interaction:', err);
+      });
+    }
   };
 
-  const handleVideoError = () => {
+  const handleVideoError = (e: any) => {
     setHasError(true);
-    console.log('Video failed to load, using fallback animation');
+    console.error('Video failed to load:', videoSrc, e);
+  };
+
+  const handleVideoCanPlay = () => {
+    console.log('Video can play:', videoSrc);
+    if (videoRef.current) {
+      videoRef.current.play().catch(err => {
+        console.log('Video play attempt failed:', err);
+      });
+    }
   };
 
   // Animated cosmic fallback
@@ -74,7 +91,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
       {videoSrc && !hasError && (
         <video
           ref={videoRef}
-          className={`absolute inset-0 w-full h-full object-cover z-0 opacity-80 transition-opacity duration-1000 ${
+          className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ${
             isLoaded ? 'opacity-80' : 'opacity-0'
           }`}
           autoPlay
@@ -83,7 +100,10 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
           playsInline
           preload="auto"
           onLoadedData={handleVideoLoad}
+          onCanPlay={handleVideoCanPlay}
           onError={handleVideoError}
+          onLoadStart={() => console.log('Video load started:', videoSrc)}
+          onLoadedMetadata={() => console.log('Video metadata loaded:', videoSrc)}
         >
           <source src={videoSrc} type="video/mp4" />
           Tu navegador no soporta videos HTML5.
