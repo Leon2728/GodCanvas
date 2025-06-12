@@ -86,7 +86,13 @@ const Avatar3DCarousel: React.FC = () => {
 
       {/* 3D Carousel Container */}
       <div className="relative w-full h-96" style={{ perspective: '1000px' }}>
-        <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
+        <div 
+          className="relative w-full h-full transition-transform duration-1000 ease-in-out"
+          style={{ 
+            transformStyle: 'preserve-3d',
+            transform: `rotateY(${-currentIndex * (360 / avatars.length)}deg)`
+          }}
+        >
           {avatars.map((avatar, index) => (
             <AvatarCard
               key={avatar.name}

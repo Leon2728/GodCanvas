@@ -31,23 +31,23 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
     }
   };
 
-  const getCardStyle = () => {
-    const angle = (index * 360) / totalCards;
-    const radius = 200;
-    const x = Math.cos((angle * Math.PI) / 180) * radius;
-    const z = Math.sin((angle * Math.PI) / 180) * radius;
-    
-    return {
-      transform: `translate3d(${x}px, 0, ${z}px) rotateY(${-angle}deg)`,
-    };
-  };
+  const angle = (index * 360) / totalCards;
+  const radius = 200;
+  const x = Math.cos((angle * Math.PI) / 180) * radius;
+  const z = Math.sin((angle * Math.PI) / 180) * radius;
 
   return (
     <div
       className={`absolute w-64 h-80 transition-all duration-1000 cursor-pointer ${
         isActive ? 'scale-110 z-20' : 'scale-90 z-10'
       }`}
-      style={getCardStyle()}
+      style={{
+        transform: `translate3d(${x}px, 0, ${z}px) rotateY(${-angle}deg)`,
+        left: '50%',
+        top: '50%',
+        marginLeft: '-128px',
+        marginTop: '-160px'
+      }}
       onClick={handleCardClick}
     >
       <div className={`relative w-full h-full rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 ${
