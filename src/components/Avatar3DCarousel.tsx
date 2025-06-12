@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import FuturisticAvatarCard from './FuturisticAvatarCard';
 import HolographicControls from './HolographicControls';
@@ -114,29 +113,28 @@ const Avatar3DCarousel: React.FC = () => {
       <QuantumBackground quantumField={quantumField} />
       <ParticleSystem isActive={isAnimating} />
       
-      {/* Holographic Title */}
-      <div className="absolute top-16 left-1/2 transform -translate-x-1/2 z-50">
-        <div className="relative">
-          <h2 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 animate-pulse">
+      {/* Holographic Title - Responsive */}
+      <div className="absolute top-8 md:top-16 left-1/2 transform -translate-x-1/2 z-50 px-4">
+        <div className="relative text-center">
+          <h2 className="text-3xl md:text-6xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 animate-pulse">
             AVATARES QUANTUM
           </h2>
-          <div className="absolute inset-0 text-6xl md:text-8xl font-black text-cyan-400/20 blur-sm animate-pulse">
+          <div className="absolute inset-0 text-3xl md:text-6xl lg:text-8xl font-black text-cyan-400/20 blur-sm animate-pulse">
             AVATARES QUANTUM
           </div>
-          {/* Holographic scan line */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent h-1 animate-hologram-scan"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent h-0.5 md:h-1 animate-hologram-scan"></div>
         </div>
-        <p className="text-xl text-cyan-300 font-mono text-center mt-4 tracking-widest">
+        <p className="text-sm md:text-xl text-cyan-300 font-mono text-center mt-2 md:mt-4 tracking-widest">
           SELECCIONA TU GUÍA CUÁNTICO
         </p>
       </div>
 
-      {/* 5G Futuristic Carousel Container */}
+      {/* 5G Futuristic Carousel Container - Responsive */}
       <div 
         ref={carouselRef}
-        className="relative w-full h-[600px] perspective-2000"
+        className="relative w-full h-[400px] md:h-[600px] perspective-1000 md:perspective-2000"
         style={{ 
-          perspective: '2000px',
+          perspective: window.innerWidth > 768 ? '2000px' : '1000px',
           perspectiveOrigin: '50% 50%'
         }}
       >
@@ -174,11 +172,11 @@ const Avatar3DCarousel: React.FC = () => {
         quantumField={quantumField}
       />
 
-      {/* Neural Interface Instructions */}
-      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-40">
-        <div className="bg-black/80 backdrop-blur-xl border border-cyan-400/30 rounded-2xl px-8 py-4">
-          <p className="text-cyan-300 font-mono text-lg tracking-wider">
-            INTERFAZ NEURAL ACTIVA • HAGA CLIC PARA CONECTAR
+      {/* Neural Interface Instructions - Responsive */}
+      <div className="absolute bottom-8 md:bottom-16 left-1/2 transform -translate-x-1/2 z-40 px-4">
+        <div className="bg-black/80 backdrop-blur-xl border border-cyan-400/30 rounded-xl md:rounded-2xl px-4 md:px-8 py-3 md:py-4 text-center">
+          <p className="text-cyan-300 font-mono text-sm md:text-lg tracking-wider">
+            <span className="hidden md:inline">INTERFAZ NEURAL ACTIVA • </span>HAGA CLIC PARA CONECTAR
           </p>
           <div className="flex justify-center mt-2">
             <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse mr-2"></div>

@@ -35,7 +35,6 @@ const FuturisticAvatarCard: React.FC<FuturisticAvatarCardProps> = ({
 
   const handleCardClick = () => {
     if (isActive && !isAnimating) {
-      // Quantum teleportation effect
       navigate(avatar.route);
     } else if (!isAnimating) {
       onQuantumJump();
@@ -43,28 +42,33 @@ const FuturisticAvatarCard: React.FC<FuturisticAvatarCardProps> = ({
   };
 
   const angle = (index * 360) / totalCards;
-  const radius = 280;
+  const isMobile = window.innerWidth < 768;
+  const radius = isMobile ? 180 : 280;
+  const cardWidth = isMobile ? 240 : 320;
+  const cardHeight = isMobile ? 300 : 384;
+  
   const x = Math.cos((angle * Math.PI) / 180) * radius;
   const z = Math.sin((angle * Math.PI) / 180) * radius;
   const rotationY = -angle + (isActive ? Math.sin(quantumField * 0.02) * 5 : 0);
 
   return (
     <div
-      className={`absolute w-80 h-96 transition-all duration-[1500ms] cursor-pointer ${
-        isActive ? 'scale-125 z-30' : 'scale-90 z-10'
+      className={`absolute transition-all duration-[1500ms] cursor-pointer ${
+        isActive ? 'scale-110 md:scale-125 z-30' : 'scale-75 md:scale-90 z-10'
       }`}
       style={{
-        transform: `translate3d(${x}px, ${isActive ? -20 : 0}px, ${z}px) rotateY(${rotationY}deg)`,
+        width: `${cardWidth}px`,
+        height: `${cardHeight}px`,
+        transform: `translate3d(${x}px, ${isActive ? -10 : 0}px, ${z}px) rotateY(${rotationY}deg)`,
         left: '50%',
         top: '50%',
-        marginLeft: '-160px',
-        marginTop: '-192px',
+        marginLeft: `-${cardWidth / 2}px`,
+        marginTop: `-${cardHeight / 2}px`,
         filter: isActive ? 'none' : 'brightness(0.6) blur(1px)',
       }}
       onClick={handleCardClick}
     >
-      {/* Holographic Frame */}
-      <div className={`relative w-full h-full rounded-3xl overflow-hidden transition-all duration-1000 ${
+      <div className={`relative w-full h-full rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-1000 ${
         isActive 
           ? 'bg-gradient-to-br from-black/90 via-gray-900/80 to-black/90 border-2' 
           : 'bg-gradient-to-br from-gray-800/60 to-gray-900/80 border'
@@ -72,7 +76,7 @@ const FuturisticAvatarCard: React.FC<FuturisticAvatarCardProps> = ({
       style={{
         borderColor: isActive ? avatar.quantumSignature : 'rgba(255,255,255,0.1)',
         boxShadow: isActive 
-          ? `0 0 50px ${avatar.quantumSignature}40, inset 0 0 50px ${avatar.quantumSignature}20`
+          ? `0 0 30px ${avatar.quantumSignature}40, inset 0 0 30px ${avatar.quantumSignature}20`
           : 'none'
       }}>
         
@@ -85,7 +89,7 @@ const FuturisticAvatarCard: React.FC<FuturisticAvatarCardProps> = ({
         )}
 
         {/* Avatar Image with Quantum Effects */}
-        <div className="relative h-3/5 overflow-hidden rounded-t-3xl">
+        <div className="relative h-3/5 overflow-hidden rounded-t-2xl md:rounded-t-3xl">
           <img 
             src={avatar.image}
             alt={avatar.name}
@@ -102,16 +106,16 @@ const FuturisticAvatarCard: React.FC<FuturisticAvatarCardProps> = ({
           {/* Quantum Particles Overlay */}
           {isActive && (
             <div className="absolute inset-0">
-              {[...Array(8)].map((_, i) => (
+              {[...Array(6)].map((_, i) => (
                 <div
                   key={i}
                   className="absolute w-1 h-1 rounded-full animate-pulse"
                   style={{
                     background: avatar.quantumSignature,
-                    left: `${20 + (i * 10)}%`,
-                    top: `${10 + (i * 8)}%`,
+                    left: `${20 + (i * 12)}%`,
+                    top: `${10 + (i * 10)}%`,
                     animationDelay: `${i * 0.2}s`,
-                    boxShadow: `0 0 10px ${avatar.quantumSignature}`
+                    boxShadow: `0 0 8px ${avatar.quantumSignature}`
                   }}
                 />
               ))}
@@ -119,19 +123,19 @@ const FuturisticAvatarCard: React.FC<FuturisticAvatarCardProps> = ({
           )}
 
           {/* Holographic UI Elements */}
-          <div className="absolute top-4 right-4">
-            <div className="bg-black/80 backdrop-blur-sm rounded-lg px-3 py-1 border border-cyan-400/30">
-              <span className="text-xs text-cyan-400 font-mono">{avatar.holoCode}</span>
+          <div className="absolute top-2 md:top-4 right-2 md:right-4">
+            <div className="bg-black/80 backdrop-blur-sm rounded-md md:rounded-lg px-2 md:px-3 py-1 border border-cyan-400/30">
+              <span className="text-xs md:text-sm text-cyan-400 font-mono">{avatar.holoCode}</span>
             </div>
           </div>
 
           {/* Energy Level Indicator */}
           {isActive && (
-            <div className="absolute bottom-4 left-4 flex space-x-1">
-              {[...Array(5)].map((_, i) => (
+            <div className="absolute bottom-2 md:bottom-4 left-2 md:left-4 flex space-x-0.5 md:space-x-1">
+              {[...Array(4)].map((_, i) => (
                 <div
                   key={i}
-                  className="w-1 h-6 rounded-full animate-pulse"
+                  className="w-0.5 md:w-1 h-4 md:h-6 rounded-full animate-pulse"
                   style={{
                     background: `linear-gradient(to top, ${avatar.quantumSignature}, transparent)`,
                     animationDelay: `${i * 0.1}s`
@@ -143,15 +147,15 @@ const FuturisticAvatarCard: React.FC<FuturisticAvatarCardProps> = ({
         </div>
         
         {/* Content with Glassmorphism */}
-        <div className="absolute bottom-0 left-0 right-0 p-6">
-          <div className="bg-black/60 backdrop-blur-xl rounded-2xl p-4 border border-white/10">
-            <h3 className={`text-2xl font-bold mb-2 transition-colors duration-500 ${
+        <div className="absolute bottom-0 left-0 right-0 p-3 md:p-6">
+          <div className="bg-black/60 backdrop-blur-xl rounded-xl md:rounded-2xl p-3 md:p-4 border border-white/10">
+            <h3 className={`text-lg md:text-2xl font-bold mb-1 md:mb-2 transition-colors duration-500 ${
               isActive ? 'text-white' : 'text-gray-300'
             }`}>
               {avatar.name}
             </h3>
             
-            <div className={`inline-block px-4 py-2 rounded-full text-sm font-bold mb-3 transition-all duration-500 ${
+            <div className={`inline-block px-2 md:px-4 py-1 md:py-2 rounded-full text-xs md:text-sm font-bold mb-2 md:mb-3 transition-all duration-500 ${
               isActive 
                 ? 'text-black' 
                 : 'text-gray-700'
@@ -164,7 +168,7 @@ const FuturisticAvatarCard: React.FC<FuturisticAvatarCardProps> = ({
               {avatar.title}
             </div>
             
-            <p className={`text-sm leading-tight transition-colors duration-500 ${
+            <p className={`text-xs md:text-sm leading-tight transition-colors duration-500 ${
               isActive ? 'text-gray-200' : 'text-gray-400'
             }`}>
               {avatar.description}
@@ -176,7 +180,7 @@ const FuturisticAvatarCard: React.FC<FuturisticAvatarCardProps> = ({
         {isActive && (
           <div className="absolute inset-0 pointer-events-none">
             <div 
-              className="absolute inset-0 rounded-3xl"
+              className="absolute inset-0 rounded-2xl md:rounded-3xl"
               style={{
                 background: `conic-gradient(from ${quantumField}deg, transparent, ${avatar.quantumSignature}20, transparent)`,
                 animation: 'spin 8s linear infinite'
