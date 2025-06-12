@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import VideoBackground from './VideoBackground';
 
@@ -234,8 +233,6 @@ const JesusSimulation: React.FC<{ onBack: () => void }> = ({ onBack }) => {
               <br /><br />
               Soltar esta hoja no borra lo que pasó, pero sí rompe el poder que tiene sobre ti.
               <br /><br />
-              <em className="text-yellow-200">(Hace una pausa, luego sonríe.)</em>
-              <br /><br />
               Y sé que no necesitas entenderlo todo… <span className="text-green-300 animate-pulse">Solo confiar.</span>
             </JesusMessage>
             
@@ -285,15 +282,13 @@ const JesusSimulation: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
             <div className="bg-black/60 backdrop-blur-xl rounded-xl p-6 mt-8 border-2 border-pink-400/50 relative">
               <div className="absolute inset-0 bg-gradient-to-r from-pink-400/5 to-transparent animate-pulse rounded-xl" />
-              <div className="text-pink-300 font-bold mb-4 relative z-10 text-center">💝 Fe (dando un paso al frente):</div>
+              <div className="text-pink-300 font-bold mb-4 relative z-10 text-center">💝 Fe:</div>
               <div className="text-white leading-relaxed relative z-10 text-center">
                 "Hola. No necesitas sentirte fuerte ahora. Solo necesitas confiar en lo que Él te ha prometido.
                 <br /><br />
                 Yo estaré contigo en este paso. No para empujarte… sino para sostenerte.
                 <br /><br />
                 <span className="text-pink-200">Perdonar no siempre se siente lógico… pero es justo ahí donde empieza la verdadera libertad.</span>
-                <br /><br />
-                <em className="text-yellow-200">(Extiende su mano con una sonrisa cálida.)</em>
                 <br /><br />
                 <strong className="text-pink-300 animate-pulse">¿Vamos juntos?</strong>"
               </div>
