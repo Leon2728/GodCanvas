@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 type SimulationStep = 
@@ -62,7 +61,14 @@ const JesusSimulation: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         return (
           <StepContainer>
             <div className="text-center mb-8">
-              <div className="text-6xl mb-4">🌲</div>
+              {/* Tree Image */}
+              <div className="mb-8">
+                <img 
+                  src="/lovable-uploads/3b88d9c4-192f-4729-85c1-21c699881555.png"
+                  alt="El Árbol que Suelta - Bosque de Sanidad"
+                  className="w-full max-w-2xl mx-auto rounded-2xl shadow-2xl border-4 border-white/20"
+                />
+              </div>
               <h3 className="text-2xl text-white font-bold mb-6">El Encuentro en el Bosque</h3>
             </div>
             <JesusMessage>
