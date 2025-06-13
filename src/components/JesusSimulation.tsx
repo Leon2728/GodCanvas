@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import VideoBackground from './VideoBackground';
 
@@ -610,7 +609,7 @@ const WoundPersonalizationStep: React.FC<{
       <JesusMessage breathingActive={breathingActive}>
         Le has puesto nombre a la herida. <span className="text-green-300 animate-pulse">Bien hecho.</span> Es el paso más difícil.
         <br /><br />
-        Ahora, para poder soltarla, debemos mirar a quién está atada. <span className="text-blue-200">Escribe su nombre aquí.</span> Puede ser otra persona... o puedes ser tú mismo. No tengas miedo. <span className="text-yellow-200">Esto queda entre tú, Yo, y el Padre.</span>
+        Ahora, para poder soltarla, debemos mirar a quién está atada. <span className="text-blue-200">No tengas miedo.</span> <span className="text-yellow-200">Esto queda entre tú, Yo, y el Padre.</span>
       </JesusMessage>
 
       {!isSubmitted ? (
@@ -620,7 +619,7 @@ const WoundPersonalizationStep: React.FC<{
               type="text"
               value={personName}
               onChange={(e) => setPersonName(e.target.value)}
-              placeholder="Escribe el nombre aquí..."
+              placeholder="Escribe su nombre aquí..."
               className="w-full px-6 py-4 bg-black/60 border-2 border-white/20 rounded-xl text-white text-center text-lg placeholder-gray-400 focus:border-blue-400 focus:outline-none transition-all duration-300 focus:scale-105"
             />
           </div>
