@@ -1,11 +1,11 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import JesusSimulation from '../components/JesusSimulation';
+import WaterCycleSimulator from '../components/WaterCycleSimulator';
 
 const Jesus: React.FC = () => {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<'entry' | 'conversation' | 'simulation'>('entry');
+  const [mode, setMode] = useState<'entry' | 'conversation' | 'simulation' | 'water-cycle'>('entry');
 
   const handleBackToCarousel = () => {
     navigate('/');
@@ -57,13 +57,17 @@ const Jesus: React.FC = () => {
         {mode === 'simulation' && (
           <JesusSimulation onBack={() => setMode('entry')} />
         )}
+        
+        {mode === 'water-cycle' && (
+          <WaterCycleSimulator onBack={() => setMode('entry')} />
+        )}
       </div>
     </div>
   );
 };
 
 // Entry Block Component
-const EntryBlock: React.FC<{ onModeChange: (mode: 'conversation' | 'simulation') => void }> = ({ onModeChange }) => {
+const EntryBlock: React.FC<{ onModeChange: (mode: 'conversation' | 'simulation' | 'water-cycle') => void }> = ({ onModeChange }) => {
   return (
     <div className="container mx-auto px-6 py-12">
       <div className="max-w-4xl mx-auto text-center">
@@ -110,6 +114,14 @@ const EntryBlock: React.FC<{ onModeChange: (mode: 'conversation' | 'simulation')
           >
             <span className="text-2xl">🌳</span>
             <span>Modo Simulación: "El Árbol que Suelta"</span>
+          </button>
+          
+          <button
+            onClick={() => onModeChange('water-cycle')}
+            className="flex items-center justify-center gap-3 px-8 py-6 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl"
+          >
+            <span className="text-2xl">💧</span>
+            <span>Simulador: "El Ciclo del Agua"</span>
           </button>
         </div>
       </div>
