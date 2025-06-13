@@ -609,7 +609,7 @@ const WoundPersonalizationStep: React.FC<{
       <JesusMessage breathingActive={breathingActive}>
         Le has puesto nombre a la herida. <span className="text-green-300 animate-pulse">Bien hecho.</span> Es el paso más difícil.
         <br /><br />
-        Ahora, para poder soltarla, debemos mirar a quién está atada. <span className="text-blue-200">No tengas miedo.</span> <span className="text-yellow-200">Esto queda entre tú, Yo, y el Padre.</span>
+        Ahora <span className="text-blue-200">entrégamela.</span> <span className="text-blue-200">No tengas miedo.</span> <span className="text-yellow-200">Esto queda entre tú, Yo, y el Padre.</span>
       </JesusMessage>
 
       {!isSubmitted ? (
