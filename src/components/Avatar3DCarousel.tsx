@@ -333,6 +333,9 @@ export default function Avatar3DCarousel() {
     <section 
       className="py-24 px-6 relative overflow-hidden min-h-screen flex items-center"
       aria-label="Personajes Bíblicos Holográficos"
+      role="region"
+      aria-roledescription="carousel"
+      tabIndex={-1}
       {...bind()}
     >
       {/* Advanced Matrix Background */}
@@ -424,7 +427,13 @@ export default function Avatar3DCarousel() {
           onMouseLeave={() => setIsPaused(false)}
           ref={carouselRef}
         >
-          <div className="relative h-[600px] md:h-[700px] perspective-[2000px]">
+          <div
+            className="relative h-[600px] md:h-[700px] perspective-[2000px]"
+            aria-live="polite"
+            aria-atomic="false"
+            tabIndex={0}
+            aria-label={`Avatar actual: ${avatars[currentIndex].name}`}
+          >
             {avatars.map((avatar, index) => {
               const isActive = index === currentIndex;
               const isPrev = index === (currentIndex - 1 + avatars.length) % avatars.length;
@@ -493,6 +502,12 @@ export default function Avatar3DCarousel() {
                   onClick={() => isActive ? handleAvatarClick(avatar, index) : goToSlide(index)}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label={isActive
+                    ? `Avatar activo: ${avatar.name}, nivel ${avatar.level}, poder ${avatar.power}`
+                    : `Avatar: ${avatar.name}, haga click para seleccionar`}
+                  tabIndex={isActive ? 0 : -1}
                 >
                   {/* Holographic Frame */}
                   <div className={`relative w-full h-full rounded-2xl overflow-hidden transition-all duration-500 ${
@@ -513,7 +528,7 @@ export default function Avatar3DCarousel() {
                         <div className="relative w-full h-full">
                           <LazyImage
                             src={avatar.image}
-                            alt={avatar.name}
+                            alt={`Avatar de ${avatar.name} - ${avatar.description}`}
                             className={`w-full h-full object-cover transition-all duration-700 ${
                               hoveredIndex === index ? 'scale-110 brightness-110' : 'scale-100'
                             } ${isActive ? 'brightness-110 contrast-110' : 'brightness-90'}`}
@@ -571,7 +586,8 @@ export default function Avatar3DCarousel() {
                         <div className={`absolute bottom-0 left-0 right-0 p-6 transform transition-all duration-700 ${
                           isActive ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
                         }`}>
-                          <div className="backdrop-blur-xl bg-black/80 rounded-xl p-4 border border-cyan-400/30">
+                          <div className="backdrop-blur-xl bg-black/90 rounded-xl p-4 border border-cyan-400/30">
+                            {/* Se mejoró opacidad fondo para mejor contraste de texto */}
                             <div className="flex items-center justify-between mb-3">
                               <div>
                                 <h3 className="text-xl md:text-2xl font-black text-white font-mono tracking-wider">
@@ -639,8 +655,10 @@ export default function Avatar3DCarousel() {
             <>
               <button
                 onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white hover:shadow-2xl hover:shadow-cyan-400/50 transition-all duration-300 border-2 border-cyan-400/50 z-40 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed group"
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white hover:shadow-2xl hover:shadow-cyan-400/50 transition-all duration-300 border-2 border-cyan-400/50 z-40 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed group focus:ring-2 focus:ring-emerald-400"
                 disabled={isAnimating}
+                aria-label="Avatar anterior"
+                tabIndex={0}
               >
                 <div className="text-xl font-bold group-hover:scale-125 transition-transform">◀</div>
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/0 to-cyan-400/20 group-hover:from-cyan-400/20 group-hover:to-cyan-400/40 transition-all duration-300"></div>
@@ -648,8 +666,10 @@ export default function Avatar3DCarousel() {
               
               <button
                 onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 rounded-full flex items-center justify-center text-white hover:shadow-2xl hover:shadow-cyan-400/50 transition-all duration-300 border-2 border-cyan-400/50 z-40 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed group"
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 rounded-full flex items-center justify-center text-white hover:shadow-2xl hover:shadow-cyan-400/50 transition-all duration-300 border-2 border-cyan-400/50 z-40 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed group focus:ring-2 focus:ring-emerald-400"
                 disabled={isAnimating}
+                aria-label="Avatar siguiente"
+                tabIndex={0}
               >
                 <div className="text-xl font-bold group-hover:scale-125 transition-transform">▶</div>
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/0 to-cyan-400/20 group-hover:from-cyan-400/20 group-hover:to-cyan-400/40 transition-all duration-300"></div>
