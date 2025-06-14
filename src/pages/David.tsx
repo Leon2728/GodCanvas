@@ -67,7 +67,7 @@ const EntryBlock: React.FC<{ onModeChange: (mode: 'watercycle') => void }> = ({ 
         <div className="mb-12">
           <div className="w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-white/20 shadow-2xl">
             <img 
-              src="/lovable-uploads/28208dd9-0d18-4231-97e0-21190702e10a.png"
+              src="/lovable-uploads/bbe99dfb-6aa8-4351-9816-0a64057ce82e.png"
               alt="Rey David"
               className="w-full h-full object-cover"
             />

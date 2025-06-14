@@ -30,7 +30,7 @@ const avatars = [
   {
     id: "david",
     name: "Rey David", 
-    image: "/lovable-uploads/28208dd9-0d18-4231-97e0-21190702e10a.png",
+    image: "/lovable-uploads/bbe99dfb-6aa8-4351-9816-0a64057ce82e.png",
     description: "Maestro de salmos y adoración celestial",
     link: "/david",
     category: "rey",
@@ -85,7 +85,7 @@ const avatars = [
   {
     id: "salomon",
     name: "Rey Salomón",
-    image: "/lovable-uploads/bbe99dfb-6aa8-4351-9816-0a64057ce82e.png",
+    image: "/lovable-uploads/28208dd9-0d18-4231-97e0-21190702e10a.png",
     description: "Arquitecto de la sabiduría suprema",
     link: "/salomon",
     category: "rey",
