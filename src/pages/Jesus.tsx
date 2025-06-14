@@ -1,11 +1,11 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import JesusSimulation from '../components/JesusSimulation';
-import WaterCycleSimulator from '../components/WaterCycleSimulator';
 
 const Jesus: React.FC = () => {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<'entry' | 'conversation' | 'simulation' | 'watercycle'>('entry');
+  const [mode, setMode] = useState<'entry' | 'conversation' | 'simulation'>('entry');
 
   const handleBackToCarousel = () => {
     navigate('/');
@@ -57,17 +57,13 @@ const Jesus: React.FC = () => {
         {mode === 'simulation' && (
           <JesusSimulation onBack={() => setMode('entry')} />
         )}
-        
-        {mode === 'watercycle' && (
-          <WaterCycleSimulator onBack={() => setMode('entry')} />
-        )}
       </div>
     </div>
   );
 };
 
 // Entry Block Component
-const EntryBlock: React.FC<{ onModeChange: (mode: 'conversation' | 'simulation' | 'watercycle') => void }> = ({ onModeChange }) => {
+const EntryBlock: React.FC<{ onModeChange: (mode: 'conversation' | 'simulation') => void }> = ({ onModeChange }) => {
   return (
     <div className="container mx-auto px-6 py-12">
       <div className="max-w-4xl mx-auto text-center">
@@ -99,7 +95,7 @@ const EntryBlock: React.FC<{ onModeChange: (mode: 'conversation' | 'simulation' 
         </div>
 
         {/* Mode Selection */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center">
           <button
             onClick={() => onModeChange('conversation')}
             className="flex items-center justify-center gap-3 px-6 py-6 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl"
@@ -114,14 +110,6 @@ const EntryBlock: React.FC<{ onModeChange: (mode: 'conversation' | 'simulation' 
           >
             <span className="text-2xl">🌳</span>
             <span>Modo Simulación: "El Árbol que Suelta"</span>
-          </button>
-          
-          <button
-            onClick={() => onModeChange('watercycle')}
-            className="flex items-center justify-center gap-3 px-6 py-6 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl"
-          >
-            <span className="text-2xl">💧</span>
-            <span>El Ciclo del Agua con David</span>
           </button>
         </div>
       </div>

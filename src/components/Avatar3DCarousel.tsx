@@ -30,9 +30,9 @@ const avatars = [
   {
     id: "david",
     name: "Rey David", 
-    image: "/lovable-uploads/1ec2033e-25b5-4535-95df-6e56e6760675.png",
+    image: "/lovable-uploads/28208dd9-0d18-4231-97e0-21190702e10a.png",
     description: "Maestro de salmos y adoración celestial",
-    link: "/musica-david",
+    link: "/david",
     category: "rey",
     level: "LEGENDARY",
     power: "94%",
