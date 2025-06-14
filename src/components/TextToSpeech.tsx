@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Square, Settings, Volume2, VolumeX, Download, Loader2 } from 'lucide-react';
+import { Play, Pause, Square, Settings, Volume2, VolumeX, Loader2 } from 'lucide-react';
 import { Button } from './ui/button';
 
 interface TextToSpeechProps {
