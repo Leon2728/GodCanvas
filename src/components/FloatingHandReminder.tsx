@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { HandHeart } from "lucide-react";
 
@@ -25,7 +24,7 @@ const getDynamicPath = () => {
 const HAND_DURATION = 1700; // milisegundos cada paso
 const FADE_OUT_STEPS = 3; // últimos pasos, hace fade out
 
-// SVG Rainbow Gradient HandHeart
+// SVG Rainbow Gradient HandHeart (más visible, mano rellena degradado, corazón rojo)
 const RainbowHandHeart = ({ size = 48 }: { size?: number }) => (
   <svg
     width={size}
@@ -35,33 +34,34 @@ const RainbowHandHeart = ({ size = 48 }: { size?: number }) => (
     className="w-12 h-12 drop-shadow-xl"
     xmlns="http://www.w3.org/2000/svg"
   >
-    {/* DEFINIMOS EL GRADIENTE RAINBOW */}
     <defs>
-      <linearGradient id="handGradient" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#8b5cf6" stopOpacity="0.22" />    {/* Violeta translúcido */}
-        <stop offset="0.2" stopColor="#06b6d4" stopOpacity="0.19" /> {/* Cyan */}
-        <stop offset="0.45" stopColor="#10b981" stopOpacity="0.24" /> /* Emerald */
-        <stop offset="0.6" stopColor="#fde68a" stopOpacity="0.20" /> {/* Yellow */}
-        <stop offset="0.8" stopColor="#f472b6" stopOpacity="0.23" /> {/* Pink */}
-        <stop offset="1" stopColor="#f43f5e" stopOpacity="0.2" /> {/* Red */}
+      <linearGradient id="handGradientFill" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#8b5cf6" />    {/* Violeta */}
+        <stop offset="0.2" stopColor="#06b6d4" /> {/* Cyan */}
+        <stop offset="0.45" stopColor="#10b981" /> /* Emerald */
+        <stop offset="0.6" stopColor="#fde68a" /> {/* Yellow */}
+        <stop offset="0.8" stopColor="#f472b6" /> {/* Pink */}
+        <stop offset="1" stopColor="#f43f5e" /> {/* Red */}
       </linearGradient>
       <linearGradient id="handShadow" x1="16" y1="8" x2="38" y2="40" gradientUnits="userSpaceOnUse">
         <stop stopColor="#fff" stopOpacity="0.08"/>
         <stop offset="1" stopColor="#000" stopOpacity="0.10"/>
       </linearGradient>
     </defs>
-    {/* Rutas de la mano (todas menos el corazón) */}
+
+    {/* Mano rellena de arcoíris y con trazo suave blanco, mucho más visible */}
     <path
       d="M16.7 11.2c0-2.3 1.96-4.2 4.35-4.2 2.1 0 3.8 1.46 4.13 3.48M9.27 17.3c-.02-2.45 1.96-4.44 4.38-4.44 1.1 0 2.09.41 2.86 1.1m9.31-3.1c2.53.09 4.46 2.07 4.45 4.57v10.81m-19.6-7.71c-1.72 1.5-2.1 4.12-.31 5.78l11.97 12.72c1.89 2 4.99 2 6.88 0l7.42-7.87c1.8-1.91 1.46-5.09-.68-6.48-1.26-.8-3.04-.61-4.03.43l-2.83 2.86"
-      stroke="url(#handGradient)"
-      strokeWidth="2.1"
-      strokeLinecap="round"
+      fill="url(#handGradientFill)"
+      stroke="#fff"
+      strokeWidth="1.85"
       strokeLinejoin="round"
-      fill="none"
-      /* Suavidad y sombra pequeña extra mostrando 'vida' */
-      style={{ filter: "drop-shadow(0 0 2px #fff8)" }}
+      strokeLinecap="round"
+      opacity="0.95"
+      style={{ filter: "drop-shadow(0 0 6px #fff3)" }}
     />
-    {/* Sombra leve extra bajo la mano */}
+
+    {/* Sombra bajo la mano */}
     <path
       d="M17 13c-4 0-6.5-1-8.4 1.1-.9 1-1.16 3.02-.16 4.27"
       stroke="url(#handShadow)"
@@ -71,7 +71,8 @@ const RainbowHandHeart = ({ size = 48 }: { size?: number }) => (
       fill="none"
       opacity="0.7"
     />
-    {/* Corazón interior en ROJO PURO */}
+
+    {/* Corazón puro rojo */}
     <path
       d="M36.2 11.65c-1.31-1.13-3.38-1.08-4.61.11-1.13 1.1-1.12 2.85-.05 3.94l2.09 2.19 2.08-2.19c1.06-1.09 1.07-2.83-.05-3.94Z"
       fill="#ef4444"
@@ -138,4 +139,3 @@ const FloatingHandReminder: React.FC = () => {
 };
 
 export default FloatingHandReminder;
-
