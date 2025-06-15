@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Volume2, VolumeX, Play, Pause, RotateCcw } from 'lucide-react';
 import { Button } from './ui/button';
@@ -19,6 +20,23 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text, title = "Artículo" }
   
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const speechUtteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+
+  // Load API key from localStorage on mount
+  useEffect(() => {
+    const storedApiKey = localStorage.getItem('elevenlabs_api_key');
+    if (storedApiKey) {
+      setApiKey(storedApiKey);
+    }
+  }, []);
+
+  // Save API key to localStorage when it changes
+  useEffect(() => {
+    if (apiKey) {
+      localStorage.setItem('elevenlabs_api_key', apiKey);
+    } else {
+      localStorage.removeItem('elevenlabs_api_key');
+    }
+  }, [apiKey]);
 
   // Cleanup text for better speech synthesis
   const cleanText = (rawText: string) => {
@@ -198,17 +216,17 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text, title = "Artículo" }
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-900/20 to-indigo-900/20 backdrop-blur-xl rounded-2xl border border-blue-400/20 p-6 mb-8">
+    <div className="bg-gradient-to-br from-gray-900 via-violet-900/30 to-gray-900 backdrop-blur-lg rounded-2xl border border-violet-500/30 p-6 mb-8 shadow-2xl shadow-violet-900/30">
       <audio ref={audioRef} />
       
       <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
-            <Volume2 className="w-5 h-5 text-blue-300" />
+        <div className="flex items-center space-x-4">
+          <div className="w-12 h-12 bg-violet-500/20 rounded-full flex items-center justify-center border border-violet-500/30">
+            <Volume2 className="w-6 h-6 text-violet-300" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-white">Escuchar Artículo</h3>
-            <p className="text-sm text-blue-200">{title}</p>
+            <h3 className="text-lg font-bold text-white tracking-wide">Escuchar Artículo</h3>
+            <p className="text-sm text-violet-300 font-lora">{title}</p>
           </div>
         </div>
         
@@ -216,35 +234,35 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text, title = "Artículo" }
           variant="ghost"
           size="sm"
           onClick={() => setShowApiKeyInput(!showApiKeyInput)}
-          className="text-blue-300 hover:text-blue-200"
+          className="text-violet-300 hover:text-violet-200 hover:bg-violet-500/20 transition-colors"
         >
           ⚙️ Configurar
         </Button>
       </div>
 
       {showApiKeyInput && (
-        <div className="mb-4 p-4 bg-blue-950/30 rounded-lg border border-blue-400/20">
-          <label className="block text-sm font-medium text-blue-200 mb-2">
-            ElevenLabs API Key (opcional para voz profesional):
+        <div className="mb-4 p-4 bg-violet-950/40 rounded-lg border border-violet-500/30 animate-fade-in">
+          <label className="block text-sm font-medium text-violet-200 mb-2">
+            ElevenLabs API Key (voz de alta fidelidad)
           </label>
           <input
             type="password"
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
             placeholder="Ingresa tu API key de ElevenLabs"
-            className="w-full px-3 py-2 bg-blue-900/20 border border-blue-400/30 rounded-lg text-white placeholder-blue-300/50 focus:border-blue-400/50 focus:outline-none"
+            className="w-full px-3 py-2 bg-violet-900/30 border border-violet-500/40 rounded-lg text-white placeholder-violet-300/50 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-violet-400 transition-all"
           />
-          <p className="text-xs text-blue-300/70 mt-1">
-            Sin API key se usará la voz del navegador (gratuita)
+          <p className="text-xs text-violet-300/70 mt-2">
+            La clave se guarda en tu navegador. Sin API key, se usará la voz estándar del sistema (gratuita).
           </p>
         </div>
       )}
 
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-2 md:space-x-4">
         {!isPlaying ? (
           <Button
             onClick={handlePlay}
-            className="flex items-center space-x-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-200 border border-blue-400/30"
+            className="flex-1 md:flex-none flex items-center justify-center space-x-2 bg-violet-600/30 hover:bg-violet-600/50 text-violet-100 border border-violet-400/40 font-semibold transition-all duration-200"
           >
             <Play className="w-4 h-4" />
             <span>Reproducir</span>
@@ -252,7 +270,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text, title = "Artículo" }
         ) : (
           <Button
             onClick={isPaused ? handleResume : handlePause}
-            className="flex items-center space-x-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-200 border border-blue-400/30"
+            className="flex-1 md:flex-none flex items-center justify-center space-x-2 bg-violet-600/30 hover:bg-violet-600/50 text-violet-100 border border-violet-400/40 font-semibold transition-all duration-200"
           >
             {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
             <span>{isPaused ? 'Continuar' : 'Pausar'}</span>
@@ -262,8 +280,9 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text, title = "Artículo" }
         <Button
           onClick={handleStop}
           variant="ghost"
-          size="sm"
-          className="text-blue-300 hover:text-blue-200"
+          size="icon"
+          className="text-violet-300 hover:text-violet-100 hover:bg-violet-500/20 transition-colors"
+          aria-label="Detener y reiniciar"
         >
           <RotateCcw className="w-4 h-4" />
         </Button>
@@ -271,24 +290,25 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text, title = "Artículo" }
         <Button
           onClick={toggleMute}
           variant="ghost"
-          size="sm"
-          className="text-blue-300 hover:text-blue-200"
+          size="icon"
+          className="text-violet-300 hover:text-violet-100 hover:bg-violet-500/20 transition-colors"
+          aria-label={isMuted ? "Quitar silencio" : "Silenciar"}
         >
           {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
         </Button>
 
-        <div className="flex items-center space-x-2">
-          <span className="text-sm text-blue-300">Velocidad:</span>
+        <div className="hidden md:flex items-center space-x-2">
+          <span className="text-sm text-violet-300">Velocidad:</span>
           {[0.75, 1, 1.25, 1.5].map((speed) => (
             <Button
               key={speed}
               onClick={() => handleSpeedChange(speed)}
               variant="ghost"
               size="sm"
-              className={`text-xs ${
+              className={`text-xs px-2.5 py-1 h-auto rounded-md ${
                 playbackRate === speed 
-                  ? 'text-blue-200 bg-blue-600/20' 
-                  : 'text-blue-300 hover:text-blue-200'
+                  ? 'text-violet-100 bg-violet-600/40' 
+                  : 'text-violet-300 hover:text-violet-200 hover:bg-violet-500/20'
               }`}
             >
               {speed}x
@@ -296,23 +316,44 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text, title = "Artículo" }
           ))}
         </div>
       </div>
+      
+      <div className="flex md:hidden items-center space-x-2 mt-4">
+          <span className="text-sm text-violet-300">Velocidad:</span>
+          {[0.75, 1, 1.25, 1.5].map((speed) => (
+            <Button
+              key={speed}
+              onClick={() => handleSpeedChange(speed)}
+              variant="ghost"
+              size="sm"
+              className={`text-xs px-2.5 py-1 h-auto rounded-md ${
+                playbackRate === speed 
+                  ? 'text-violet-100 bg-violet-600/40' 
+                  : 'text-violet-300 hover:text-violet-200 hover:bg-violet-500/20'
+              }`}
+            >
+              {speed}x
+            </Button>
+          ))}
+        </div>
 
       {duration > 0 && (
-        <div className="mt-4 flex items-center space-x-2">
-          <span className="text-xs text-blue-300">{formatTime(currentTime)}</span>
-          <div className="flex-1 h-1 bg-blue-900/30 rounded-full overflow-hidden">
+        <div className="mt-4 flex items-center space-x-3">
+          <span className="text-xs text-violet-300 font-mono w-10 text-center">{formatTime(currentTime)}</span>
+          <div className="flex-1 group h-2 bg-violet-900/50 rounded-full cursor-pointer">
             <div 
-              className="h-full bg-blue-400 transition-all duration-300"
+              className="h-full bg-violet-400 rounded-full transition-all duration-150 group-hover:bg-violet-300"
               style={{ width: `${(currentTime / duration) * 100}%` }}
             />
           </div>
-          <span className="text-xs text-blue-300">{formatTime(duration)}</span>
+          <span className="text-xs text-violet-300 font-mono w-10 text-center">{formatTime(duration)}</span>
         </div>
       )}
 
-      <p className="text-xs text-blue-300/70 mt-3">
-        💡 Tip: Para mejor calidad de voz, configura tu API key de ElevenLabs
-      </p>
+      {!apiKey && (
+        <p className="text-xs text-violet-400/80 mt-4 text-center bg-violet-900/30 p-2 rounded-md border border-violet-500/20">
+          ✨ Voz de alta fidelidad disponible. Haz clic en <strong>⚙️ Configurar</strong> para usar tu API key de ElevenLabs.
+        </p>
+      )}
     </div>
   );
 };
