@@ -1,71 +1,61 @@
+
 import React, { useEffect, useState } from "react";
 import { HandHeart } from "lucide-react";
 
 /**
- * Secuencia de posiciones por las que la mano flotante se moverá, 
- * relativas a la ventana (viewport).
+ * Puntos animados para el recorrido de la mano (vivos, toca varias zonas)
  */
-const HAND_PATH = [
-  { top: 30, left: 32 }, // cerca del logo header arriba izq.
-  { top: 120, left: 90 }, // bajando a mitad del header
-  { top: 290, left: 36 }, // encima de la primera sección
-  { top: 120, left: window.innerWidth - 80 }, // va a la derecha arriba
-];
-
-const TOOLTIP_MESSAGES = [
-  "¡Estás en GodCanvas!",
-  "Explora y déjate guiar...",
-];
-
-const REMINDER_DURATION = 9000; // milisegundos total (9s aprox)
-const STEP_DURATION = 2400; // ms por cada paso del tour
-
-const getHandPath = () => {
-  // recalcula handpath para responsive
+const getDynamicPath = () => {
   const W = window.innerWidth;
+  const H = window.innerHeight;
   return [
-    { top: 30, left: 32 },
-    { top: 120, left: 90 },
-    { top: 230, left: Math.max(32, W * 0.4) }, // centro-izq
-    { top: 120, left: Math.max(32, W - 80) },
+    { top: 36, left: 36 },
+    { top: 90, left: Math.max(48, W * 0.5 - 36) },
+    { top: Math.max(160, H * 0.37), left: Math.max(40, W * 0.69) },
+    { top: H * 0.72, left: Math.max(32, W * 0.16) },
+    { top: H - 120, left: W - 72 },
+    { top: H * 0.57, left: Math.max(56, W * 0.7) },
+    { top: H * 0.12, left: W * 0.85 },
+    { top: H * 0.81, left: W * 0.44 },
+    { top: H * 0.2, left: W * 0.1 },
+    { top: 78, left: W * 0.62 },
   ];
 };
+
+const HAND_DURATION = 1700; // milisegundos cada paso
+const FADE_OUT_STEPS = 3; // últimos pasos, hace fade out
 
 const FloatingHandReminder: React.FC = () => {
   const [visible, setVisible] = useState(true);
   const [step, setStep] = useState(0);
-  const [handPath, setHandPath] = useState(() => getHandPath());
+  const [handPath, setHandPath] = useState(() => getDynamicPath());
 
   useEffect(() => {
-    // Actualiza el path al cambiar el tamaño
-    const onResize = () => setHandPath(getHandPath());
-    window.addEventListener("resize", onResize);
+    // Actualiza los puntos si el tamaño cambia
+    const handleResize = () => setHandPath(getDynamicPath());
+    window.addEventListener("resize", handleResize);
 
-    let stepTimeout: NodeJS.Timeout;
-    let hideTimeout: NodeJS.Timeout;
-
-    // Ciclo animación por cada paso
+    let moveTimeout: NodeJS.Timeout;
     if (visible && step < handPath.length - 1) {
-      stepTimeout = setTimeout(() => setStep(step + 1), STEP_DURATION);
+      moveTimeout = setTimeout(() => setStep(s => s + 1), HAND_DURATION);
     }
-    // Desaparece al final
+    // Al terminar el recorrido, esconde la mano
     if (visible && step >= handPath.length - 1) {
-      hideTimeout = setTimeout(() => setVisible(false), 1600);
+      moveTimeout = setTimeout(() => setVisible(false), HAND_DURATION * 0.85);
     }
 
     return () => {
-      window.removeEventListener("resize", onResize);
-      clearTimeout(stepTimeout);
-      clearTimeout(hideTimeout);
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(moveTimeout);
     };
     // eslint-disable-next-line
   }, [step, handPath.length, visible]);
 
-  // No renderiza si pasó el tour
   if (!visible) return null;
 
   const pos = handPath[step];
-  const showTooltip = step < 2; // Solo los primeros pasos
+  const isFading =
+    step >= handPath.length - FADE_OUT_STEPS && visible;
 
   return (
     <div
@@ -74,27 +64,22 @@ const FloatingHandReminder: React.FC = () => {
         position: "fixed",
         top: pos.top,
         left: pos.left,
-        transition: "top 1.6s cubic-bezier(.34,2,.60,1), left 1.6s cubic-bezier(.24,.92,.82,.48)",
+        transition:
+          "top 1.2s cubic-bezier(.35,2,.62,1), left 1.2s cubic-bezier(.2,.99,.72,.67)",
         pointerEvents: "none",
+        opacity: isFading
+          ? 1 - (step - (handPath.length - FADE_OUT_STEPS)) / FADE_OUT_STEPS
+          : 1,
       }}
       aria-hidden="true"
     >
-      <div className="flex items-center gap-3 animate-fade-in">
-        <span
-          className="rounded-full bg-gradient-to-br from-violet-500/80 to-emerald-500/80 p-2 shadow-2xl border-2 border-white/60 animate-pulse"
-        >
-          <HandHeart
-            className="w-11 h-11 drop-shadow-xl"
-            strokeWidth={2.1}
-            color="red"
-          />
-        </span>
-        {showTooltip && (
-          <span className="bg-black/90 text-violet-200 font-bold px-4 py-2 rounded-full shadow-lg border border-violet-400/50 text-base whitespace-nowrap animate-fade-in">
-            {TOOLTIP_MESSAGES[step] || TOOLTIP_MESSAGES[0]}
-          </span>
-        )}
-      </div>
+      <span className="rounded-full bg-gradient-to-br from-violet-500/80 to-emerald-500/80 p-2 shadow-xl border-2 border-white/60 animate-pulse block">
+        <HandHeart
+          className="w-12 h-12 drop-shadow-xl"
+          color="red"
+          strokeWidth={2.1}
+        />
+      </span>
     </div>
   );
 };
