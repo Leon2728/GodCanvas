@@ -77,49 +77,53 @@ const Header: React.FC = () => {
 
         <div className="container mx-auto px-3 py-3 md:px-6 md:py-4 relative">
           <div className="flex items-center justify-between">
-            {/* Logo Holográfico con G de fondo */}
+            {/* Logo Holográfico con G de fondo, ahora con overflow-hidden y tamaño mejorados */}
             <button
               onClick={scrollToTop}
               className="relative group cursor-pointer touch-manipulation"
               tabIndex={0}
               aria-label="Ir al inicio"
+              style={{ maxWidth: 220, maxHeight: 72 }} // Limita el tamaño máximo del logo
             >
-              {/* Brillo exterior */}
-              <div className="absolute -inset-3 bg-gradient-to-r from-violet-600/30 via-purple-600/30 to-emerald-500/30 rounded-2xl blur-lg md:blur-xl opacity-50 group-hover:opacity-80 transition-all duration-700"></div>
-              {/* G llamativa detrás, responsiva más pequeña en mobile */}
-              <span
-                className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0"
-                aria-hidden="true"
-              >
+              {/* Recorta contenido sobrante */}
+              <div className="relative rounded-2xl overflow-hidden" style={{ width: '100%', height: 56, minWidth: 120, minHeight: 45 }}>
+                {/* Brillo exterior */}
+                <div className="absolute -inset-3 bg-gradient-to-r from-violet-600/30 via-purple-600/30 to-emerald-500/30 rounded-2xl blur-lg md:blur-xl opacity-50 group-hover:opacity-80 transition-all duration-700 pointer-events-none select-none"></div>
+                {/* G detrás del texto */}
                 <span
-                  className="
-                    font-extrabold font-serif
-                    text-[20px] xs:text-[30px] sm:text-[36px]
-                    md:text-[84px]
-                    leading-none
-                    text-transparent
-                    bg-gradient-to-br from-emerald-300 via-violet-300 to-purple-500
-                    bg-clip-text
-                    opacity-20 md:opacity-25
-                    drop-shadow-md md:drop-shadow-2xl
-                    blur-[0.5px] md:blur-[2px]
-                    animate-pulse
-                  "
-                  style={{
-                    letterSpacing: '-0.07em',
-                    textShadow: '0 0 10px #7c3aed22, 0 4px 10px #34d39916',
-                  }}
+                  className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0"
+                  aria-hidden="true"
                 >
-                  G
+                  <span
+                    className={`
+                      font-extrabold font-serif
+                      text-[32px] xs:text-[38px] sm:text-[44px] md:text-[96px] lg:text-[112px] 
+                      leading-none
+                      text-transparent
+                      bg-gradient-to-br from-emerald-300 via-violet-300 to-purple-500
+                      bg-clip-text
+                      opacity-20 md:opacity-25
+                      drop-shadow-md md:drop-shadow-2xl
+                      blur-[1px] md:blur-[2.5px] 
+                      animate-pulse
+                      transition-all
+                    `}
+                    style={{
+                      letterSpacing: '-0.07em',
+                      textShadow: '0 0 8px #7c3aed22, 0 2px 4px #34d39913',
+                    }}
+                  >
+                    G
+                  </span>
                 </span>
-              </span>
-              {/* Texto encima */}
-              <div className="relative px-4 py-2 md:px-5 md:py-2 bg-gradient-to-r from-violet-900/20 to-emerald-900/20 rounded-xl border border-violet-400/30 backdrop-blur-sm group-hover:border-violet-400/50 transition-all duration-300 focus:ring-2 focus:ring-violet-400 z-10">
-                <div className="text-2xl font-black bg-gradient-to-r from-violet-300 via-purple-300 to-emerald-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300 relative">
-                  GodCanvas
+                {/* Texto encima */}
+                <div className="relative px-4 py-2 md:px-5 md:py-2 bg-gradient-to-r from-violet-900/20 to-emerald-900/20 rounded-xl border border-violet-400/30 backdrop-blur-sm group-hover:border-violet-400/50 transition-all duration-300 focus:ring-2 focus:ring-violet-400 z-10">
+                  <div className="text-2xl font-black bg-gradient-to-r from-violet-300 via-purple-300 to-emerald-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300 relative">
+                    GodCanvas
+                  </div>
+                  {/* Home indicator */}
+                  <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-violet-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
-                {/* Home indicator */}
-                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-violet-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
             </button>
 
