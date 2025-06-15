@@ -1,8 +1,9 @@
-
 import React from "react";
 import { Helmet } from "react-helmet";
 import { blogPosts } from "../data/blogPosts";
 import ReactMarkdown from "react-markdown";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 // Opcional: componentes para embellecer el Markdown
 const MarkdownComponents = {
@@ -47,6 +48,8 @@ const MarkdownComponents = {
 const post = blogPosts[0]; // Por ahora solo uno
 
 const BlogPost1: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="max-w-3xl mx-auto px-4 pb-32">
       <Helmet>
@@ -58,6 +61,20 @@ const BlogPost1: React.FC = () => {
         <meta property="og:type" content="article" />
         <link rel="canonical" href="https://tudominio.com/blog/la-guerra-global-se-intensifica" />
       </Helmet>
+
+      {/* Botón de salir / volver */}
+      <div className="pt-8 pb-4 flex justify-start">
+        <Button
+          variant="outline"
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+          </svg>
+          Volver al Blog
+        </Button>
+      </div>
 
       {/* Imagen de portada centrada */}
       {post.imageUrl && (
@@ -83,4 +100,3 @@ const BlogPost1: React.FC = () => {
 };
 
 export default BlogPost1;
-
