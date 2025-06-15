@@ -1,7 +1,7 @@
 import React from 'react';
 import BlogPostCard from './BlogPostCard';
 import { blogPosts } from '../data/blogPosts';
-import { Video, Mic } from 'lucide-react';
+import { Video, Mic, PenTool } from 'lucide-react';
 
 interface BlogSectionProps {
   isDark: boolean;
@@ -23,16 +23,15 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isDark }) => {
         
         {/* Clean, professional header */}
         <header className="text-center mb-16">
-          <div className="inline-flex items-center space-x-2 mb-8 px-4 py-2 rounded-full bg-violet-600/10 border border-violet-400/20 backdrop-blur-sm">
-            <div className="w-1.5 h-1.5 bg-violet-400 rounded-full"></div>
+          <div className="inline-flex items-center space-x-2 mb-4 px-4 py-2 rounded-full bg-violet-600/10 border border-violet-400/20 backdrop-blur-sm">
+            <PenTool className="w-4 h-4 text-violet-300" />
             <span className="text-violet-300 font-medium text-sm tracking-wide">ANÁLISIS PROFÉTICO</span>
           </div>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-white via-violet-100 to-emerald-100 bg-clip-text text-transparent">
-              Blog Profético
-            </span>
+          <h1 className="text-5xl md:text-7xl font-serif font-bold mb-4 text-white leading-tight tracking-tight">
+            Blog <span className="text-violet-300">Profético</span>
           </h1>
+          <div className="w-24 h-1 bg-gradient-to-r from-violet-500 to-emerald-500 mx-auto rounded-full mb-6"></div>
           
           <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-normal">
             Perspectivas divinas sobre los eventos actuales y análisis profético del mundo moderno
@@ -41,21 +40,21 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isDark }) => {
 
         {/* Nueva Introducción Espiritual - Debajo de Blog Profético */}
         <div className="mb-20 max-w-3xl mx-auto">
-          <div className="bg-gradient-to-r from-amber-50/5 via-yellow-50/5 to-amber-50/5 backdrop-blur-xl rounded-3xl border border-amber-400/20 p-8 md:p-10 shadow-2xl shadow-amber-500/10">
+          <div className="bg-black/20 backdrop-blur-lg rounded-2xl border border-violet-400/20 p-8 shadow-lg shadow-violet-500/10">
             <div className="flex items-center justify-center mb-6">
-              <span className="text-2xl mr-2">✝️</span>
-              <span className="text-amber-300 font-bold text-lg uppercase tracking-wide">Introducción: El Discernimiento Ante Todo</span>
+              <span className="text-2xl mr-3 text-violet-300">✝️</span>
+              <span className="text-violet-300 font-bold font-serif text-xl tracking-wide">El Discernimiento Ante Todo</span>
             </div>
-            <div className="text-amber-100/90 space-y-5 text-lg text-center leading-relaxed">
+            <div className="text-violet-100/90 space-y-5 text-lg text-center leading-relaxed font-lora">
               <p>
-                Antes de continuar, recuerda que este blog no atribuye los eventos aquí descritos como actos directos de Dios, sino como acontecimientos que Él permite dentro de Su soberanía, para juicio, corrección o cumplimiento profético.
+                Este blog no atribuye los eventos aquí descritos como actos directos de Dios, sino como acontecimientos que Él permite dentro de Su soberanía, para juicio, corrección o cumplimiento profético.
               </p>
               <p>
                 No buscamos alarmar, sino despertar. Todo aquí fue escrito con temor reverente, discernimiento espiritual y una carga profética clara.
               </p>
-              <blockquote className="border-l-4 border-amber-400/50 pl-4 italic text-amber-200 my-6 font-medium text-lg text-left mx-auto max-w-xl bg-amber-900/10 rounded-md">
+              <blockquote className="border-l-4 border-violet-400/50 pl-6 italic text-violet-200 my-6 font-medium text-lg text-left mx-auto max-w-xl bg-violet-900/20 py-4 rounded-r-lg">
                 “Las cosas secretas pertenecen a Jehová nuestro Dios; mas las reveladas son para nosotros y para nuestros hijos para siempre.”<br /> 
-                <span className="block mt-2 text-amber-300 font-semibold text-sm text-right">— Deuteronomio 29:29</span>
+                <span className="block mt-2 text-violet-300 font-semibold text-sm text-right not-italic">— Deuteronomio 29:29</span>
               </blockquote>
             </div>
           </div>
@@ -77,54 +76,50 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isDark }) => {
         </div>
 
         {/* New Visual Content Sections */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           
           {/* Documentary Section */}
-          <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-violet-400/20 transition-all duration-300 p-8">
-            <div className="flex items-center space-x-3 mb-6">
+          <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-violet-400/30 transition-all duration-300 p-8 flex flex-col">
+            <div className="flex items-center space-x-3 mb-4">
               <Video className="w-8 h-8 text-violet-400" />
-              <h2 className="text-2xl font-bold text-white">🎥 Sección del Documental</h2>
+              <h2 className="text-2xl font-serif font-bold text-white">Documentales</h2>
             </div>
             
-            <p className="text-gray-400 mb-6 leading-relaxed">
-              Explora contenido visual profundo sobre las profecías y análisis geopolíticos. 
-              Documentales que revelan las conexiones espirituales detrás de los eventos mundiales.
+            <p className="text-gray-400 mb-6 leading-relaxed flex-grow">
+              Explora contenido visual profundo sobre las profecías y análisis geopolíticos que revelan las conexiones espirituales detrás de los eventos mundiales.
             </p>
             
             <div className="aspect-video bg-gradient-to-br from-violet-900/20 to-emerald-900/20 rounded-lg mb-6 flex items-center justify-center border border-violet-400/20">
               <div className="text-center">
-                <Video className="w-16 h-16 text-violet-300 mx-auto mb-4" />
+                <Video className="w-12 h-12 text-violet-300 mx-auto mb-3" />
                 <p className="text-violet-200 font-medium">Próximamente</p>
-                <p className="text-gray-400 text-sm">Contenido documental en desarrollo</p>
               </div>
             </div>
             
-            <button className="w-full py-3 text-sm font-medium text-violet-300 border border-violet-400/30 rounded-lg hover:bg-violet-600/10 hover:border-violet-400/50 transition-all duration-200">
+            <button disabled className="w-full py-3 text-sm font-medium text-violet-300 border border-violet-400/30 rounded-lg bg-violet-600/10 transition-all duration-200 opacity-50 cursor-not-allowed">
               Ver Documentales
             </button>
           </div>
 
           {/* Podcast Section */}
-          <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-emerald-400/20 transition-all duration-300 p-8">
-            <div className="flex items-center space-x-3 mb-6">
+          <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-emerald-400/30 transition-all duration-300 p-8 flex flex-col">
+            <div className="flex items-center space-x-3 mb-4">
               <Mic className="w-8 h-8 text-emerald-400" />
-              <h2 className="text-2xl font-bold text-white">🎙️ Podcast / Reflexiones</h2>
+              <h2 className="text-2xl font-serif font-bold text-white">Podcast</h2>
             </div>
             
-            <p className="text-gray-400 mb-6 leading-relaxed">
-              Reflexiones profundas y conversaciones sobre el discernimiento profético. 
-              Episodios que conectan la espiritualidad con los acontecimientos actuales.
+            <p className="text-gray-400 mb-6 leading-relaxed flex-grow">
+              Reflexiones profundas y conversaciones sobre el discernimiento profético, conectando la espiritualidad con los acontecimientos actuales.
             </p>
             
             <div className="aspect-video bg-gradient-to-br from-emerald-900/20 to-violet-900/20 rounded-lg mb-6 flex items-center justify-center border border-emerald-400/20">
               <div className="text-center">
-                <Mic className="w-16 h-16 text-emerald-300 mx-auto mb-4" />
+                <Mic className="w-12 h-12 text-emerald-300 mx-auto mb-3" />
                 <p className="text-emerald-200 font-medium">Próximamente</p>
-                <p className="text-gray-400 text-sm">Episodios de podcast en preparación</p>
               </div>
             </div>
             
-            <button className="w-full py-3 text-sm font-medium text-emerald-300 border border-emerald-400/30 rounded-lg hover:bg-emerald-600/10 hover:border-emerald-400/50 transition-all duration-200">
+            <button disabled className="w-full py-3 text-sm font-medium text-emerald-300 border border-emerald-400/30 rounded-lg bg-emerald-600/10 transition-all duration-200 opacity-50 cursor-not-allowed">
               Escuchar Podcast
             </button>
           </div>
