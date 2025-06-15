@@ -4,6 +4,7 @@ import { blogPosts } from "../data/blogPosts";
 import ReactMarkdown from "react-markdown";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import TextToSpeech from "../components/TextToSpeech";
 
 // Opcional: componentes para embellecer el Markdown
 const MarkdownComponents = {
@@ -75,6 +76,9 @@ const BlogPost1: React.FC = () => {
           Volver al Blog
         </Button>
       </div>
+
+      {/* TEXTO A VOZ */}
+      <TextToSpeech text={post.content} title={post.title} />
 
       {/* Imagen de portada centrada */}
       {post.imageUrl && (
