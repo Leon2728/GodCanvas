@@ -1,4 +1,3 @@
-
 // src/data/blogPosts.ts
 
 export interface BlogPost {
@@ -28,14 +27,6 @@ export const blogPosts: BlogPost[] = [
 [🔗 Leer Parte 1 en Facebook](https://www.facebook.com/share/p/1FSrNQP3MP/)
 
 ---
-
-## ✝️ Introducción: El Discernimiento Ante Todo
-
-Antes de continuar, recuerda que este blog no atribuye los eventos aquí descritos como actos directos de Dios, sino como acontecimientos que Él permite dentro de Su soberanía, para juicio, corrección o cumplimiento profético.
-
-No buscamos alarmar, sino despertar. Todo aquí fue escrito con temor reverente, discernimiento espiritual y una carga profética clara.
-
-> “Las cosas secretas pertenecen a Jehová nuestro Dios; mas las reveladas son para nosotros y para nuestros hijos para siempre.” — Deuteronomio 29:29
 
 ## 🔥 1 de Junio: El Ataque que Validó la Visión
 
