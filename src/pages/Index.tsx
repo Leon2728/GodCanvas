@@ -8,10 +8,12 @@ import CommunitySection from '../components/CommunitySection';
 import SocialSection from '../components/SocialSection';
 import AboutSection from '../components/AboutSection';
 import RegisterSection from '../components/RegisterSection';
+import FloatingHandReminder from '../components/FloatingHandReminder';
 
 const Index: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-violet-950 to-emerald-950 transition-colors duration-500">
+      <FloatingHandReminder />
       <Helmet>
         <title>El Lienzo de Dios - Guías Espirituales, Blog Profético y Sabiduría Bíblica</title>
         <meta
