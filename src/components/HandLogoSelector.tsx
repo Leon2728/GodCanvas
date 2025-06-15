@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Hand,
   HandCoins,
@@ -10,16 +10,6 @@ import {
   Handshake,
 } from "lucide-react";
 
-const handIcons = [
-  { name: "Mano Normal", component: Hand },
-  { name: "Monedas", component: HandCoins },
-  { name: "Corazón", component: HandHeart },
-  { name: "Ayudando", component: HandHelping },
-  { name: "Metal", component: HandMetal },
-  { name: "Sirviendo", component: HandPlatter },
-  { name: "Apretón", component: Handshake },
-];
-
 export type HandIconType =
   | "Hand"
   | "HandCoins"
@@ -28,6 +18,16 @@ export type HandIconType =
   | "HandMetal"
   | "HandPlatter"
   | "Handshake";
+
+const handIcons: { type: HandIconType; name: string; component: React.FC<any> }[] = [
+  { type: "Hand", name: "Mano Normal", component: Hand },
+  { type: "HandCoins", name: "Monedas", component: HandCoins },
+  { type: "HandHeart", name: "Corazón", component: HandHeart },
+  { type: "HandHelping", name: "Ayudando", component: HandHelping },
+  { type: "HandMetal", name: "Metal", component: HandMetal },
+  { type: "HandPlatter", name: "Sirviendo", component: HandPlatter },
+  { type: "Handshake", name: "Apretón", component: Handshake },
+];
 
 interface Props {
   value: HandIconType;
@@ -42,12 +42,11 @@ const HandLogoSelector: React.FC<Props> = ({ value, onChange }) => {
     <div className="mb-3 flex flex-wrap gap-2 bg-black/40 px-3 py-2 rounded-lg">
       {handIcons.map((h) => {
         const Icon = h.component;
-        const selected =
-          value === Icon.displayName || value === Icon.name.replace("Icon", "");
+        const selected = value === h.type;
         return (
           <button
-            key={h.name}
-            onClick={() => onChange(Icon.displayName as HandIconType)}
+            key={h.type}
+            onClick={() => onChange(h.type)}
             className={`flex flex-col items-center px-2 py-1 rounded-md border border-transparent hover:border-violet-400 transition ${
               selected ? "bg-violet-500/30 border-violet-400" : ""
             }`}
@@ -63,4 +62,3 @@ const HandLogoSelector: React.FC<Props> = ({ value, onChange }) => {
 };
 
 export default HandLogoSelector;
-
