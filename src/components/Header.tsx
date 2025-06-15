@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Music, X } from 'lucide-react';
+import HandLogoSelector, { HandIconType } from "./HandLogoSelector";
 
 const Header: React.FC = () => {
   const [activeSection, setActiveSection] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [logoHandType, setLogoHandType] = useState<HandIconType>("Hand");
+  const handIconsMap: Record<HandIconType, React.FC<any>> = {
+    Hand,
+    HandCoins,
+    HandHeart,
+    HandHelping,
+    HandMetal,
+    HandPlatter,
+    Handshake,
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,6 +73,11 @@ const Header: React.FC = () => {
 
   return (
     <>
+      {/* Selector visual de mano (solo visible para el equipo/editor) */}
+      <div className="fixed top-[85px] left-4 z-[110] max-w-xs">
+        <HandLogoSelector value={logoHandType} onChange={setLogoHandType} />
+        <div className="text-xs text-white/70">Oculta esto después de elegir ;)</div>
+      </div>
       {/* Quantum Grid Background */}
       <div className="fixed top-0 left-0 right-0 z-40 pointer-events-none h-20">
         <div className="absolute inset-0 bg-gradient-to-b from-violet-500/5 via-transparent to-transparent"></div>
@@ -76,7 +92,7 @@ const Header: React.FC = () => {
 
         <div className="container mx-auto px-3 py-3 md:px-6 md:py-4 relative">
           <div className="flex items-center justify-between">
-            {/* Logo (Solo texto, sin icono de dedo) */}
+            {/* Logo (Ícono de mano a la izquierda del texto) */}
             <button
               onClick={scrollToTop}
               className="relative group cursor-pointer touch-manipulation"
@@ -85,6 +101,11 @@ const Header: React.FC = () => {
               style={{ maxWidth: 220, maxHeight: 72 }}
             >
               <div className="relative flex items-center gap-2 px-4 py-2 md:px-5 md:py-2 bg-gradient-to-r from-violet-900/20 to-emerald-900/20 rounded-xl border border-violet-400/30 backdrop-blur-sm group-hover:border-violet-400/50 transition-all duration-300 focus:ring-2 focus:ring-violet-400 z-10">
+                {/* Icono de mano */}
+                {(() => {
+                  const HandIcon = handIconsMap[logoHandType] || Hand;
+                  return <HandIcon className="w-7 h-7 text-violet-200 drop-shadow-sm" />;
+                })()}
                 <span className="text-2xl font-black bg-gradient-to-r from-violet-300 via-purple-300 to-emerald-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300 relative select-none">
                   GodCanvas
                 </span>
