@@ -1,25 +1,13 @@
 
 import React from "react";
-import { Hand, HandCoins, HandHeart, HandHelping, HandMetal, HandPlatter, Handshake } from "lucide-react";
-import { HandIconType } from "./HandLogoSelector";
-
-const handIconsMap: Record<HandIconType, React.FC<any>> = {
-  Hand,
-  HandCoins,
-  HandHeart,
-  HandHelping,
-  HandMetal,
-  HandPlatter,
-  Handshake,
-};
+// Eliminamos lucide hand icons porque ya no se usan
 
 interface HeaderLogoButtonProps {
-  handType: HandIconType;
+  handType: string; // Not used anymore but kept for compatibility
   scrollToTop: () => void;
 }
 
-const HeaderLogoButton: React.FC<HeaderLogoButtonProps> = ({ handType, scrollToTop }) => {
-  const HandIcon = handIconsMap[handType] || Hand;
+const HeaderLogoButton: React.FC<HeaderLogoButtonProps> = ({ scrollToTop }) => {
   return (
     <button
       onClick={scrollToTop}
@@ -28,15 +16,18 @@ const HeaderLogoButton: React.FC<HeaderLogoButtonProps> = ({ handType, scrollToT
       aria-label="Ir al inicio"
       style={{ maxWidth: 220, maxHeight: 72 }}
     >
-      <div className="relative flex items-center gap-2 px-4 py-2 md:px-5 md:py-2 bg-gradient-to-r from-violet-900/20 to-emerald-900/20 rounded-xl border border-violet-400/30 backdrop-blur-sm group-hover:border-violet-400/50 transition-all duration-300 focus:ring-2 focus:ring-violet-400 z-10">
-        <HandIcon className="w-7 h-7 text-violet-200 drop-shadow-sm" />
-        <span className="text-2xl font-black bg-gradient-to-r from-violet-300 via-purple-300 to-emerald-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300 relative select-none">
-          GodCanvas
-        </span>
-        <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-violet-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="flex items-center gap-2 px-2 md:px-3 py-1 md:py-2 bg-white rounded-2xl border border-violet-400/40 shadow-sm transition-all duration-300 focus:ring-2 focus:ring-violet-400 z-10">
+        <img
+          src="/lovable-uploads/1ec2033e-25b5-4535-95df-6e56e6760675.png"
+          alt="Logo God Canvas"
+          className="w-16 h-16 object-contain"
+          draggable={false}
+          style={{ minWidth: 48, minHeight: 48 }}
+        />
       </div>
     </button>
   );
 };
 
 export default HeaderLogoButton;
+
