@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { HandHeart } from "lucide-react";
 
@@ -85,8 +84,9 @@ const FloatingHandReminder: React.FC = () => {
           className="rounded-full bg-gradient-to-br from-violet-500/80 to-emerald-500/80 p-2 shadow-2xl border-2 border-white/60 animate-pulse"
         >
           <HandHeart
-            className="w-11 h-11 text-white drop-shadow-xl"
+            className="w-11 h-11 drop-shadow-xl"
             strokeWidth={2.1}
+            color="red"
           />
         </span>
         {showTooltip && (
