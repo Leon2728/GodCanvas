@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 import HeaderLogoButton from './HeaderLogoButton';
 import HeaderDesktopNav from './HeaderDesktopNav';
 import HeaderMobileMenu from './HeaderMobileMenu';
-import HeaderHandSelector from './HeaderHandSelector';
+// HeaderHandSelector import eliminado
 import { Music } from "lucide-react";
 import { HandIconType } from "./HandLogoSelector";
 
@@ -10,7 +11,8 @@ const Header: React.FC = () => {
   const [activeSection, setActiveSection] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [logoHandType, setLogoHandType] = useState<HandIconType>("Hand");
+  // El valor predeterminado de la mano se fija en "Hand" y no se puede cambiar por el usuario
+  const logoHandType: HandIconType = "Hand";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,8 +63,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      {/* Selector visual de mano (solo visible para el equipo/editor) */}
-      <HeaderHandSelector value={logoHandType} onChange={setLogoHandType} />
+      {/* El selector de mano ha sido eliminado */}
 
       {/* Quantum Grid Background */}
       <div className="fixed top-0 left-0 right-0 z-40 pointer-events-none h-20">
