@@ -28,12 +28,12 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isDark }) => {
             <span className="text-violet-300 font-medium text-sm tracking-wide">ANÁLISIS PROFÉTICO</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-serif font-bold mb-4 text-white leading-tight tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif font-bold mb-4 text-white leading-tight tracking-tight">
             Blog <span className="text-violet-300">Profético</span>
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-violet-500 to-emerald-500 mx-auto rounded-full mb-6"></div>
           
-          <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-normal">
+          <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-normal">
             Perspectivas divinas sobre los eventos actuales y análisis profético del mundo moderno
           </p>
         </header>

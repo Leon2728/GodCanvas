@@ -17,13 +17,13 @@ const HeroSection: React.FC = () => {
       
       {/* Hero Content */}
       <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
-        <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-violet-600 via-purple-500 to-emerald-500 bg-clip-text text-transparent leading-tight drop-shadow-lg">
+        <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-violet-600 via-purple-500 to-emerald-500 bg-clip-text text-transparent leading-tight drop-shadow-lg">
           El Lienzo de Dios
         </h1>
-        <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-light tracking-wide mb-4 drop-shadow-md">
+        <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-light tracking-wide mb-4 drop-shadow-md">
           Explora la sabiduría eterna a través de hombres y mujeres que caminaron con Dios y dejaron huella en la historia.
         </p>
-        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 font-light tracking-wide italic drop-shadow-md">
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 font-light tracking-wide italic drop-shadow-md">
           Cada vida es un lienzo en manos del Creador, donde la fe traza el camino hacia la eternidad.
         </p>
         

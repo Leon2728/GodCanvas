@@ -53,7 +53,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, isDark }) => {
         </div>
         
         {/* Title with better typography */}
-        <h3 className="font-serif text-2xl font-bold mb-3 text-white group-hover:text-violet-200 transition-colors duration-200 flex-grow">
+        <h3 className="font-serif text-xl lg:text-2xl font-bold mb-3 text-white group-hover:text-violet-200 transition-colors duration-200 flex-grow">
           {cleanTitle}
         </h3>
         
