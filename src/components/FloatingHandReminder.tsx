@@ -1,72 +1,63 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { HandHeart } from "lucide-react";
 
 /**
- * Secuencia de posiciones por las que la mano flotante se moverá, 
- * relativas a la ventana (viewport).
+ * Calcula una ruta animada por todo el viewport.
+ * Recoge puntos desde esquinas, centros y bordes, para dar dinamismo.
  */
-const HAND_PATH = [
-  { top: 30, left: 32 }, // cerca del logo header arriba izq.
-  { top: 120, left: 90 }, // bajando a mitad del header
-  { top: 290, left: 36 }, // encima de la primera sección
-  { top: 120, left: window.innerWidth - 80 }, // va a la derecha arriba
-];
-
-const TOOLTIP_MESSAGES = [
-  "¡Estás en GodCanvas!",
-  "Explora y déjate guiar...",
-];
-
-const REMINDER_DURATION = 9000; // milisegundos total (9s aprox)
-const STEP_DURATION = 2400; // ms por cada paso del tour
-
-const getHandPath = () => {
-  // recalcula handpath para responsive
+const getAnimatedPath = () => {
   const W = window.innerWidth;
+  const H = window.innerHeight;
+
   return [
     { top: 30, left: 32 },
-    { top: 120, left: 90 },
-    { top: 230, left: Math.max(32, W * 0.4) }, // centro-izq
-    { top: 120, left: Math.max(32, W - 80) },
+    { top: 120, left: W - 90 },
+    { top: H * 0.2, left: W / 2 - 40 },
+    { top: H * 0.75, left: 40 },
+    { top: H - 120, left: W / 2 + 32 },
+    { top: H - 80, left: W - 80 },
+    { top: H * 0.3, left: W * 0.8 },
+    { top: H * 0.6, left: W * 0.2 },
+    { top: 80, left: W / 2 },
+    { top: 40, left: W - 100 },
   ];
 };
 
 const FloatingHandReminder: React.FC = () => {
-  const [visible, setVisible] = useState(true);
   const [step, setStep] = useState(0);
-  const [handPath, setHandPath] = useState(() => getHandPath());
+  const [handPath, setHandPath] = useState(() => getAnimatedPath());
+  const [visible, setVisible] = useState(true);
+  const running = useRef(true);
 
   useEffect(() => {
-    // Actualiza el path al cambiar el tamaño
-    const onResize = () => setHandPath(getHandPath());
-    window.addEventListener("resize", onResize);
+    // Recalcular la ruta cuando cambia el tamaño
+    const handleResize = () => setHandPath(getAnimatedPath());
+    window.addEventListener("resize", handleResize);
 
-    let stepTimeout: NodeJS.Timeout;
-    let hideTimeout: NodeJS.Timeout;
-
-    // Ciclo animación por cada paso
-    if (visible && step < handPath.length - 1) {
-      stepTimeout = setTimeout(() => setStep(step + 1), STEP_DURATION);
-    }
-    // Desaparece al final
-    if (visible && step >= handPath.length - 1) {
-      hideTimeout = setTimeout(() => setVisible(false), 1600);
+    // Loop animado infinito por todos los pasos
+    running.current = true;
+    let timeout: ReturnType<typeof setTimeout>;
+    if (visible && running.current) {
+      timeout = setTimeout(() => {
+        setStep((prev) => (prev + 1) % handPath.length);
+      }, 1700); // velocidad de animación por punto
     }
 
     return () => {
-      window.removeEventListener("resize", onResize);
-      clearTimeout(stepTimeout);
-      clearTimeout(hideTimeout);
+      running.current = false;
+      clearTimeout(timeout);
+      window.removeEventListener("resize", handleResize);
     };
     // eslint-disable-next-line
   }, [step, handPath.length, visible]);
 
-  // No renderiza si pasó el tour
+  // Mostrar/Ocultar al hacer scroll MUY abajo (opcional, deja visible siempre)
+  // if (window.scrollY > window.innerHeight * 2) setVisible(false);
+
   if (!visible) return null;
 
   const pos = handPath[step];
-  const showTooltip = step < 2; // Solo los primeros pasos
 
   return (
     <div
@@ -75,7 +66,7 @@ const FloatingHandReminder: React.FC = () => {
         position: "fixed",
         top: pos.top,
         left: pos.left,
-        transition: "top 1.6s cubic-bezier(.34,2,.60,1), left 1.6s cubic-bezier(.24,.92,.82,.48)",
+        transition: "top 1.3s cubic-bezier(.34,2,.60,1), left 1.3s cubic-bezier(.24,.92,.82,.48)",
         pointerEvents: "none",
       }}
       aria-hidden="true"
@@ -85,18 +76,17 @@ const FloatingHandReminder: React.FC = () => {
           className="rounded-full bg-gradient-to-br from-violet-500/80 to-emerald-500/80 p-2 shadow-2xl border-2 border-white/60 animate-pulse"
         >
           <HandHeart
-            className="w-11 h-11 text-white drop-shadow-xl"
+            className="w-11 h-11 text-red-500 drop-shadow-xl"
             strokeWidth={2.1}
           />
         </span>
-        {showTooltip && (
-          <span className="bg-black/90 text-violet-200 font-bold px-4 py-2 rounded-full shadow-lg border border-violet-400/50 text-base whitespace-nowrap animate-fade-in">
-            {TOOLTIP_MESSAGES[step] || TOOLTIP_MESSAGES[0]}
-          </span>
-        )}
+        <span className="bg-black/90 text-violet-200 font-bold px-4 py-2 rounded-full shadow-lg border border-violet-400/50 text-base whitespace-nowrap animate-fade-in">
+          ¡Estás en una comunidad cristiana viva!
+        </span>
       </div>
     </div>
   );
 };
 
 export default FloatingHandReminder;
+
