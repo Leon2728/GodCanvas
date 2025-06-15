@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Helmet } from "react-helmet";
 import { blogPosts } from "../data/blogPosts";
@@ -6,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import TextToSpeech from "../components/TextToSpeech";
 import { ArrowLeft, Facebook } from "lucide-react";
+import VideoBackground from "../components/VideoBackground";
 
 // Components para modernizar el Markdown
 const MarkdownComponents = {
@@ -162,28 +164,29 @@ const BlogPost1: React.FC = () => {
         </Button>
       </div>
 
-      {/* Portada */}
-      <div className="w-full flex justify-center my-7">
-        <img
-          src="https://lovable.dev/opengraph-image-p98pqg.png"
-          alt="Portada El Lienzo de Dios - La Guerra Global se Intensifica"
-          className="rounded-2xl shadow-xl shadow-emerald-600/30 max-h-[400px] w-full object-cover border-2 border-emerald-300/30"
+      {/* Portada con video de fondo */}
+      <div className="relative w-full h-[260px] md:h-[360px] rounded-2xl overflow-hidden shadow-xl shadow-emerald-600/30 border-2 border-emerald-300/30 mb-7 flex items-center justify-center">
+        <VideoBackground
+          videoSrc="/videos/cosmic-background.mp4"
+          fallbackGradient
+          className="z-0"
         />
-      </div>
-
-      {/* Título y metadata */}
-      <div className="text-center mb-7">
-        <h1 className="font-serif text-4xl md:text-5xl font-black bg-gradient-to-r from-pink-400 via-violet-400 to-emerald-400 bg-clip-text text-transparent mb-2">
-          La Guerra Global se Intensifica: <span className="text-white">¿Estás Listo?</span>
-        </h1>
-        <div className="flex justify-center gap-2 mb-3 mt-2">
-          <span className="px-4 py-2 text-sm font-medium bg-violet-900/70 text-violet-200 rounded-full border border-violet-400/30 shadow">
-            Profecía
-          </span>
-          <time className="block text-sm text-emerald-300 mt-1 font-semibold uppercase tracking-wider pt-1">
-            9 de junio de 2025
-          </time>
+        {/* Overlay y texto encima del video */}
+        <div className="absolute inset-0 flex flex-col justify-center items-center z-20 text-center px-4">
+          <h1 className="font-serif text-4xl md:text-5xl font-black bg-gradient-to-r from-pink-400 via-violet-400 to-emerald-400 bg-clip-text text-transparent drop-shadow-lg mb-2">
+            La Guerra Global se Intensifica: <span className="text-white">¿Estás Listo?</span>
+          </h1>
+          <div className="flex justify-center gap-2 mb-3 mt-2">
+            <span className="px-4 py-2 text-sm font-medium bg-violet-900/70 text-violet-200 rounded-full border border-violet-400/30 shadow">
+              Profecía
+            </span>
+            <time className="block text-sm text-emerald-300 mt-1 font-semibold uppercase tracking-wider pt-1">
+              9 de junio de 2025
+            </time>
+          </div>
         </div>
+        {/* Capa sutil para oscurecer video (ya la tiene VideoBackground, pero suma un toque) */}
+        <div className="absolute inset-0 bg-black/30 z-10 pointer-events-none rounded-2xl" />
       </div>
 
       {/* Texto a voz */}
@@ -227,3 +230,4 @@ const BlogPost1: React.FC = () => {
 };
 
 export default BlogPost1;
+
