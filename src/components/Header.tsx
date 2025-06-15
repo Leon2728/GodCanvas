@@ -1,28 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Music, X, Hand, HandCoins, HandHeart, HandHelping, HandMetal, HandPlatter, Handshake } from 'lucide-react';
-import HandLogoSelector, { HandIconType } from "./HandLogoSelector";
+import HeaderLogoButton from './HeaderLogoButton';
+import HeaderDesktopNav from './HeaderDesktopNav';
+import HeaderMobileMenu from './HeaderMobileMenu';
+import HeaderHandSelector from './HeaderHandSelector';
+import { Music } from "lucide-react";
+import { HandIconType } from "./HandLogoSelector";
 
 const Header: React.FC = () => {
   const [activeSection, setActiveSection] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [logoHandType, setLogoHandType] = useState<HandIconType>("Hand");
-  const handIconsMap: Record<HandIconType, React.FC<any>> = {
-    Hand,
-    HandCoins,
-    HandHeart,
-    HandHelping,
-    HandMetal,
-    HandPlatter,
-    Handshake,
-  };
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-
-      // Detect active section based on scroll position
       const sections = ['hero', 'blog-profetico', 'musica', 'comunidad', 'redes', 'about'];
       const currentSection = sections.find(section => {
         const element = document.getElementById(section);
@@ -32,12 +24,10 @@ const Header: React.FC = () => {
         }
         return false;
       });
-
       if (currentSection) {
         setActiveSection(currentSection);
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -53,7 +43,6 @@ const Header: React.FC = () => {
     }
     setMobileMenuOpen(false);
   };
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -62,7 +51,6 @@ const Header: React.FC = () => {
     setActiveSection('hero');
     setMobileMenuOpen(false);
   };
-
   const navItems = [
     { href: 'blog-profetico', label: 'Blog Profético', icon: '📰' },
     { href: 'musica', label: 'Música', icon: <Music className="w-5 h-5" /> },
@@ -74,10 +62,8 @@ const Header: React.FC = () => {
   return (
     <>
       {/* Selector visual de mano (solo visible para el equipo/editor) */}
-      <div className="fixed top-[85px] left-4 z-[110] max-w-xs">
-        <HandLogoSelector value={logoHandType} onChange={setLogoHandType} />
-        <div className="text-xs text-white/70">Oculta esto después de elegir ;)</div>
-      </div>
+      <HeaderHandSelector value={logoHandType} onChange={setLogoHandType} />
+
       {/* Quantum Grid Background */}
       <div className="fixed top-0 left-0 right-0 z-40 pointer-events-none h-20">
         <div className="absolute inset-0 bg-gradient-to-b from-violet-500/5 via-transparent to-transparent"></div>
@@ -89,59 +75,12 @@ const Header: React.FC = () => {
         <div className="absolute inset-0 opacity-20">
           <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 via-transparent to-emerald-500/10"></div>
         </div>
-
         <div className="container mx-auto px-3 py-3 md:px-6 md:py-4 relative">
           <div className="flex items-center justify-between">
-            {/* Logo (Ícono de mano a la izquierda del texto) */}
-            <button
-              onClick={scrollToTop}
-              className="relative group cursor-pointer touch-manipulation"
-              tabIndex={0}
-              aria-label="Ir al inicio"
-              style={{ maxWidth: 220, maxHeight: 72 }}
-            >
-              <div className="relative flex items-center gap-2 px-4 py-2 md:px-5 md:py-2 bg-gradient-to-r from-violet-900/20 to-emerald-900/20 rounded-xl border border-violet-400/30 backdrop-blur-sm group-hover:border-violet-400/50 transition-all duration-300 focus:ring-2 focus:ring-violet-400 z-10">
-                {/* Icono de mano */}
-                {(() => {
-                  const HandIcon = handIconsMap[logoHandType] || Hand;
-                  return <HandIcon className="w-7 h-7 text-violet-200 drop-shadow-sm" />;
-                })()}
-                <span className="text-2xl font-black bg-gradient-to-r from-violet-300 via-purple-300 to-emerald-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300 relative select-none">
-                  GodCanvas
-                </span>
-                {/* Home indicator */}
-                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-violet-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-            </button>
-
+            {/* Logo */}
+            <HeaderLogoButton handType={logoHandType} scrollToTop={scrollToTop} />
             {/* Navigation - Desktop */}
-            <nav className="hidden lg:flex items-center space-x-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.href}
-                  onClick={() => scrollToSection(item.href)}
-                  className={`flex items-center space-x-3 px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 touch-manipulation ${
-                    activeSection === item.href ? 'text-white font-semibold' : 'text-gray-300 hover:text-white'
-                  } focus:outline-none focus:ring-2 focus:ring-violet-400`}
-                  tabIndex={0}
-                >
-                  <span className="text-lg">
-                    {typeof item.icon === 'string' ? item.icon : item.icon}
-                  </span>
-                  <span className="font-medium tracking-wide">{item.label}</span>
-                </button>
-              ))}
-
-              {/* CTA Button */}
-              <button
-                onClick={() => scrollToSection('register')}
-                className="ml-6 flex items-center px-8 py-3 bg-gradient-to-r from-violet-600 via-purple-600 to-emerald-500 text-white font-bold rounded-full transform transition-all duration-300 hover:scale-105 shadow-xl focus:outline-none focus:ring-2 focus:ring-violet-400"
-                tabIndex={0}
-              >
-                <span className="tracking-wide">Únete Ahora</span>
-              </button>
-            </nav>
-
+            <HeaderDesktopNav navItems={navItems} activeSection={activeSection} scrollToSection={scrollToSection} />
             {/* Mobile Menu Button */}
             <div className="lg:hidden flex items-center space-x-4">
               <button
@@ -162,54 +101,14 @@ const Header: React.FC = () => {
         </div>
 
         {/* Menú móvil lateral */}
-        {mobileMenuOpen && (
-          <div className="fixed inset-0 z-[99] bg-black/60 backdrop-blur-sm transition-all duration-300 lg:hidden" onClick={() => setMobileMenuOpen(false)}>
-            <aside
-              className="absolute left-0 top-0 h-full w-4/5 max-w-xs bg-gradient-to-b from-gray-950 via-violet-950 to-emerald-950 shadow-xl border-r border-violet-700/20 p-6 flex flex-col gap-8 animate-slide-in-right"
-              role="dialog"
-              aria-label="Menú de navegación móvil"
-              onClick={e => e.stopPropagation()}
-              tabIndex={-1}
-            >
-              <button
-                className="self-end mb-4 p-2 rounded-full hover:bg-violet-900/20 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-400"
-                aria-label="Cerrar menú"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <X className="w-7 h-7 text-violet-300" />
-              </button>
-              <nav className="flex flex-col gap-5">
-                <button
-                  onClick={scrollToTop}
-                  className="flex items-center px-4 py-3 rounded-xl text-violet-300 hover:bg-violet-900/30 font-bold text-lg transition-all focus:outline-none focus:ring-2 focus:ring-violet-400"
-                  tabIndex={0}
-                >
-                  Inicio
-                </button>
-                {navItems.map(item => (
-                  <button
-                    key={item.href}
-                    onClick={() => scrollToSection(item.href)}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-white/90 hover:bg-violet-900/30 text-base transition-all focus:outline-none focus:ring-2 focus:ring-violet-400 ${
-                      activeSection === item.href ? 'text-violet-200 font-bold' : ''
-                    }`}
-                    tabIndex={0}
-                  >
-                    <span className="text-xl">{typeof item.icon === 'string' ? item.icon : item.icon}</span>
-                    <span>{item.label}</span>
-                  </button>
-                ))}
-                <button
-                  onClick={() => scrollToSection('register')}
-                  className="w-full mt-6 bg-gradient-to-r from-violet-600 via-purple-600 to-emerald-500 text-white font-bold rounded-full px-4 py-3 shadow focus:outline-none focus:ring-2 focus:ring-violet-400"
-                  tabIndex={0}
-                >
-                  Únete Ahora
-                </button>
-              </nav>
-            </aside>
-          </div>
-        )}
+        <HeaderMobileMenu
+          open={mobileMenuOpen}
+          setOpen={setMobileMenuOpen}
+          navItems={navItems}
+          activeSection={activeSection}
+          scrollToSection={scrollToSection}
+          scrollToTop={scrollToTop}
+        />
 
         {/* Bottom quantum line */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-400/30 to-transparent"></div>
