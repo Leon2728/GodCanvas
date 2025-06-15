@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Helmet } from "react-helmet";
 import { blogPosts } from "../data/blogPosts";
@@ -97,7 +96,24 @@ const MarkdownComponents = {
   ),
 };
 
-const post = blogPosts[0]; // El único post por ahora
+const post = {
+  ...blogPosts[0],
+  // Insertamos el nuevo bloque justo después del primer bloque referente a IA en el cielo
+  content: blogPosts[0].content.replace(
+    /(La guerra cambió\. La tecnología también está bajo la soberanía de Dios\..*?\n)/,
+    `$1
+### ✈️ Flota Aérea Occidental: El Cielo se Prepara para el Choque
+
+La guerra del aire ya no es teoría. La OTAN y sus aliados están configurando una de las flotas aéreas más avanzadas y versátiles de la historia reciente. A finales de 2025, en un escenario de confrontación con Rusia, esta fuerza estaría compuesta por:
+
+- 🚀 **Cazas de Superioridad Aérea:** F-35, Typhoon y Rafale, listos para dominar el cielo.
+- 💣 **Bombarderos Estratégicos:** B-52, B-1B, B-2 (y el esperado B-21) para golpes de largo alcance.
+- 📡 **Soporte y Vigilancia:** Aviones como los E-3 Sentry y KC-135 para reabastecimiento y control del espacio aéreo.
+- 🧠 **Drones Autónomos (IA):** Una nueva generación de enjambres, como los utilizados por Ucrania en la Operación Telaraña.
+
+`
+  ),
+};
 
 const BlogPost1: React.FC = () => {
   const navigate = useNavigate();
