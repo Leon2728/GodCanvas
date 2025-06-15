@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import HeaderLogoButton from './HeaderLogoButton';
 import HeaderDesktopNav from './HeaderDesktopNav';
@@ -11,8 +10,8 @@ const Header: React.FC = () => {
   const [activeSection, setActiveSection] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  // El valor predeterminado de la mano se fija en "Hand" y no se puede cambiar por el usuario
-  const logoHandType: HandIconType = "Hand";
+  // El valor predeterminado de la mano se fija en "HandHeart" y no se puede cambiar por el usuario
+  const logoHandType: HandIconType = "HandHeart";
 
   useEffect(() => {
     const handleScroll = () => {
