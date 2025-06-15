@@ -84,16 +84,29 @@ const Header: React.FC = () => {
               aria-label="Ir al inicio"
             >
               {/* Brillo exterior */}
-              <div className="absolute -inset-3 bg-gradient-to-r from-violet-600/30 via-purple-600/30 to-emerald-500/30 rounded-2xl blur-xl opacity-50 group-hover:opacity-80 transition-all duration-700"></div>
-              {/* G llamativa detrás */}
-              <span className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0"
+              <div className="absolute -inset-3 bg-gradient-to-r from-violet-600/30 via-purple-600/30 to-emerald-500/30 rounded-2xl blur-lg md:blur-xl opacity-50 group-hover:opacity-80 transition-all duration-700"></div>
+              {/* G llamativa detrás, responsiva */}
+              <span
+                className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0"
                 aria-hidden="true"
               >
                 <span
-                  className="font-extrabold font-serif text-[56px] md:text-[84px] leading-none text-transparent bg-gradient-to-br from-emerald-300 via-violet-300 to-purple-500 bg-clip-text opacity-25 drop-shadow-2xl blur-[2px] animate-pulse"
+                  className="
+                    font-extrabold font-serif
+                    text-[36px] xs:text-[44px] sm:text-[54px]
+                    md:text-[84px]
+                    leading-none
+                    text-transparent
+                    bg-gradient-to-br from-emerald-300 via-violet-300 to-purple-500
+                    bg-clip-text
+                    opacity-20 md:opacity-25
+                    drop-shadow-xl md:drop-shadow-2xl
+                    blur-[1px] md:blur-[2px]
+                    animate-pulse
+                  "
                   style={{
                     letterSpacing: '-0.07em',
-                    textShadow: '0 0 25px #7c3aed44, 0 8px 60px #34d39933',
+                    textShadow: '0 0 15px #7c3aed33, 0 8px 30px #34d39922',
                   }}
                 >
                   G
