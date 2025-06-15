@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Music, X } from 'lucide-react';
+import { Music, X, Hand, HandCoins, HandHeart, HandHelping, HandMetal, HandPlatter, Handshake } from 'lucide-react';
 import HandLogoSelector, { HandIconType } from "./HandLogoSelector";
 
 const Header: React.FC = () => {
