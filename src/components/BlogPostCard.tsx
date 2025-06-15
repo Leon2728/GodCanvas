@@ -12,7 +12,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, isDark }) => {
   // Map post IDs to their respective routes
   const getPostRoute = (postId: string) => {
     const routes: { [key: string]: string } = {
-      '1': '/blog/despertar-conciencia-global',
+      '1': '/blog/la-guerra-global-se-intensifica', // <-- Arreglamos esta ruta
       '2': '/blog/ia-gran-diseno',
       '3': '/blog/geopolitica-celestial'
     };
@@ -75,3 +75,4 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, isDark }) => {
 };
 
 export default BlogPostCard;
+
