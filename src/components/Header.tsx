@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Music, X } from 'lucide-react';
@@ -77,16 +76,32 @@ const Header: React.FC = () => {
 
         <div className="container mx-auto px-3 py-3 md:px-6 md:py-4 relative">
           <div className="flex items-center justify-between">
-            {/* Logo Holográfico */}
+            {/* Logo Holográfico con G de fondo */}
             <button
               onClick={scrollToTop}
               className="relative group cursor-pointer touch-manipulation"
               tabIndex={0}
               aria-label="Ir al inicio"
             >
+              {/* Brillo exterior */}
               <div className="absolute -inset-3 bg-gradient-to-r from-violet-600/30 via-purple-600/30 to-emerald-500/30 rounded-2xl blur-xl opacity-50 group-hover:opacity-80 transition-all duration-700"></div>
-              <div className="relative px-4 py-2 md:px-5 md:py-2 bg-gradient-to-r from-violet-900/20 to-emerald-900/20 rounded-xl border border-violet-400/30 backdrop-blur-sm group-hover:border-violet-400/50 transition-all duration-300 focus:ring-2 focus:ring-violet-400">
-                <div className="text-2xl font-black bg-gradient-to-r from-violet-300 via-purple-300 to-emerald-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
+              {/* G llamativa detrás */}
+              <span className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0"
+                aria-hidden="true"
+              >
+                <span
+                  className="font-extrabold font-serif text-[56px] md:text-[84px] leading-none text-transparent bg-gradient-to-br from-emerald-300 via-violet-300 to-purple-500 bg-clip-text opacity-25 drop-shadow-2xl blur-[2px] animate-pulse"
+                  style={{
+                    letterSpacing: '-0.07em',
+                    textShadow: '0 0 25px #7c3aed44, 0 8px 60px #34d39933',
+                  }}
+                >
+                  G
+                </span>
+              </span>
+              {/* Texto encima */}
+              <div className="relative px-4 py-2 md:px-5 md:py-2 bg-gradient-to-r from-violet-900/20 to-emerald-900/20 rounded-xl border border-violet-400/30 backdrop-blur-sm group-hover:border-violet-400/50 transition-all duration-300 focus:ring-2 focus:ring-violet-400 z-10">
+                <div className="text-2xl font-black bg-gradient-to-r from-violet-300 via-purple-300 to-emerald-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300 relative">
                   GodCanvas
                 </div>
                 {/* Home indicator */}
