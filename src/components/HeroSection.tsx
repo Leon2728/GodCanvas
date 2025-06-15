@@ -5,33 +5,31 @@ import VideoBackground from './VideoBackground';
 const HeroSection: React.FC = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background con ruta exacta especificada */}
+      {/* Video de fondo */}
       <VideoBackground 
         videoSrc="/videos/cosmic-background.mp4"
         fallbackGradient={true}
         className="z-0"
       />
-      
-      {/* Enhanced Ethereal Light Effect */}
-      <div className="absolute inset-0 bg-gradient-radial from-violet-500/10 via-transparent to-transparent z-10"></div>
-      
-      {/* Hero Content */}
-      <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
-        <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-violet-600 via-purple-500 to-emerald-500 bg-clip-text text-transparent leading-tight drop-shadow-lg">
+      {/* Nueva luminiscencia etérea */}
+      <div className="absolute inset-0 bg-gradient-radial from-emerald-300/15 via-cyan-500/8 to-indigo-900/10 z-10"></div>
+      {/* Contenido épico */}
+      <div className="relative z-20 text-center px-7 max-w-4xl mx-auto">
+        <h1 className="text-5xl sm:text-7xl md:text-8xl font-extrabold mb-7 bg-gradient-to-tr from-cyan-300 via-white to-emerald-600 bg-clip-text text-transparent leading-tight drop-shadow-2xl font-serif tracking-tight animate-fade-in">
           El Lienzo de Dios
         </h1>
-        <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-light tracking-wide mb-4 drop-shadow-md">
-          Explora la sabiduría eterna a través de hombres y mujeres que caminaron con Dios y dejaron huella en la historia.
+        <p className="text-xl md:text-2xl font-light text-cyan-100/80 max-w-4xl mx-auto tracking-wide mb-4 drop-shadow-lg animate-fade-in">
+          Descubre un lugar donde la <span className="text-emerald-200 font-semibold">tecnología y la fe</span> convergen para revelar la eternidad. Cada mentor es un portal vivo hacia la sabiduría sagrada y la inspiración celestial.
         </p>
-        <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 font-light tracking-wide italic drop-shadow-md">
-          Cada vida es un lienzo en manos del Creador, donde la fe traza el camino hacia la eternidad.
+        <p className="text-base sm:text-lg md:text-xl text-cyan-200/70 font-light tracking-wide italic drop-shadow">
+          "Explora el legado eterno y conéctate con los grandes arquitectos de la historia espiritual.”
         </p>
-        
-        {/* Enhanced divine glow effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-violet-600/10 to-emerald-500/10 blur-3xl -z-10"></div>
+        {/* Flash divino */}
+        <div className="absolute inset-0 bg-gradient-radial from-white/15 via-cyan-400/10 to-emerald-300/0 blur-[120px] -z-10"></div>
       </div>
     </section>
   );
 };
 
 export default HeroSection;
+

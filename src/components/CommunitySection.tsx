@@ -10,82 +10,67 @@ const CommunitySection: React.FC<CommunitySectionProps> = ({ isDark }) => {
     {
       icon: '👥',
       title: 'Conexión Espiritual',
-      description: 'Únete a una comunidad de buscadores de la verdad profética'
+      description: 'Tejiendo lazos profundos entre buscadores de lo trascendente. Comparte, pregunta y crece junto a otros en propósito divino.'
     },
     {
       icon: '💬',
-      title: 'Discusiones Profundas',
-      description: 'Participa en conversaciones significativas sobre revelación divina'
+      title: 'Diálogos Inspiradores',
+      description: 'Espacios donde cada conversación enciende la chispa de nuevos descubrimientos sobre la revelación y la vida auténtica.'
     },
     {
       icon: '📖',
-      title: 'Estudios Bíblicos',
-      description: 'Explora las escrituras con perspectiva profética moderna'
+      title: 'Sabiduría en Comunidad',
+      description: 'Estudios modernos de las escrituras y conocimiento profético aplicable a tu mundo — crece junto a guías y mentores legendarios.'
     },
     {
       icon: '🎯',
-      title: 'Discernimiento',
-      description: 'Desarrolla tu capacidad de interpretar los tiempos'
+      title: 'Discernimiento Práctico',
+      description: 'Desarrolla la audacia para interpretar los tiempos y caminar con visión clara, guiado por principios eternos.'
     }
   ];
 
   return (
-    <section id="comunidad" className="relative py-24 px-6 min-h-screen bg-transparent">
-      
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/20 via-violet-900/20 to-purple-900/20"></div>
-      
-      {/* Grid pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.1)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
-      </div>
-
+    <section id="comunidad" className="relative py-28 px-6 min-h-screen bg-transparent overflow-hidden">
+      {/* Efecto glassy + gradiente */}
+      <div className="absolute inset-0 bg-gradient-to-br from-emerald-200/10 via-cyan-200/10 to-indigo-900/15"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(0,212,255,0.09)_1px,transparent_1px)] bg-[size:48px_48px] opacity-15"></div>
       <div className="relative z-10 container mx-auto max-w-7xl">
-        
-        {/* Header */}
+        {/* Encabezado inspirado */}
         <header className="text-center mb-20">
-          <div className="inline-flex items-center space-x-3 mb-6 px-6 py-3 rounded-full bg-gradient-to-r from-emerald-600/20 to-violet-600/20 border border-white/20 backdrop-blur-sm">
-            <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-            <span className="text-emerald-200 font-medium tracking-wider text-sm uppercase">Comunidad Profética</span>
+          <div className="inline-flex items-center space-x-3 mb-6 px-7 py-3 rounded-full bg-gradient-to-r from-emerald-400/40 to-cyan-400/20 border border-emerald-300/30 backdrop-blur-md shadow">
+            <div className="w-2 h-2 bg-emerald-300 rounded-full animate-pulse"></div>
+            <span className="text-emerald-100 font-medium tracking-widest text-sm uppercase">Comunidad Profética</span>
           </div>
-          
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight">
-            <span className="bg-gradient-to-r from-emerald-200 via-violet-200 to-purple-200 bg-clip-text text-transparent filter drop-shadow-xl">
-              Comunidad
-            </span>
+          <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight bg-gradient-to-r from-emerald-100 via-white to-cyan-300 bg-clip-text text-transparent drop-shadow-2xl font-serif">
+            Crece Conectando
           </h2>
-          
-          <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-light">
-            Un espacio sagrado para conectar con hermanos en la fe • Crecimiento espiritual colectivo • Unidos en propósito divino
+          <p className="text-2xl md:text-3xl text-cyan-100 max-w-4xl mx-auto leading-relaxed font-light drop-shadow-md">
+            Forjando lazos que trascienden el tiempo. Experimenta comunidad verdadera y propósito eterno.
           </p>
         </header>
-
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        {/* Paneles de features mejorados */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-20">
           {communityFeatures.map((feature, index) => (
             <div
               key={index}
-              className="relative group p-8 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-xl border border-white/20 hover:border-emerald-400/50 transition-all duration-500 transform hover:scale-105"
+              className="relative group p-9 bg-white/10 backdrop-blur-xl rounded-2xl border border-emerald-300/30 shadow-xl hover:shadow-emerald-400/10 transition-all duration-500 transform hover:scale-105"
             >
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-              <p className="text-gray-300 leading-relaxed">{feature.description}</p>
-              
-              {/* Glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-violet-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
+              <div className="text-4xl mb-5 drop-shadow">{feature.icon}</div>
+              <h3 className="text-2xl font-bold text-white mb-3 font-serif drop-shadow">{feature.title}</h3>
+              <p className="text-cyan-100 leading-relaxed font-light">{feature.description}</p>
+              {/* Glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-300/10 via-cyan-800/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-70 transition-opacity duration-500 blur-2xl pointer-events-none"></div>
             </div>
           ))}
         </div>
-
-        {/* CTA */}
+        {/* CTA renovado */}
         <div className="text-center">
-          <button className="relative px-12 py-5 bg-gradient-to-r from-emerald-700/80 via-violet-700/80 to-purple-700/80 backdrop-blur-xl text-white font-bold rounded-xl shadow-2xl hover:shadow-emerald-500/25 transition-all duration-500 transform hover:scale-105 border border-white/20 overflow-hidden group">
-            <span className="relative z-10 flex items-center space-x-3 text-lg">
-              <span>Únete a la Comunidad</span>
-              <span className="text-sm opacity-75">(Próximamente)</span>
+          <button className="relative px-14 py-6 bg-gradient-to-r from-emerald-700/90 via-cyan-800/90 to-violet-800/90 text-white font-bold rounded-xl shadow-lg hover:shadow-emerald-300/15 transition-all duration-500 transform hover:scale-105 border border-emerald-300/25 overflow-hidden font-serif group">
+            <span className="relative z-10 flex items-center space-x-3 text-lg tracking-wide">
+              <span>Únete y Trasciende</span>
+              <span className="text-sm opacity-80">(Muy Pronto)</span>
             </span>
-            
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-cyan-300/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
           </button>
         </div>
       </div>
@@ -94,3 +79,4 @@ const CommunitySection: React.FC<CommunitySectionProps> = ({ isDark }) => {
 };
 
 export default CommunitySection;
+
