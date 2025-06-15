@@ -1,6 +1,8 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Music, X, Hand } from 'lucide-react';
+import { Music, X } from 'lucide-react';
+import FingerIcon from './FingerIcon';
 
 const Header: React.FC = () => {
   const [activeSection, setActiveSection] = useState('');
@@ -85,7 +87,7 @@ const Header: React.FC = () => {
               style={{ maxWidth: 220, maxHeight: 72 }}
             >
               <div className="relative flex items-center gap-2 px-4 py-2 md:px-5 md:py-2 bg-gradient-to-r from-violet-900/20 to-emerald-900/20 rounded-xl border border-violet-400/30 backdrop-blur-sm group-hover:border-violet-400/50 transition-all duration-300 focus:ring-2 focus:ring-violet-400 z-10">
-                <Hand className="w-7 h-7 md:w-9 md:h-9 text-violet-300 animate-pulse drop-shadow" aria-hidden="true" />
+                <FingerIcon />
                 <span className="text-2xl font-black bg-gradient-to-r from-violet-300 via-purple-300 to-emerald-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300 relative select-none">
                   GodCanvas
                 </span>
