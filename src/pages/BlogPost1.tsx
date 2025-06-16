@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Helmet } from "react-helmet";
 import { blogPosts } from "../data/blogPosts";
@@ -230,4 +229,3 @@ const BlogPost1: React.FC = () => {
 };
 
 export default BlogPost1;
-
