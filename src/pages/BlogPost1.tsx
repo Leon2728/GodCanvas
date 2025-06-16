@@ -166,7 +166,7 @@ const BlogPost1: React.FC = () => {
       {/* Portada con video de fondo */}
       <div className="relative w-full h-[260px] md:h-[360px] rounded-2xl overflow-hidden shadow-xl shadow-emerald-600/30 border-2 border-emerald-300/30 mb-7 flex items-center justify-center">
         <VideoBackground
-          videoSrc="/videos/rusia-background.mp4"
+          videoSrc="/content/rusia-background.mp4"
           fallbackGradient
           className="z-0"
         />
