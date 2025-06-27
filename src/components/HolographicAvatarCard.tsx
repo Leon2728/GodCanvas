@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Heart, Shield, Sparkles, Zap, Code, Database, Cpu } from "lucide-react";
 
@@ -135,40 +134,33 @@ const HolographicAvatarCard: React.FC<HolographicAvatarCardProps> = ({
             />
           </div>
         )}
-        {/* PANEL INFERIOR DATOS */}
-        <div className={`absolute bottom-0 w-full px-6 py-3 transition-all duration-500  ${isActive ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}>
-          <div className="backdrop-blur-md bg-black/80 rounded-xl border border-emerald-500/10 shadow-inner px-4 py-3">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                {CATEGORY_ICONS[avatar.category] ?? <Code size={18} className="text-gray-400" />}
-                <span className="px-2 py-0.5 bg-gradient-to-r from-cyan-700 via-emerald-900 to-black text-xs rounded font-mono tracking-tight text-emerald-100 font-bold shadow">
-                  {avatar.level}
-                </span>
-                <span className="font-mono font-semibold text-white/90 ml-2 text-lg">{avatar.name}</span>
-              </div>
-              <span className="text-emerald-400 font-semibold text-xs font-mono">HOLO·ACTIVO</span>
+        {/* PANEL INFERIOR SIMPLIFICADO */}
+        <div className={`absolute bottom-0 w-full px-6 py-4 transition-all duration-500  ${isActive ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}>
+          <div className="backdrop-blur-md bg-black/80 rounded-xl border border-emerald-500/10 shadow-inner px-4 py-4">
+            {/* Header con nivel, icono y nombre */}
+            <div className="flex items-center gap-3 mb-3">
+              <span className="px-2 py-0.5 bg-gradient-to-r from-cyan-700 via-emerald-900 to-black text-xs rounded font-mono tracking-tight text-emerald-100 font-bold shadow">
+                {avatar.level}
+              </span>
+              {CATEGORY_ICONS[avatar.category] ?? <Code size={18} className="text-gray-400" />}
+              <span className="font-mono font-semibold text-white/90 text-lg">{avatar.name}</span>
             </div>
-            <p className="text-sm text-cyan-200 font-mono italic leading-relaxed px-1 mb-1 drop-shadow">
+            
+            {/* Profesión/Descripción */}
+            <p className="text-sm text-cyan-200 font-mono italic leading-relaxed mb-3">
               "{avatar.description}"
             </p>
-            <div className="flex items-center justify-between font-mono text-xs">
-              <div className="flex items-center">
-                <span className="inline-block w-2 h-2 bg-emerald-300 rounded-full mr-1 animate-pulse"></span>
-                <span className="text-emerald-300">PRESENTACIÓN HONORÍFICA</span>
+            
+            {/* Espacio para texto bíblico */}
+            <div className="bg-black/40 rounded-lg p-3 border border-emerald-500/10">
+              <div className="text-xs text-emerald-300 font-mono mb-2 flex items-center gap-2">
+                <span className="inline-block w-2 h-2 bg-emerald-300 rounded-full animate-pulse"></span>
+                TEXTO BÍBLICO
               </div>
-              <span className="text-yellow-300/60 font-bold">⭐ MODO EXHIBICIÓN</span>
-            </div>
-            {/* Power bar */}
-            <div className="mt-2">
-              <div className="flex gap-2 items-center">
-                <span className="text-xs text-cyan-300 font-mono">Poder:</span>
-                <div className="w-24 h-2 rounded bg-cyan-950/70 overflow-hidden relative border border-cyan-400/20">
-                  <div
-                    className={`h-full bg-gradient-to-r ${avatar.aura} transition-all duration-1000`}
-                    style={{ width: avatar.power === "∞%" ? "100%" : avatar.power }}
-                  />
-                  <span className="absolute right-1 top-1/2 -translate-y-1/2 text-xs text-cyan-200">{avatar.power}</span>
-                </div>
+              <div className="text-sm text-cyan-100 font-mono leading-relaxed min-h-[60px] flex items-center justify-center text-center">
+                <span className="text-emerald-200/60">
+                  [Espacio reservado para versículos bíblicos relevantes]
+                </span>
               </div>
             </div>
           </div>
