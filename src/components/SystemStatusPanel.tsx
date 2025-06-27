@@ -25,15 +25,12 @@ const SystemStatusPanel: React.FC<SystemStatusPanelProps> = ({
           <div className="flex items-center gap-3">
             <span className="w-5 h-5 bg-cyan-300 rounded-full animate-pulse drop-shadow"></span>
             <span className="text-emerald-200 font-mono text-lg font-bold tracking-wider drop-shadow">
-              PRESENTACIÓN HONORÍFICA HOLOGRÁFICA
+              PORTAL HOLOGRÁFICO CELESTIAL
             </span>
           </div>
           <span className="text-cyan-300 font-mono text-xs font-semibold">
             PERSONAJE {currentIndex + 1}/{avatarsCount} · EN EXHIBICIÓN
           </span>
-        </div>
-        <div className="text-cyan-100 text-center mb-6 text-md leading-relaxed">
-          Galería holográfica de honor. Cada figura es un testimonio de fe, valor y sabiduría eterna.
         </div>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-xs">
           {[
