@@ -3,9 +3,9 @@ import CarouselHeader from "./CarouselHeader";
 import SystemStatusPanel from "./SystemStatusPanel";
 import HolographicAvatarCard from "./HolographicAvatarCard";
 import { useIsMobile } from '../hooks/use-mobile';
-import { useNavigate } from "react-router-dom";
-import { Zap, Code, Database, Cpu, Shield, Sparkles, Heart } from 'lucide-react';
 import { useGesture } from 'react-use-gesture';
+import { Zap, Code, Database, Cpu, Shield, Sparkles, Heart } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 
 const avatars = [
   {
@@ -140,10 +140,10 @@ export default function Avatar3DCarousel() {
   const [imagesLoaded, setImagesLoaded] = useState<Set<number>>(new Set());
   const [scanlinePosition, setScanlinePosition] = useState(0);
 
-  const navigate = useNavigate();
   const isMobile = useIsMobile();
   const carouselRef = useRef<HTMLDivElement>(null);
   const autoplayRef = useRef<NodeJS.Timeout>();
+  const navigate = useNavigate();
 
   // Scanline animación
   useEffect(() => {
@@ -167,7 +167,7 @@ export default function Avatar3DCarousel() {
     };
   }, [currentIndex, isAutoplay, isPaused, isAnimating]);
 
-  // Navegación teclado
+  // Navegación teclado (solo flecha izquierda y derecha)
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.code === 'ArrowLeft') {
@@ -178,17 +178,16 @@ export default function Avatar3DCarousel() {
         nextSlide();
       } else if ((event.code === 'Enter' || event.code === 'Space') && document.activeElement) {
         event.preventDefault();
-        handleAvatarClick(avatars[currentIndex], currentIndex);
+        handleAvatarDisplay(avatars[currentIndex], currentIndex);
       } else if (event.code === 'Escape') {
         setIsAutoplay(!isAutoplay);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-    // ... keep useEffect dependencies the same ...
   }, [currentIndex, isAutoplay, isAnimating]);
 
-  // Gestos/touch (puedes reintegrar react-use-gesture si lo deseas)
+  // Gestos/touch
   const bind = useGesture({
     onDrag: ({ offset: [ox], direction: [dx], velocity, cancel }) => {
       if (Math.abs(ox) > 80) {
@@ -235,9 +234,9 @@ export default function Avatar3DCarousel() {
     }
   }, [isAnimating, currentIndex]);
 
-  const handleAvatarClick = (avatar: typeof avatars[0], index: number) => {
-    // Breve feedback antes de navegar (efecto “conectando”)
-    // Aquí podrías lanzar un toast, modal animado, sonido, etc.
+  // Función vacía para reemplazar el click de avatar - solo presentación
+  const handleAvatarDisplay = (avatar: typeof avatars[0], index: number) => {
+    // Solo función de presentación - sin navegación
     navigate(avatar.link);
   };
 
@@ -248,7 +247,7 @@ export default function Avatar3DCarousel() {
   return (
     <section
       className="py-24 px-6 relative overflow-hidden min-h-screen flex items-center bg-gradient-to-br from-black via-cyan-950/60 to-violet-950/70"
-      aria-label="Selección interactiva de personajes bíblicos"
+      aria-label="Presentación honorífica de personajes bíblicos"
       role="region"
       tabIndex={-1}
       {...bind()}
@@ -290,7 +289,7 @@ export default function Avatar3DCarousel() {
             aria-live="polite"
             aria-atomic="false"
             tabIndex={0}
-            aria-label={`Avatar actual: ${avatars[currentIndex].name}`}
+            aria-label={`Avatar en presentación: ${avatars[currentIndex].name}`}
           >
             {avatars.map((avatar, index) => {
               const isActive = index === currentIndex;
@@ -311,7 +310,7 @@ export default function Avatar3DCarousel() {
                   isSecondPrev={isSecondPrev}
                   isSecondNext={isSecondNext}
                   hovered={hoveredIndex === index}
-                  onClick={() => isActive ? handleAvatarClick(avatar, index) : goToSlide(index)}
+                  onClick={() => handleAvatarDisplay(avatar, index)}
                   onHover={(on) => setHoveredIndex(on ? index : null)}
                   scanlinePosition={scanlinePosition}
                   isImageLoaded={imagesLoaded.has(index)}
@@ -351,7 +350,7 @@ export default function Avatar3DCarousel() {
               key={avatar.id}
               onClick={() => goToSlide(index)}
               className={`relative group transition-all duration-400 focus:outline-none ${index === currentIndex ? "scale-125" : "hover:scale-110"}`}
-              aria-label={`Seleccionar a ${avatar.name}`}
+              aria-label={`Ver presentación de ${avatar.name}`}
             >
               <div className={`w-4 h-4 rounded-full border-2 ${
                 index === currentIndex

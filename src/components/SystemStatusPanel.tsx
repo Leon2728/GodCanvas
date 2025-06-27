@@ -25,23 +25,23 @@ const SystemStatusPanel: React.FC<SystemStatusPanelProps> = ({
           <div className="flex items-center gap-3">
             <span className="w-5 h-5 bg-cyan-300 rounded-full animate-pulse drop-shadow"></span>
             <span className="text-emerald-200 font-mono text-lg font-bold tracking-wider drop-shadow">
-              STATUS DEL SISTEMA HOLOGRÁFICO
+              PRESENTACIÓN HONORÍFICA HOLOGRÁFICA
             </span>
           </div>
           <span className="text-cyan-300 font-mono text-xs font-semibold">
-            AVATAR {currentIndex + 1}/{avatarsCount} · ACTIVO
+            PERSONAJE {currentIndex + 1}/{avatarsCount} · EN EXHIBICIÓN
           </span>
         </div>
         <div className="text-cyan-100 text-center mb-6 text-md leading-relaxed">
-          Interfaz holográfica inteligente. Cada personalidad es un puente entre la tecnología y la fe.
+          Galería holográfica de honor. Cada figura es un testimonio de fe, valor y sabiduría eterna.
         </div>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-xs">
           {[
-            { label: "AUTO-SCAN", value: isAutoplay ? "ON" : "OFF", color: isAutoplay ? "emerald" : "red" },
-            { label: "GEST. TÁCTIL", value: "ACTIVO", color: "emerald" },
-            { label: "NAVEG. NEURAL", value: "ONLINE", color: "emerald" },
-            { label: "RENDER HOLO", value: "ÓPTIMA", color: "emerald" },
-            { label: "PODER", value: currentPower ?? "--", color: "cyan" },
+            { label: "AUTO-ROTAR", value: isAutoplay ? "ON" : "OFF", color: isAutoplay ? "emerald" : "red" },
+            { label: "EXHIBICIÓN", value: "ACTIVA", color: "emerald" },
+            { label: "HOLO-SYNC", value: "ONLINE", color: "emerald" },
+            { label: "VISUAL", value: "ÓPTIMA", color: "emerald" },
+            { label: "HONOR", value: currentPower ?? "--", color: "cyan" },
           ].map((stat, i) => (
             <div key={i} className="text-center">
               <div className={`text-emerald-200 font-mono mb-2`}>{stat.label}</div>

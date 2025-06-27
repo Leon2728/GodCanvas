@@ -73,23 +73,22 @@ const HolographicAvatarCard: React.FC<HolographicAvatarCardProps> = ({
     <div
       className={`absolute top-1/2 left-1/2 w-80 h-[470px] md:w-96 md:h-[560px] 
       -translate-x-1/2 -translate-y-1/2 transition-[transform,opacity] duration-1000 ease-out 
-      cursor-pointer group ring-0 focus-within:ring-4 focus-within:ring-emerald-500`}
+      group ring-0 ${isActive ? 'cursor-default' : 'cursor-default'}`}
       style={{
         transform: `translate(-50%, -50%) translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
         opacity,
         zIndex,
         filter: isActive ? "drop-shadow(0 0 30px rgba(20,255,255,0.25))" : "",
       }}
-      onClick={onClick}
       onMouseEnter={() => onHover(true)}
       onMouseLeave={() => onHover(false)}
-      role="group"
-      aria-roledescription="slide"
-      tabIndex={isActive ? 0 : -1}
+      role="img"
+      aria-roledescription="Presentación honorífica"
+      tabIndex={-1}
       aria-label={
         (isActive
-          ? `Avatar activo: ${avatar.name}, nivel ${avatar.level}, poder ${avatar.power}`
-          : `Avatar: ${avatar.name}, haz click para enfocar`)
+          ? `Presentando a ${avatar.name}, nivel ${avatar.level}, poder ${avatar.power}`
+          : `${avatar.name} en presentación`)
       }
     >
       <div
@@ -113,7 +112,7 @@ const HolographicAvatarCard: React.FC<HolographicAvatarCardProps> = ({
         {/* Imagen principal */}
         <img
           src={avatar.image}
-          alt={`Avatar de ${avatar.name}`}
+          alt={`Presentación honorífica de ${avatar.name}`}
           className={`w-full h-full object-cover object-top transition-all duration-900 rounded-2xl ${hovered ? "scale-105 brightness-110" : "scale-100"} ${isActive ? "brightness-110" : "brightness-90"}`}
           onLoad={handleImageLoad}
           loading="lazy"
@@ -147,17 +146,17 @@ const HolographicAvatarCard: React.FC<HolographicAvatarCardProps> = ({
                 </span>
                 <span className="font-mono font-semibold text-white/90 ml-2 text-lg">{avatar.name}</span>
               </div>
-              <span className="text-emerald-400 font-semibold text-xs font-mono">HOLO·ONLINE</span>
+              <span className="text-emerald-400 font-semibold text-xs font-mono">HOLO·ACTIVO</span>
             </div>
             <p className="text-sm text-cyan-200 font-mono italic leading-relaxed px-1 mb-1 drop-shadow">
-              “{avatar.description}”
+              "{avatar.description}"
             </p>
             <div className="flex items-center justify-between font-mono text-xs">
               <div className="flex items-center">
                 <span className="inline-block w-2 h-2 bg-emerald-300 rounded-full mr-1 animate-pulse"></span>
-                <span className="text-emerald-300">LISTO PARA CONECTAR</span>
+                <span className="text-emerald-300">PRESENTACIÓN HONORÍFICA</span>
               </div>
-              <span className="text-yellow-300/80 font-bold blink-animation">↵ ENTER: BIO</span>
+              <span className="text-yellow-300/60 font-bold">⭐ MODO EXHIBICIÓN</span>
             </div>
             {/* Power bar */}
             <div className="mt-2">
