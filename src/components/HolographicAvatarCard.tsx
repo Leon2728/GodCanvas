@@ -1,5 +1,5 @@
-
 import React from "react";
+import { Heart, Shield, Sparkles, Zap, Code, Database, Cpu } from "lucide-react";
 
 type Avatar = {
   id: string;
@@ -26,6 +26,17 @@ type HolographicAvatarCardProps = {
   scanlinePosition: number;
   isImageLoaded: boolean;
   handleImageLoad: () => void;
+};
+
+const CATEGORY_ICONS: Record<string, React.ReactNode> = {
+  salvador: <Heart size={18} className="text-pink-400" />,
+  arcangel: <Shield size={18} className="text-cyan-300" />,
+  rey: <Sparkles size={18} className="text-yellow-400" />,
+  profeta: <Zap size={18} className="text-emerald-400" />,
+  apostol: <Code size={18} className="text-blue-200" />,
+  santo: <Database size={18} className="text-indigo-200" />,
+  juez: <Cpu size={18} className="text-lime-300" />,
+  reina: <Sparkles size={18} className="text-pink-300" />,
 };
 
 const HolographicAvatarCard: React.FC<HolographicAvatarCardProps> = ({
@@ -123,36 +134,34 @@ const HolographicAvatarCard: React.FC<HolographicAvatarCardProps> = ({
             />
           </div>
         )}
-        {/* PANEL INFERIOR CON NUEVO TEXTO */}
+        {/* PANEL INFERIOR SIMPLIFICADO */}
         <div className={`absolute bottom-0 w-full px-6 py-4 transition-all duration-500  ${isActive ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}>
-          <div className="backdrop-blur-md bg-black/80 rounded-xl border border-emerald-500/10 shadow-inner px-6 py-6">
-            {/* Título con icono */}
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-2xl">✨</span>
-              <h3 className="text-xl font-bold text-emerald-300 font-mono tracking-wide">
-                Galería Bíblica
-              </h3>
+          <div className="backdrop-blur-md bg-black/80 rounded-xl border border-emerald-500/10 shadow-inner px-4 py-4">
+            {/* Header con nivel, icono y nombre */}
+            <div className="flex items-center gap-3 mb-3">
+              <span className="px-2 py-0.5 bg-gradient-to-r from-cyan-700 via-emerald-900 to-black text-xs rounded font-mono tracking-tight text-emerald-100 font-bold shadow">
+                {avatar.level}
+              </span>
+              {CATEGORY_ICONS[avatar.category] ?? <Code size={18} className="text-gray-400" />}
+              <span className="font-mono font-semibold text-white/90 text-lg">{avatar.name}</span>
             </div>
             
-            {/* Subtítulo */}
-            <h4 className="text-lg font-semibold text-cyan-200 mb-4 font-mono">
-              Huellas Eternas en la Historia de Dios
-            </h4>
+            {/* Profesión/Descripción */}
+            <p className="text-sm text-cyan-200 font-mono italic leading-relaxed mb-3">
+              "{avatar.description}"
+            </p>
             
-            {/* Texto descriptivo */}
-            <div className="space-y-3 text-sm text-cyan-100 leading-relaxed">
-              <p>
-                Esta galería rinde homenaje a los personajes bíblicos que marcaron la historia sagrada, 
-                ya sea por su fe, su obediencia o incluso sus caídas.
-              </p>
-              <p>
-                Cada rostro representa una vida real que dejó una lección eterna en el desarrollo 
-                del plan redentor.
-              </p>
-              <p className="text-emerald-200 font-medium">
-                Más que retratos, aquí contemplamos testimonios vivos que siguen hablando 
-                al alma de cada generación.
-              </p>
+            {/* Espacio para texto bíblico */}
+            <div className="bg-black/40 rounded-lg p-3 border border-emerald-500/10">
+              <div className="text-xs text-emerald-300 font-mono mb-2 flex items-center gap-2">
+                <span className="inline-block w-2 h-2 bg-emerald-300 rounded-full animate-pulse"></span>
+                TEXTO BÍBLICO
+              </div>
+              <div className="text-sm text-cyan-100 font-mono leading-relaxed min-h-[60px] flex items-center justify-center text-center">
+                <span className="text-emerald-200/60">
+                  [Espacio reservado para versículos bíblicos relevantes]
+                </span>
+              </div>
             </div>
           </div>
         </div>
