@@ -11,6 +11,13 @@ const CarouselHeader: React.FC<CarouselHeaderProps> = ({
   onToggleAutoplay,
 }) => (
   <div className="text-center mb-16 relative">
+    <div className="relative inline-block mb-8">
+      <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-tr from-cyan-400 via-emerald-400 via-70% to-violet-500 tracking-tight drop-shadow-xl animate-fade-in">
+        GALERÍA BÍBLICA
+      </h2>
+      <div className="absolute -inset-6 bg-gradient-to-r from-cyan-400/10 via-emerald-400/10 to-violet-400/10 blur-2xl rounded-lg pointer-events-none"></div>
+    </div>
+
     <div className="flex justify-center items-center mb-5">
       <button
         onClick={onToggleAutoplay}
